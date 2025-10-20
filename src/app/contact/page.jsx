@@ -68,7 +68,7 @@ export default function Contact() {
           <div className="mt-12 grid grid-cols-2 gap-8 text-center">
             <div>
               <p className="text-gray-500 text-xs mb-2">EMAIL</p>
-              <p className="text-white font-bold">info@cineverse.com</p>
+              <p className="text-white font-bold">info@theatron.com</p>
             </div>
             <div>
               <p className="text-gray-500 text-xs mb-2">PHONE</p>

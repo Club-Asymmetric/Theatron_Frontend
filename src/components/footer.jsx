@@ -23,7 +23,7 @@ export default function Footer() {
           </div>
 
           <div className="text-right">
-            <p className="text-gray-500 text-xs">© 2025 CINEVERSE</p>
+            <p className="text-gray-500 text-xs">© 2025 THEATRON</p>
           </div>
         </div>
 

@@ -29,12 +29,7 @@ export default function Navigation() {
           >
             EVENTS
           </Link>
-          <Link
-            href="/registration"
-            className={`text-sm tracking-wider transition ${isActive("/registration") ? "text-red-600" : "text-gray-400 hover:text-white"}`}
-          >
-            REGISTRATION
-          </Link>
+        
           <Link
             href="/gallery"
             className={`text-sm tracking-wider transition ${isActive("/gallery") ? "bg-red-600 px-4 py-2 text-white" : "text-gray-400 hover:text-white"}`}
@@ -50,19 +45,7 @@ export default function Navigation() {
         </div>
 
        
-       <div className="flex items-center gap-4">
-      <Link href="../app/signin/page.jsx">
-        <button className="border border-gray-600 px-6 py-2 text-sm text-white hover:border-white transition">
-          SIGN IN
-        </button>
-      </Link>
-
-      <Link href="../app/signup/page.jsx">
-        <button className="bg-red-600 px-6 py-2 text-sm text-white font-bold hover:bg-red-700 transition">
-          SIGN UP
-        </button>
-      </Link>
-    </div>
+      
       </div>
     </nav>
   )

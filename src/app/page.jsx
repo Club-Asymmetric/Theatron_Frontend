@@ -2,6 +2,7 @@ import Navigation from "@/components/navigation"
 import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
 import Countdown from "@/components/countdown"
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -68,8 +69,8 @@ export default function Home() {
               REGISTER NOW →
             </button>
             <button className="border border-gray-600 px-12 py-3 text-white font-bold hover:border-white transition">
-              VIEW EVENTS
-            </button>
+  <Link href="./events/page.jsx">VIEW EVENTS</Link>
+</button>
           </div>
         </div>
       </section>
