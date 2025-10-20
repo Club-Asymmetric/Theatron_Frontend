@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="bg-black border-t border-gray-800 py-12 px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-3 gap-8 mb-8">
-          {/* Left */}
+       
           <div className="flex items-center gap-3">
             <div className="bg-red-600 p-2">
               <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -16,19 +16,18 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Center */}
+     
           <div className="text-center">
             <p className="text-red-600 font-bold text-sm mb-1">RESOLUTION × IMMERSE</p>
             <p className="text-gray-500 text-xs">CHENNAI INSTITUTE OF TECHNOLOGY</p>
           </div>
 
-          {/* Right */}
           <div className="text-right">
             <p className="text-gray-500 text-xs">© 2025 CINEVERSE</p>
           </div>
         </div>
 
-        {/* Decorative line */}
+       
         <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent"></div>
       </div>
     </footer>
