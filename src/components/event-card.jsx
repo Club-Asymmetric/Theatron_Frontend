@@ -3,7 +3,7 @@ export default function EventCard({ title, description, entryFee, image, highlig
     <div
       className={`group cursor-pointer transition ${highlighted ? "border-2 border-red-600" : "border border-gray-700"}`}
     >
-      {/* Image */}
+  
       <div className="relative h-64 overflow-hidden bg-gray-900">
         <img
           src={image || "/placeholder.svg"}
@@ -12,15 +12,14 @@ export default function EventCard({ title, description, entryFee, image, highlig
         />
       </div>
 
-      {/* Content */}
       <div className="p-6 bg-black">
         <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
         <p className="text-gray-400 text-sm mb-4 leading-relaxed">{description}</p>
 
-        {/* Red accent line */}
+    
         <div className="h-px bg-red-600 mb-4"></div>
 
-        {/* Entry Fee and Button */}
+    
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs text-gray-500 mb-1">ENTRY FEE</p>
