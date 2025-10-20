@@ -1,4 +1,6 @@
-export default function EventCard({ title, description, entryFee, image, highlighted = false }) {
+import Link from "next/link"
+
+export default function EventCard({ title, description, entryFee, image, highlighted = false, registrationPath }) {
   return (
     <div
       className={`group cursor-pointer transition ${highlighted ? "border-2 border-red-600" : "border border-gray-700"}`}
@@ -25,9 +27,11 @@ export default function EventCard({ title, description, entryFee, image, highlig
             <p className="text-xs text-gray-500 mb-1">ENTRY FEE</p>
             <p className="text-red-600 font-bold text-lg">{entryFee}</p>
           </div>
-          <button className="bg-red-600 px-6 py-2 text-white font-bold text-sm hover:bg-red-700 transition">
-            REGISTER →
-          </button>
+          <Link href={registrationPath || "/registration"}>
+            <button className="bg-red-600 px-6 py-2 text-white font-bold text-sm hover:bg-red-700 transition">
+              REGISTER →
+            </button>
+          </Link>
         </div>
       </div>
     </div>

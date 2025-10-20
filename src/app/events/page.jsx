@@ -10,8 +10,9 @@ export default function Events() {
       title: "CINE PULSE",
       description:
         "Showcase your storytelling prowess through compelling short films. Bring your vision to life in this ultimate cinematic challenge.",
-      entryFee: "₹200",
+      entryFee: "₹150",
       image: "../../public/film-festival-cinema.png",
+      registrationPath: "/registration/cine-pulse",
     },
     {
       id: 2,
@@ -20,6 +21,7 @@ export default function Events() {
         "Master the art of editing. Create captivating trailers that leave audiences wanting more. Precision, timing, and creativity.",
       entryFee: "₹150",
       image: "../../public/video-editing-camera.jpg",
+      registrationPath: "/registration/trailer-cut",
     },
     {
       id: 3,
@@ -28,15 +30,53 @@ export default function Events() {
         "Capture moments that speak louder than words. Display your photography skills and freeze emotions in time.",
       entryFee: "₹150",
       image: "../../public/photography-portraits.jpg",
+      registrationPath: "/registration/stills-of-soul",
     },
     {
       id: 4,
       title: "ADAPT TUNE",
       description:
         "Express yourself through movement and rhythm. Dance to the beats of cinema and create mesmerizing performances.",
-      entryFee: "₹200",
+      entryFee: "₹150",
       image: "../../public/dance-performance-art.jpg",
       highlighted: true,
+      registrationPath: "/registration/adapt-tune",
+    },
+    {
+      id: 5,
+      title: "GRAPHICS GRID",
+      description:
+        "Unleash your creativity in poster-making competition. Design original, AI-free masterpieces that reflect pure artistic expression.",
+      entryFee: "₹150",
+      image: "../../public/graphics-design-poster.jpg",
+      registrationPath: "/registration/graphics-grid",
+    },
+    {
+      id: 6,
+      title: "THE FINAL DRAFT",
+      description:
+        "Solo scriptwriting competition with two-page original English scripts. Final round features on-the-spot writing based on given topics.",
+      entryFee: "₹150",
+      image: "../../public/scriptwriting-draft.jpg",
+      registrationPath: "/registration/the-final-draft",
+    },
+    {
+      id: 7,
+      title: "QUIZCORN",
+      description:
+        "Test your knowledge of Tamil and English cinema. Covering actors, directors, scripts, and film production in this ultimate quiz challenge.",
+      entryFee: "₹150",
+      image: "../../public/cinema-quiz-competition.jpg",
+      registrationPath: "/registration/quizcorn",
+    },
+    {
+      id: 8,
+      title: "FUSION FRAMES",
+      description:
+        "3-minute stageplay performances featuring mime, drama, dance, music, street play, or creative fusion of multiple art forms.",
+      entryFee: "₹200",
+      image: "../../public/stage-performance-fusion.jpg",
+      registrationPath: "/registration/fusion-frames",
     },
   ]
 
@@ -77,6 +117,7 @@ export default function Events() {
                 entryFee={event.entryFee}
                 image={event.image}
                 highlighted={event.highlighted}
+                registrationPath={event.registrationPath}
               />
             ))}
           </div>
