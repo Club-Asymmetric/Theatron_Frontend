@@ -11,12 +11,11 @@ export default function Navigation() {
   return (
     <nav className="fixed top-0 w-full bg-black border-b border-gray-800 z-50">
       <div className="flex items-center justify-between px-8 py-4">
-        {/* Logo */}
+   
         <Link href="/" className="bg-red-600 px-4 py-2 font-bold text-white border-2 border-red-600">
           THEATRON
         </Link>
 
-        {/* Menu Items */}
         <div className="flex items-center gap-8">
           <Link
             href="/"
@@ -50,7 +49,7 @@ export default function Navigation() {
           </Link>
         </div>
 
-        {/* Auth Buttons */}
+       
        <div className="flex items-center gap-4">
       <Link href="../app/signin/page.jsx">
         <button className="border border-gray-600 px-6 py-2 text-sm text-white hover:border-white transition">
