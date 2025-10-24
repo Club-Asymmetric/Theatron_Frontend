@@ -4,12 +4,16 @@ import Footer from "@/components/footer"
 
 export default function Contact() {
   return (
-    <main className="bg-black text-white min-h-screen">
+    <main className="relative bg-black text-white min-h-screen overflow-hidden">
+      {/* Animated gradient background overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] animate-pulse-slow"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)]"></div>
+
       <Navigation />
       <Sidebar />
 
       {/* Contact Section */}
-      <section className="pt-32 pb-20 px-8">
+      <section className="relative z-10 pt-32 pb-20 px-8">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-6xl font-bold mb-8">CONTACT</h1>
@@ -17,7 +21,7 @@ export default function Contact() {
           </div>
 
           {/* Contact Form */}
-          <div className="border border-gray-700 p-8">
+          <div className="border border-gray-700 p-8 mb-12">
             <form className="space-y-6">
               <div>
                 <label className="block text-sm font-bold mb-2">Name</label>
@@ -65,14 +69,14 @@ export default function Contact() {
           </div>
 
           {/* Contact Info */}
-          <div className="mt-12 grid grid-cols-2 gap-8 text-center">
+          <div className="mt-12 grid grid-cols-2 gap-8 text-center text-white">
             <div>
-              <p className="text-gray-500 text-xs mb-2">EMAIL</p>
-              <p className="text-white font-bold">info@theatron.com</p>
+              <p className="text-gray-400 text-xs mb-2 uppercase tracking-widest">Email</p>
+              <p className="font-bold">info@theatron.com</p>
             </div>
             <div>
-              <p className="text-gray-500 text-xs mb-2">PHONE</p>
-              <p className="text-white font-bold">+91 XXXX XXXX XX</p>
+              <p className="text-gray-400 text-xs mb-2 uppercase tracking-widest">Phone</p>
+              <p className="font-bold">+91 XXXX XXXX XX</p>
             </div>
           </div>
         </div>

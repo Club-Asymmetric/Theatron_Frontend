@@ -51,6 +51,8 @@ export default function TrailerCutRegistration() {
 
   return (
     <main className="bg-black text-white min-h-screen">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] animate-pulse-slow"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)]"></div>
       <Navigation />
       <Sidebar />
 

@@ -1,3 +1,5 @@
+'use client';
+
 import Navigation from "@/components/navigation"
 import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
@@ -6,71 +8,122 @@ import Link from "next/link"
 
 export default function Home() {
   return (
-    <main className="bg-black text-white min-h-screen">
+    <main className="relative bg-gradient-to-br from-black via-zinc-900 to-black text-white min-h-screen overflow-hidden">
+      {/* Animated gradient background overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] animate-pulse-slow"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)]"></div>
+
       <Navigation />
       <Sidebar />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-8">
+      <section className="relative z-10 pt-32 pb-20 px-8 text-center">
         <div className="max-w-7xl mx-auto">
           {/* Tagline */}
-          <div className="text-center mb-16">
-            <p className="text-gray-500 text-sm tracking-widest mb-8">
-              A FUSION OF FILM, PHOTOGRAPHY, ART, AND EXPRESSION
-            </p>
+          <p className="text-gray-400 text-sm tracking-[0.25em] mb-10 uppercase animate-fadeIn">
+            A FUSION OF FILM, PHOTOGRAPHY, ART, AND EXPRESSION
+          </p>
 
-            {/* Decorative line with dot */}
-            <div className="flex items-center justify-center gap-4 mb-12">
-              <div className="h-px w-12 bg-red-600"></div>
-              <div className="w-3 h-3 bg-red-600 rounded-full"></div>
-              <div className="h-px w-12 bg-red-600"></div>
-            </div>
+          {/* Decorative line */}
+          <div className="flex items-center justify-center gap-4 mb-12">
+            <div className="h-px w-16 bg-red-600/80"></div>
+            <div className="w-4 h-4 bg-red-600 rounded-full animate-pulse"></div>
+            <div className="h-px w-16 bg-red-600/80"></div>
           </div>
 
           {/* Countdown */}
-          <div className="mb-20">
+          
+          {/* Main Title */}
+          <div className="flex justify-center items-center gap-4 mb-6">
+  {/* Theatron Logo */}
+  <div
+    className="inline-block"
+    style={{
+      animation: 'bounce 2s ease-in-out infinite',
+      display: 'inline-block',
+    }}
+  >
+    <img
+      src="/Theatron_logo.png"
+      alt="Theatron Logo"
+      className="w-58 md:w-104 drop-shadow-[0_0_25px_rgba(255,0,0,0.4)] transition-transform duration-500"
+    />
+  </div>
+
+  {/* Inline keyframes */}
+  <style jsx>{`
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+  `}</style>
+</div>
+
+<div className="mb-20">
             <Countdown />
           </div>
 
-          {/* Main Title */}
-          <div className="text-center mb-20">
-            <h1 className="text-7xl font-bold neon-glow mb-4">
-              THEATRON <span className="bg-red-600 px-6 py-2 ml-4">2025</span>
-            </h1>
-          </div>
 
-          {/* Tagline */}
-          <div className="text-center mb-20">
-            <p className="text-gray-500 text-sm tracking-widest">A FUSION OF FILM, PHOTOGRAPHY, ART, AND EXPRESSION</p>
-          </div>
+          {/* Secondary tagline */}
+          <p className="text-gray-400 text-sm tracking-[0.25em] mb-16 uppercase">
+            CELEBRATING CREATIVITY, CINEMA & ARTISTRY
+          </p>
 
-          {/* Decorative line with dot */}
+          {/* Glowing divider */}
           <div className="flex items-center justify-center gap-4 mb-20">
-            <div className="h-px w-12 bg-red-600"></div>
-            <div className="w-3 h-3 bg-red-600 rounded-full"></div>
-            <div className="h-px w-12 bg-red-600"></div>
+            <div className="h-px w-16 bg-red-600/80"></div>
+            <div className="w-3 h-3 bg-red-600 rounded-full animate-pulse"></div>
+            <div className="h-px w-16 bg-red-600/80"></div>
           </div>
 
-          {/* Sponsors Section */}
-          <div className="mb-20">
-            <p className="text-center text-red-600 text-xs tracking-widest mb-12">PRESENTED BY OUR SPONSORS</p>
-            <div className="flex justify-center items-center gap-12">
-              <p className="text-gray-600 text-lg">SPONSOR ONE</p>
-              <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-              <p className="text-gray-600 text-lg">SPONSOR TWO</p>
-              <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-              <p className="text-gray-600 text-lg">SPONSOR THREE</p>
-            </div>
-          </div>
+          {/* Sponsors */}
+          
+    <div className="mb-20">
+      <p className="text-center text-red-500 text-xs tracking-widest mb-8 uppercase">
+        Presented By Our Sponsors
+      </p>
+
+      <div className="relative w-full overflow-hidden">
+        <div className="flex animate-scroll whitespace-nowrap gap-10 items-center text-gray-400 font-medium">
+          <p>SPONSOR ONE</p>
+          <div className="w-2 h-2 bg-red-600 rounded-full"></div>
+          <p>SPONSOR TWO</p>
+          <div className="w-2 h-2 bg-red-600 rounded-full"></div>
+          <p>SPONSOR THREE</p>
+          <div className="w-2 h-2 bg-red-600 rounded-full"></div>
+          <p>SPONSOR FOUR</p>
+          <div className="w-2 h-2 bg-red-600 rounded-full"></div>
+          <p>SPONSOR FIVE</p>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes scroll {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
+        }
+        .animate-scroll {
+          display: inline-flex;
+          animation: scroll 20s linear infinite;
+        }
+      `}</style>
+    </div>
+ 
+
 
           {/* CTA Buttons */}
-          <div className="flex justify-center gap-6">
-            <button className="bg-red-600 px-12 py-3 text-white font-bold hover:bg-red-700 transition">
-              REGISTER NOW →
+          <div className="flex justify-center gap-8">
+            <button className="relative bg-red-600 px-10 py-3 font-semibold rounded-full overflow-hidden transition-transform transform hover:scale-105 hover:shadow-[0_0_20px_rgba(255,0,0,0.6)]">
+              <span className="relative z-10">REGISTER NOW →</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-red-700 via-red-500 to-red-700 opacity-0 hover:opacity-100 transition-opacity"></span>
             </button>
-            <button className="border border-gray-600 px-12 py-3 text-white font-bold hover:border-white transition">
-  <Link href="./events/page.jsx">VIEW EVENTS</Link>
-</button>
+
+            <Link
+              href="/events"
+              className="relative border border-gray-600 px-10 py-3 rounded-full font-semibold text-white transition-transform transform hover:scale-105 hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+            >
+              VIEW EVENTS
+            </Link>
           </div>
         </div>
       </section>

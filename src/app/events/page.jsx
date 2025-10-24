@@ -11,7 +11,7 @@ export default function Events() {
       description:
         "Showcase your storytelling prowess through compelling short films. Bring your vision to life in this ultimate cinematic challenge.",
       entryFee: "₹150",
-      image: "../../public/film-festival-cinema.png",
+      image: "/film-festival-cinema.png",
       registrationPath: "/registration/cine-pulse",
     },
     {
@@ -20,7 +20,7 @@ export default function Events() {
       description:
         "Master the art of editing. Create captivating trailers that leave audiences wanting more. Precision, timing, and creativity.",
       entryFee: "₹150",
-      image: "../../public/video-editing-camera.jpg",
+      image: "/video-editing-camera.jpg",
       registrationPath: "/registration/trailer-cut",
     },
     {
@@ -29,7 +29,7 @@ export default function Events() {
       description:
         "Capture moments that speak louder than words. Display your photography skills and freeze emotions in time.",
       entryFee: "₹150",
-      image: "../../public/photography-portraits.jpg",
+      image: "/photography-portraits.jpg",
       registrationPath: "/registration/stills-of-soul",
     },
     {
@@ -38,7 +38,7 @@ export default function Events() {
       description:
         "Express yourself through movement and rhythm. Dance to the beats of cinema and create mesmerizing performances.",
       entryFee: "₹150",
-      image: "../../public/dance-performance-art.jpg",
+      image: "/dance-performance-art.jpg",
       highlighted: true,
       registrationPath: "/registration/adapt-tune",
     },
@@ -48,7 +48,7 @@ export default function Events() {
       description:
         "Unleash your creativity in poster-making competition. Design original, AI-free masterpieces that reflect pure artistic expression.",
       entryFee: "₹150",
-      image: "../../public/graphics-design-poster.jpg",
+      image: "/graphics-design-poster.jpg",
       registrationPath: "/registration/graphics-grid",
     },
     {
@@ -57,7 +57,7 @@ export default function Events() {
       description:
         "Solo scriptwriting competition with two-page original English scripts. Final round features on-the-spot writing based on given topics.",
       entryFee: "₹150",
-      image: "../../public/scriptwriting-draft.jpg",
+      image: "/scriptwriting-draft.jpg",
       registrationPath: "/registration/the-final-draft",
     },
     {
@@ -66,7 +66,7 @@ export default function Events() {
       description:
         "Test your knowledge of Tamil and English cinema. Covering actors, directors, scripts, and film production in this ultimate quiz challenge.",
       entryFee: "₹150",
-      image: "../../public/cinema-quiz-competition.jpg",
+      image: "/cinema-quiz-competition.jpg",
       registrationPath: "/registration/quizcorn",
     },
     {
@@ -75,18 +75,22 @@ export default function Events() {
       description:
         "3-minute stageplay performances featuring mime, drama, dance, music, street play, or creative fusion of multiple art forms.",
       entryFee: "₹200",
-      image: "../../public/stage-performance-fusion.jpg",
+      image: "/stage-performance-fusion.jpg",
       registrationPath: "/registration/fusion-frames",
     },
   ]
 
   return (
-    <main className="bg-black text-white min-h-screen">
+    <main className="relative bg-gradient-to-br from-black via-zinc-900 to-black text-white min-h-screen overflow-hidden">
+      {/* Animated gradient background overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] animate-pulse-slow"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)]"></div>
+
       <Navigation />
       <Sidebar />
 
       {/* Events Section */}
-      <section className="pt-32 pb-20 px-8">
+      <section className="relative z-10 pt-32 pb-20 px-8">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
