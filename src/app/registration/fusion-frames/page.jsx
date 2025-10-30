@@ -10,43 +10,44 @@ export default function FusionFramesRegistration() {
     team_name: "",
     team_size: 1,
     phone: "",
-    email: ""
+    email: "",
   })
-  const [participants, setParticipants] = useState([
-    { name: "", college: "" }
-  ])
+  const [participants, setParticipants] = useState([{ name: "", college: "" }])
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
 
   const handleTeamSizeChange = (size) => {
     setTeamSize(size)
-    setFormData({ ...formData, team_size: size })
-    
-    // Adjust participants array
-    const newParticipants = [...participants]
-    if (size > participants.length) {
-      // Add participants
-      for (let i = participants.length; i < size; i++) {
-        newParticipants.push({ name: "", college: "" })
-      }
-    } else {
-      // Remove participants
-      newParticipants.splice(size)
-    }
-    setParticipants(newParticipants)
-  }
+    setFormData((prev) => ({ ...prev, team_size: size }))
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+    // Adjust participants array
+    setParticipants((prev) => {
+      const newParticipants = [...prev]
+      if (size > prev.length) {
+        for (let i = prev.length; i < size; i++) {
+          newParticipants.push({ name: "", college: "" })
+        }
+      } else {
+        newParticipants.length = size
+      }
+      return newParticipants
     })
   }
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
   const handleParticipantChange = (index, field, value) => {
-    const newParticipants = [...participants]
-    newParticipants[index][field] = value
-    setParticipants(newParticipants)
+    setParticipants((prev) =>
+      prev.map((p, i) =>
+        i === index ? { ...p, [field]: value } : p
+      )
+    )
   }
 
   const handleSubmit = async (e) => {
@@ -54,9 +55,8 @@ export default function FusionFramesRegistration() {
     setIsSubmitting(true)
     setSubmitStatus(null)
 
-    // Build the submission data
     const submissionData = { ...formData }
-    
+
     participants.forEach((participant, index) => {
       submissionData[`name${index + 1}`] = participant.name
       submissionData[`college${index + 1}`] = participant.college
@@ -65,20 +65,13 @@ export default function FusionFramesRegistration() {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/register/group/fusion-frames`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(submissionData),
       })
 
       if (response.ok) {
         setSubmitStatus('success')
-        setFormData({
-          team_name: "",
-          team_size: 1,
-          phone: "",
-          email: ""
-        })
+        setFormData({ team_name: "", team_size: 1, phone: "", email: "" })
         setParticipants([{ name: "", college: "" }])
         setTeamSize(1)
       } else {
@@ -91,23 +84,24 @@ export default function FusionFramesRegistration() {
       setIsSubmitting(false)
     }
   }
+
   return (
     <main className="bg-black text-white min-h-screen">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] animate-pulse-slow"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] animate-pulse-slow z-0 pointer-events-none"></div>
+<div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)] z-0 pointer-events-none"></div>
       <Navigation />
       <Sidebar />
 
-      {/* Registration Section */}
       <section className="pt-32 pb-20 px-8">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-6xl font-bold mb-4">FUSION FRAMES</h1>
             <p className="text-red-600 text-sm tracking-wider mb-4">STAGEPLAY EVENT</p>
-            <p className="text-gray-500 text-sm">This stageplay event invites participants to showcase their talent in a 3-minute performance, featuring mime, drama, dance, music, street play, dance drama, or a creative fusion of these art forms.</p>
+            <p className="text-gray-500 text-sm">
+              This stageplay event invites participants to showcase their talent in a 3-minute performance, featuring mime, drama, dance, music, street play, dance drama, or a creative fusion of these art forms.
+            </p>
           </div>
 
-          {/* Registration Form */}
           <div className="border border-gray-700 p-8">
             {submitStatus === 'success' && (
               <div className="mb-6 p-4 bg-green-900 border border-green-600 text-green-200 rounded">
@@ -119,10 +113,11 @@ export default function FusionFramesRegistration() {
                 Registration failed. Please try again.
               </div>
             )}
+
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-sm font-bold mb-2">Number of Participants (1-10)</label>
-                <select 
+                <select
                   value={teamSize}
                   onChange={(e) => handleTeamSizeChange(parseInt(e.target.value))}
                   className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-red-600 focus:outline-none transition"
@@ -149,29 +144,31 @@ export default function FusionFramesRegistration() {
 
               <div className="space-y-4">
                 <h3 className="text-lg font-bold text-red-600">Participant Details</h3>
-                
+
                 {participants.map((participant, index) => (
                   <div key={index} className="space-y-3 p-4 border border-gray-600 rounded">
                     <h4 className="font-bold text-white">
                       Participant {index + 1} {index === 0 ? "(Required)" : "(Optional)"}
                     </h4>
+
                     <div>
                       <label className="block text-sm font-bold mb-2">Name</label>
                       <input
                         type="text"
                         value={participant.name}
-                        onChange={(e) => handleParticipantChange(index, 'name', e.target.value)}
+                        onChange={(e) => handleParticipantChange(index, "name", e.target.value)}
                         className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-red-600 focus:outline-none transition"
                         placeholder={`Enter participant ${index + 1} name`}
                         required={index === 0}
                       />
                     </div>
+
                     <div>
                       <label className="block text-sm font-bold mb-2">College</label>
                       <input
                         type="text"
                         value={participant.college}
-                        onChange={(e) => handleParticipantChange(index, 'college', e.target.value)}
+                        onChange={(e) => handleParticipantChange(index, "college", e.target.value)}
                         className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-red-600 focus:outline-none transition"
                         placeholder={`Enter participant ${index + 1} college`}
                         required={index === 0}
@@ -219,7 +216,7 @@ export default function FusionFramesRegistration() {
                 disabled={isSubmitting}
                 className="w-full bg-red-600 px-6 py-3 text-white font-bold hover:bg-red-700 transition disabled:opacity-50"
               >
-                {isSubmitting ? 'SUBMITTING...' : 'REGISTER FOR FUSION FRAMES'}
+                {isSubmitting ? "SUBMITTING..." : "REGISTER FOR FUSION FRAMES"}
               </button>
             </form>
           </div>
