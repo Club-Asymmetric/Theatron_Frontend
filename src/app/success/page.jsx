@@ -1,8 +1,8 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 
-export default function SuccessPage() {
+function SuccessContent() {
   const searchParams = useSearchParams()
   const [status, setStatus] = useState("Verifying payment...")
 
@@ -56,5 +56,18 @@ export default function SuccessPage() {
         Back to Home
       </a>
     </main>
+  )
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center">
+        <h1 className="text-3xl font-bold mb-4">TRAILER CUT</h1>
+        <p className="text-lg text-center text-gray-300">Loading...</p>
+      </main>
+    }>
+      <SuccessContent />
+    </Suspense>
   )
 }
