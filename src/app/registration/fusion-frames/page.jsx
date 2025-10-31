@@ -2,7 +2,7 @@
 import Navigation from "@/components/navigation"
 import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function FusionFramesRegistration() {
   const [teamSize, setTeamSize] = useState(1)
@@ -14,19 +14,21 @@ export default function FusionFramesRegistration() {
   })
   const [participants, setParticipants] = useState([{ name: "", college: "" }])
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState(null)
+  const [errorMsg, setErrorMsg] = useState(null)
+
+  useEffect(() => {
+    const script = document.createElement("script")
+    script.src = "https://checkout.razorpay.com/v1/checkout.js"
+    document.body.appendChild(script)
+  }, [])
 
   const handleTeamSizeChange = (size) => {
     setTeamSize(size)
     setFormData((prev) => ({ ...prev, team_size: size }))
-
-    // Adjust participants array
     setParticipants((prev) => {
       const newParticipants = [...prev]
       if (size > prev.length) {
-        for (let i = prev.length; i < size; i++) {
-          newParticipants.push({ name: "", college: "" })
-        }
+        for (let i = prev.length; i < size; i++) newParticipants.push({ name: "", college: "" })
       } else {
         newParticipants.length = size
       }
@@ -36,50 +38,56 @@ export default function FusionFramesRegistration() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleParticipantChange = (index, field, value) => {
     setParticipants((prev) =>
-      prev.map((p, i) =>
-        i === index ? { ...p, [field]: value } : p
-      )
+      prev.map((p, i) => (i === index ? { ...p, [field]: value } : p))
     )
   }
 
-  const handleSubmit = async (e) => {
+  const handlePayment = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    setSubmitStatus(null)
-
-    const submissionData = { ...formData }
-
-    participants.forEach((participant, index) => {
-      submissionData[`name${index + 1}`] = participant.name
-      submissionData[`college${index + 1}`] = participant.college
-    })
+    setErrorMsg(null)
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/register/group/fusion-frames`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(submissionData),
+      const orderRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/get_order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: 200, currency: "INR", receipt: `fusion-frames_${Date.now()}` })
       })
+      const order = await orderRes.json()
 
-      if (response.ok) {
-        setSubmitStatus('success')
-        setFormData({ team_name: "", team_size: 1, phone: "", email: "" })
-        setParticipants([{ name: "", college: "" }])
-        setTeamSize(1)
-      } else {
-        setSubmitStatus('error')
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: order.amount,
+        currency: order.currency,
+        name: "CIT Immerse - Fusion Frames",
+        description: "Stageplay Event",
+        order_id: order.id,
+        prefill: { name: formData.team_name, email: formData.email, contact: formData.phone },
+        theme: { color: "#EF4444" },
+        handler: async function (response) {
+          const query = new URLSearchParams({
+            payment_id: response.razorpay_payment_id,
+            order_id: response.razorpay_order_id,
+            signature: response.razorpay_signature,
+            team_name: formData.team_name,
+            team_size: teamSize,
+            phone: formData.phone,
+            email: formData.email
+          }).toString()
+          window.location.href = `/success?${query}`
+        }
       }
-    } catch (error) {
-      console.error('Error submitting form:', error)
-      setSubmitStatus('error')
+
+      const razor = new window.Razorpay(options)
+      razor.open()
+    } catch (err) {
+      console.error(err)
+      setErrorMsg("Something went wrong while initiating payment.")
     } finally {
       setIsSubmitting(false)
     }
@@ -88,11 +96,12 @@ export default function FusionFramesRegistration() {
   return (
     <main className="bg-black text-white min-h-screen">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] animate-pulse-slow z-0 pointer-events-none"></div>
-<div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)] z-0 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)] z-0 pointer-events-none"></div>
+
       <Navigation />
       <Sidebar />
 
-      <section className="pt-32 pb-20 px-8">
+      <section className="pt-32 pb-20 px-8 relative z-10">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-6xl font-bold mb-4">FUSION FRAMES</h1>
@@ -102,19 +111,11 @@ export default function FusionFramesRegistration() {
             </p>
           </div>
 
-          <div className="border border-gray-700 p-8">
-            {submitStatus === 'success' && (
-              <div className="mb-6 p-4 bg-green-900 border border-green-600 text-green-200 rounded">
-                Registration successful! You will receive a confirmation email shortly.
-              </div>
+          <div className="border border-gray-700 p-8 rounded-lg">
+            {errorMsg && (
+              <div className="mb-6 p-4 bg-red-900 border border-red-600 text-red-200 rounded">{errorMsg}</div>
             )}
-            {submitStatus === 'error' && (
-              <div className="mb-6 p-4 bg-red-900 border border-red-600 text-red-200 rounded">
-                Registration failed. Please try again.
-              </div>
-            )}
-
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6" onSubmit={handlePayment}>
               <div>
                 <label className="block text-sm font-bold mb-2">Number of Participants (1-10)</label>
                 <select
@@ -144,13 +145,11 @@ export default function FusionFramesRegistration() {
 
               <div className="space-y-4">
                 <h3 className="text-lg font-bold text-red-600">Participant Details</h3>
-
                 {participants.map((participant, index) => (
                   <div key={index} className="space-y-3 p-4 border border-gray-600 rounded">
                     <h4 className="font-bold text-white">
                       Participant {index + 1} {index === 0 ? "(Required)" : "(Optional)"}
                     </h4>
-
                     <div>
                       <label className="block text-sm font-bold mb-2">Name</label>
                       <input
@@ -162,7 +161,6 @@ export default function FusionFramesRegistration() {
                         required={index === 0}
                       />
                     </div>
-
                     <div>
                       <label className="block text-sm font-bold mb-2">College</label>
                       <input
@@ -204,11 +202,9 @@ export default function FusionFramesRegistration() {
                 />
               </div>
 
-              <div className="border-t border-gray-700 pt-6">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-lg font-bold">Entry Fee</span>
-                  <span className="text-red-600 text-xl font-bold">₹200</span>
-                </div>
+              <div className="border-t border-gray-700 pt-6 flex justify-between items-center mb-4">
+                <span className="text-lg font-bold">Entry Fee</span>
+                <span className="text-red-600 text-xl font-bold">₹200</span>
               </div>
 
               <button
@@ -216,7 +212,7 @@ export default function FusionFramesRegistration() {
                 disabled={isSubmitting}
                 className="w-full bg-red-600 px-6 py-3 text-white font-bold hover:bg-red-700 transition disabled:opacity-50"
               >
-                {isSubmitting ? "SUBMITTING..." : "REGISTER FOR FUSION FRAMES"}
+                {isSubmitting ? "PROCESSING..." : "REGISTER & PAY ₹200"}
               </button>
             </form>
           </div>

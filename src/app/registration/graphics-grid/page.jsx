@@ -2,7 +2,7 @@
 import Navigation from "@/components/navigation"
 import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function GraphicsGridRegistration() {
   const [formData, setFormData] = useState({
@@ -12,7 +12,13 @@ export default function GraphicsGridRegistration() {
     college: ""
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState(null)
+  const [errorMsg, setErrorMsg] = useState(null)
+
+  useEffect(() => {
+    const script = document.createElement("script")
+    script.src = "https://checkout.razorpay.com/v1/checkout.js"
+    document.body.appendChild(script)
+  }, [])
 
   const handleInputChange = (e) => {
     setFormData({
@@ -21,29 +27,51 @@ export default function GraphicsGridRegistration() {
     })
   }
 
-  const handleSubmit = async (e) => {
+  const handlePayment = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    setSubmitStatus(null)
+    setErrorMsg(null)
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/register/solo/graphics-grid`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/get_order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: 150, currency: "INR", receipt: `graphics-grid_${Date.now()}` })
       })
+      const order = await res.json()
 
-      if (response.ok) {
-        setSubmitStatus('success')
-        setFormData({ name: "", phone: "", email: "", college: "" })
-      } else {
-        setSubmitStatus('error')
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: order.amount,
+        currency: order.currency,
+        name: "CIT Immerse - Graphics Grid",
+        description: "Poster Making Competition",
+        order_id: order.id,
+        prefill: {
+          name: formData.name,
+          email: formData.email,
+          contact: formData.phone
+        },
+        theme: { color: "#EF4444" },
+        handler: async function (response) {
+          const query = new URLSearchParams({
+            payment_id: response.razorpay_payment_id,
+            order_id: response.razorpay_order_id,
+            signature: response.razorpay_signature,
+            name: formData.name,
+            phone: formData.phone,
+            email: formData.email,
+            college: formData.college
+          }).toString()
+          window.location.href = `/success?${query}`
+        }
       }
-    } catch (error) {
-      console.error('Error submitting form:', error)
-      setSubmitStatus('error')
+
+      const razor = new window.Razorpay(options)
+      razor.open()
+    } catch (err) {
+      console.error(err)
+      setErrorMsg("Something went wrong while initiating payment.")
     } finally {
       setIsSubmitting(false)
     }
@@ -51,33 +79,30 @@ export default function GraphicsGridRegistration() {
 
   return (
     <main className="bg-black text-white min-h-screen">
-     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] animate-pulse-slow z-0 pointer-events-none"></div>
-<div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)] z-0 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] animate-pulse-slow z-0 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)] z-0 pointer-events-none"></div>
+
       <Navigation />
       <Sidebar />
 
       {/* Registration Section */}
-      <section className="pt-32 pb-20 px-8">
+      <section className="pt-32 pb-20 px-8 relative z-10">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-6xl font-bold mb-4">GRAPHICS GRID</h1>
             <p className="text-red-600 text-sm tracking-wider mb-4">POSTER MAKING COMPETITION</p>
-            <p className="text-gray-500 text-sm">Unleash your creativity in our poster-making competition by designing original, AI-free masterpieces that reflect pure artistic expression.</p>
+            <p className="text-gray-500 text-sm">
+              Unleash your creativity in our poster-making competition by designing original, AI-free masterpieces that reflect pure artistic expression.
+            </p>
           </div>
 
-          {/* Registration Form */}
-          <div className="border border-gray-700 p-8">
-            {submitStatus === 'success' && (
-              <div className="mb-6 p-4 bg-green-900 border border-green-600 text-green-200 rounded">
-                Registration successful! You will receive a confirmation email shortly.
-              </div>
-            )}
-            {submitStatus === 'error' && (
+          <div className="border border-gray-700 p-8 rounded-lg">
+            {errorMsg && (
               <div className="mb-6 p-4 bg-red-900 border border-red-600 text-red-200 rounded">
-                Registration failed. Please try again.
+                {errorMsg}
               </div>
             )}
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6" onSubmit={handlePayment}>
               <div>
                 <label className="block text-sm font-bold mb-2">Participant Name</label>
                 <input
@@ -130,11 +155,9 @@ export default function GraphicsGridRegistration() {
                 />
               </div>
 
-              <div className="border-t border-gray-700 pt-6">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-lg font-bold">Entry Fee</span>
-                  <span className="text-red-600 text-xl font-bold">₹150</span>
-                </div>
+              <div className="border-t border-gray-700 pt-6 flex justify-between items-center mb-4">
+                <span className="text-lg font-bold">Entry Fee</span>
+                <span className="text-red-600 text-xl font-bold">₹150</span>
               </div>
 
               <button
@@ -142,7 +165,7 @@ export default function GraphicsGridRegistration() {
                 disabled={isSubmitting}
                 className="w-full bg-red-600 px-6 py-3 text-white font-bold hover:bg-red-700 transition disabled:opacity-50"
               >
-                {isSubmitting ? 'SUBMITTING...' : 'REGISTER FOR GRAPHICS GRID'}
+                {isSubmitting ? "PROCESSING..." : "REGISTER & PAY ₹150"}
               </button>
             </form>
           </div>
