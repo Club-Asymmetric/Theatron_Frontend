@@ -23,19 +23,15 @@ export default function Home() {
           <p className="text-gray-400 text-lg tracking-[0.25em] mb-10 uppercase animate-fadeIn">
             A FUSION OF FILM, PHOTOGRAPHY, ART, AND EXPRESSION
           </p>
+{/* Decorative line */}
+<div className="flex items-center justify-center gap-4 mb-40">
+  <div className="h-px w-12 bg-red-600/80"></div>
+  <div className="w-3 h-3 bg-red-600 rounded-full animate-pulse"></div>
+  <div className="h-px w-12 bg-red-600/80"></div>
+</div>
 
-          {/* Decorative line */}
-          <div className="flex items-center justify-center gap-4 mb-12">
-            <div className="h-px w-16 bg-red-600/80"></div>
-            <div className="w-4 h-4 bg-red-600 rounded-full animate-pulse"></div>
-            <div className="h-px w-16 bg-red-600/80"></div>
-          </div>
-
-          {/* Countdown */}
-          
-          {/* Main Title */}
-          <div className="flex justify-center items-center gap-4 mb-6">
-  {/* Theatron Logo */}
+{/* Main Title (Logo) */}
+<div className="flex justify-center items-center mb-40">
   <div
     className="inline-block"
     style={{
@@ -46,22 +42,26 @@ export default function Home() {
     <img
       src="/Theatron_logo.png"
       alt="Theatron Logo"
-      className="w-58 md:w-104 drop-shadow-[0_0_25px_rgba(255,0,0,0.4)] transition-transform duration-500"
+      className="mx-auto drop-shadow-[0_0_40px_rgba(255,0,0,0.7)] transition-transform duration-500"
+      style={{
+        width: 'clamp(350px, 45vw, 650px)',
+        height: 'auto',
+      }}
     />
   </div>
 
-  {/* Inline keyframes */}
   <style jsx>{`
     @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
   `}</style>
 </div>
 
-<div className="mb-20">
-            <Countdown />
-          </div>
+{/* Countdown - generous gap below logo */}
+<div className="mt-8 mb-20">
+  <Countdown />
+</div>
 
 
           {/* Secondary tagline */}
