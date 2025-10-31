@@ -8,7 +8,6 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 export const metadata = {
   title: "THEATRON 2025",
   description: "A fusion of film, photography, art, and expression",
-  generator: "v0.app",
 }
 
 export default function RootLayout({ children }) {

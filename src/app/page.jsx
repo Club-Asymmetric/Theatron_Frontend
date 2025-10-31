@@ -20,7 +20,7 @@ export default function Home() {
       <section className="relative z-10 pt-32 pb-20 px-8 text-center">
         <div className="max-w-7xl mx-auto">
           {/* Tagline */}
-          <p className="text-gray-400 text-sm tracking-[0.25em] mb-10 uppercase animate-fadeIn">
+          <p className="text-gray-400 text-lg tracking-[0.25em] mb-10 uppercase animate-fadeIn">
             A FUSION OF FILM, PHOTOGRAPHY, ART, AND EXPRESSION
           </p>
 
@@ -65,7 +65,7 @@ export default function Home() {
 
 
           {/* Secondary tagline */}
-          <p className="text-gray-400 text-sm tracking-[0.25em] mb-16 uppercase">
+          <p className="text-gray-400 text-lg tracking-[0.25em] mb-16 uppercase">
             CELEBRATING CREATIVITY, CINEMA & ARTISTRY
           </p>
 
@@ -79,7 +79,7 @@ export default function Home() {
           {/* Sponsors */}
           
     <div className="mb-20">
-      <p className="text-center text-red-500 text-xs tracking-widest mb-8 uppercase">
+      <p className="text-center text-red-500 text-lg tracking-widest mb-8 uppercase">
         Presented By Our Sponsors
       </p>
 

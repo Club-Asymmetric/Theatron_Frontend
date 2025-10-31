@@ -27,7 +27,7 @@ export default function Events() {
       id: 3,
       title: "STILLS OF SOUL",
       description:
-        "Capture moments that speak louder than words. Display your photography skills and freeze emotions in time.",
+        "Capture moments that speak louder than words. Display your photography skills, freeze emotions in time, and let your lens tell stories the heart can feel.",
       entryFee: "₹150",
       image: "/photography-portraits.jpg",
       registrationPath: "/registration/stills-of-soul",
@@ -39,7 +39,6 @@ export default function Events() {
         "Express yourself through movement and rhythm. Dance to the beats of cinema and create mesmerizing performances.",
       entryFee: "₹150",
       image: "/dance-performance-art.jpg",
-      highlighted: true,
       registrationPath: "/registration/adapt-tune",
     },
     {

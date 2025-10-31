@@ -31,10 +31,10 @@ export default function Countdown() {
 
   const TimeBox = ({ value, label }) => (
     <div className="flex flex-col items-center">
-      <div className="border-2 border-red-600 px-8 py-6 mb-2">
+      <div className="border-2 border-red-600 px-10 py-10 mb-2">
         <p className="text-5xl font-bold text-red-600">{String(value).padStart(2, "0")}</p>
       </div>
-      <p className="text-gray-500 text-sm tracking-wider">{label}</p>
+      <p className="text-gray-500 text-lg tracking-wider">{label}</p>
     </div>
   )
 
