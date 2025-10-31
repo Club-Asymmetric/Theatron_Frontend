@@ -13,7 +13,7 @@ export default function Countdown() {
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date()
-      const eventDate = new Date("2025-12-31").getTime()
+      const eventDate = new Date("2025-11-14").getTime()
       const distance = eventDate - now.getTime()
 
       if (distance > 0) {
