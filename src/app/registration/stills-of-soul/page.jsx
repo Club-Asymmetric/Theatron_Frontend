@@ -28,7 +28,7 @@ export default function StillsOfSoulRegistration() {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/get_order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: 150, currency: "INR", receipt: `stills_of_soul_${Date.now()}` })
+        body: JSON.stringify({ amount: 150, currency: "INR", receipt: `stills_${Date.now()}` })
       })
       const order = await res.json()
 
@@ -55,7 +55,7 @@ export default function StillsOfSoulRegistration() {
             email: formData.email,
             college: formData.college
           }).toString()
-          window.location.href = `/success?${query}`
+          window.location.href = `/success/stills-of-soul?${query}`
         }
       }
 
@@ -70,30 +70,25 @@ export default function StillsOfSoulRegistration() {
   }
 
   return (
-    <main className="bg-black text-white min-h-screen">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] animate-pulse-slow z-0 pointer-events-none"></div>
+    <main className="bg-black text-white min-h-screen relative">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] z-0 pointer-events-none"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)] z-0 pointer-events-none"></div>
 
       <Navigation />
       <Sidebar />
 
-      <section className="pt-32 pb-20 px-8">
+      <section className="pt-32 pb-20 px-8 relative z-10">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-6xl font-bold mb-4">STILLS OF SOUL</h1>
             <p className="text-red-600 text-sm tracking-wider mb-4">PHOTOGRAPHY COMPETITION</p>
             <p className="text-gray-500 text-sm">
-              Showcase your creativity and photography skills by submitting your most captivating original photo.
+              Capture moments that speak louder than words. Showcase your artistic perspective through photography that reveals emotion, depth, and imagination.
             </p>
           </div>
 
           <div className="border border-gray-700 p-8 rounded-lg">
-            {errorMsg && (
-              <div className="mb-6 p-4 bg-red-900 border border-red-600 text-red-200 rounded">
-                {errorMsg}
-              </div>
-            )}
-
+            {errorMsg && <div className="mb-6 p-4 bg-red-900 border border-red-600 text-red-200 rounded">{errorMsg}</div>}
             <form className="space-y-6" onSubmit={handlePayment}>
               {["name", "phone", "email", "college"].map((field) => (
                 <div key={field}>
@@ -108,12 +103,10 @@ export default function StillsOfSoulRegistration() {
                   />
                 </div>
               ))}
-
               <div className="border-t border-gray-700 pt-6 flex justify-between items-center">
                 <span className="text-lg font-bold">Entry Fee</span>
                 <span className="text-red-600 text-xl font-bold">₹150</span>
               </div>
-
               <button
                 type="submit"
                 disabled={isSubmitting}

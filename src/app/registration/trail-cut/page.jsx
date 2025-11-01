@@ -4,7 +4,7 @@ import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
 import { useState, useEffect } from "react"
 
-export default function CinePulseRegistration() {
+export default function TrailCutRegistration() {
   const [formData, setFormData] = useState({ name: "", phone: "", email: "", college: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState(null)
@@ -25,21 +25,19 @@ export default function CinePulseRegistration() {
     setErrorMsg(null)
 
     try {
-      // 1️⃣ Create Razorpay order from backend
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/get_order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: 150, currency: "INR", receipt: `cinepulse_${Date.now()}` })
+        body: JSON.stringify({ amount: 150, currency: "INR", receipt: `trailcut_${Date.now()}` })
       })
       const order = await res.json()
 
-      // 2️⃣ Launch Razorpay Checkout
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: order.amount,
         currency: order.currency,
-        name: "CIT Immerse - Cine Pulse",
-        description: "Short Film Competition",
+        name: "CIT Immerse - TrailCut",
+        description: "Cinematic Trailer Editing Competition",
         order_id: order.id,
         prefill: {
           name: formData.name,
@@ -48,7 +46,6 @@ export default function CinePulseRegistration() {
         },
         theme: { color: "#EF4444" },
         handler: async function (response) {
-          // 3️⃣ Redirect to success page with payment details in query
           const query = new URLSearchParams({
             payment_id: response.razorpay_payment_id,
             order_id: response.razorpay_order_id,
@@ -58,7 +55,7 @@ export default function CinePulseRegistration() {
             email: formData.email,
             college: formData.college
           }).toString()
-          window.location.href = `/success?${query}`
+          window.location.href = `/success/trailcut?${query}`
         }
       }
 
@@ -83,11 +80,11 @@ export default function CinePulseRegistration() {
       <section className="pt-32 pb-20 px-8 relative z-10">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-6xl font-bold mb-4">CINE PULSE</h1>
-            <p className="text-red-600 text-sm tracking-wider mb-4">SHORT FILM COMPETITION</p>
+            <h1 className="text-6xl font-bold mb-4">TRAILCUT</h1>
+            <p className="text-red-600 text-sm tracking-wider mb-4">CINEMATIC TRAILER EDITING COMPETITION</p>
             <p className="text-gray-500 text-sm">
-              This short film competition invites participants to showcase their creativity, storytelling, and cinematic
-              vision in a 4–5 minute film.
+              Master the precision of cinematic editing. Create thrilling trailers that captivate viewers with rhythm,
+              emotion, and creativity that celebrates true cinematic brilliance.
             </p>
           </div>
 

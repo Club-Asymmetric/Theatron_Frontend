@@ -1,87 +1,116 @@
+'use client'
+
+import { useState } from "react"
 import Navigation from "@/components/navigation"
 import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
 import EventCard from "@/components/event-card"
 
 export default function Events() {
-  const events = [
+  const [filter, setFilter] = useState("competition")
+
+  const competitions = [
     {
       id: 1,
-      title: "CINE PULSE",
+      title: "Graphics Grid",
       description:
-        "Showcase your storytelling prowess through compelling short films. Bring your vision to life in this ultimate cinematic challenge.",
-      entryFee: "₹150",
-      image: "/film-festival-cinema.png",
-      registrationPath: "/registration/cine-pulse",
-    },
-    {
-      id: 2,
-      title: "TRAILER CUT",
-      description:
-        "Master the art of editing. Create captivating trailers that leave audiences wanting more. Precision, timing, and creativity.",
-      entryFee: "₹150",
-      image: "/video-editing-camera.jpg",
-      registrationPath: "/registration/trailer-cut",
-    },
-    {
-      id: 3,
-      title: "STILLS OF SOUL",
-      description:
-        "Capture moments that speak louder than words. Display your photography skills, freeze emotions in time, and let your lens tell stories the heart can feel.",
-      entryFee: "₹150",
-      image: "/photography-portraits.jpg",
-      registrationPath: "/registration/stills-of-soul",
-    },
-    {
-      id: 4,
-      title: "ADAPT TUNE",
-      description:
-        "Express yourself through movement and rhythm. Dance to the beats of cinema and create mesmerizing performances.",
-      entryFee: "₹150",
-      image: "/dance-performance-art.jpg",
-      registrationPath: "/registration/adapt-tune",
-    },
-    {
-      id: 5,
-      title: "GRAPHICS GRID",
-      description:
-        "Unleash your creativity in poster-making competition. Design original, AI-free masterpieces that reflect pure artistic expression.",
+        "Unleash your creativity through digital art and design. Create visually stunning posters that speak louder than words, combining imagination, style, and originality. Transform ideas into visuals that inspire emotion and cinematic impact.",
       entryFee: "₹150",
       image: "/graphics-design-poster.jpg",
       registrationPath: "/registration/graphics-grid",
     },
     {
-      id: 6,
-      title: "THE FINAL DRAFT",
+      id: 2,
+      title: "Stage Play",
       description:
-        "Solo scriptwriting competition with two-page original English scripts. Final round features on-the-spot writing based on given topics.",
+        "Bring stories to life under the spotlight. Perform powerful dramas or lighthearted comedies that express emotion, passion, and creativity. Let your performance reflect the art of storytelling that connects deeply with every audience.",
       entryFee: "₹150",
-      image: "/scriptwriting-draft.jpg",
-      registrationPath: "/registration/the-final-draft",
+      image: "/stage-play.jpg",
+      registrationPath: "/registration/stage-play",
     },
+    {
+      id: 3,
+      title: "Stills of Soul",
+      description:
+        "Capture the essence of emotion through your lens. Freeze powerful moments that tell stories words cannot. Each photograph should mirror your creative vision, turning still images into timeless expressions of cinematic storytelling.",
+      entryFee: "₹150",
+      image: "/still-of-soul.jpg",
+      registrationPath: "/registration/stills-of-soul",
+    },
+    {
+      id: 4,
+      title: "CinePlus",
+      description:
+        "Craft short films that blend emotion, vision, and storytelling brilliance. From scripting to direction, bring your imagination to life on screen. Let your creativity shape narratives that touch hearts and inspire audiences.",
+      entryFee: "₹150",
+      image: "/cineplus.jpg",
+      registrationPath: "/registration/cineplus",
+    },
+    {
+  id: 5,
+  title: "TrailCut",
+  description:
+    "Master the precision of cinematic editing. Create thrilling trailers that captivate viewers with energy and rhythm. Every second counts—craft motion, mood, and momentum that leaves audiences eager for more, celebrating true cinematic brilliance.",
+  entryFee: "₹150",
+  image: "/trailer-cut.jpg",
+  registrationPath: "/registration/trail-cut",
+},
+{
+  id: 6,
+  title: "AdapTune",
+  description:
+    "Let rhythm and expression define your performance. Dance to cinematic tunes that combine passion, choreography, and storytelling. Move beyond beats to create an experience that connects art, energy, and raw emotion seamlessly.",
+  entryFee: "₹150",
+  image: "/adaptune.jpg",
+  registrationPath: "/registration/adaptune",
+},
+
     {
       id: 7,
-      title: "QUIZCORN",
+      title: "Quizcorn",
       description:
-        "Test your knowledge of Tamil and English cinema. Covering actors, directors, scripts, and film production in this ultimate quiz challenge.",
+        "Step into the world of film trivia. Test your knowledge of actors, directors, scripts, and iconic moments in cinema. Compete with fellow cinephiles and prove that your love for movies goes far beyond the screen.",
       entryFee: "₹150",
-      image: "/cinema-quiz-competition.jpg",
+      image: "/quiz.jpg",
       registrationPath: "/registration/quizcorn",
-    },
-    {
-      id: 8,
-      title: "FUSION FRAMES",
-      description:
-        "3-minute stageplay performances featuring mime, drama, dance, music, street play, or creative fusion of multiple art forms.",
-      entryFee: "₹200",
-      image: "/stage-performance-fusion.jpg",
-      registrationPath: "/registration/fusion-frames",
     },
   ]
 
+  const workshops = [
+    {
+      id: 1,
+      title: "Script Writing",
+      description:
+        "Discover the fundamentals of cinematic storytelling. Learn to craft original scripts with compelling plots, powerful characters, and natural dialogue. Turn your creative thoughts into scripts ready for the big screen.",
+      entryFee: "₹150",
+      image: "/scriptwriting-draft.jpg",
+      registrationPath: "/registration/script-writing",
+    },
+    {
+      id: 2,
+      title: "Photography Workshop",
+      description:
+        "Dive deep into the art and science of photography. Explore lighting, framing, and visual storytelling guided by experts. Transform everyday scenes into captivating frames that tell stories without words.",
+      entryFee: "₹150",
+      image: "/photography-workshop.jpg",
+      registrationPath: "/registration/photography-workshop",
+    },
+    {
+      id: 3,
+      title: "3D Printing",
+      description:
+        "Step into the future of innovation and design. Learn how 3D printing brings imagination to life— from concept modeling to tangible creations. Build, create, and innovate using cutting-edge printing technology.",
+      entryFee: "₹150",
+      image: "/3d-printing.jpg",
+      registrationPath: "/registration/3d-printing",
+    },
+  ]
+
+  const displayedEvents = filter === "competition" ? competitions : workshops
+
   return (
     <main className="relative bg-gradient-to-br from-black via-zinc-900 to-black text-white min-h-screen overflow-hidden">
-      {/* Animated gradient background overlay */}
+      {/* Background Effects */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] animate-pulse-slow"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)]"></div>
 
@@ -93,33 +122,53 @@ export default function Events() {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
-            <p className="text-red-600 text-xs tracking-widest mb-4">CHOOSE YOUR ARENA</p>
+            <p className="text-red-600 text-xs tracking-widest mb-4">CHOOSE YOUR CATEGORY</p>
             <h1 className="text-6xl font-bold mb-4">EVENTS</h1>
 
-            {/* Decorative line with dot */}
             <div className="flex items-center justify-center gap-4 mb-8">
               <div className="h-px w-12 bg-red-600"></div>
               <div className="w-3 h-3 bg-red-600 rounded-full"></div>
               <div className="h-px w-12 bg-red-600"></div>
             </div>
 
-            <p className="text-gray-500 text-sm tracking-wider">EIGHT CATEGORIES. INFINITE POSSIBILITIES.</p>
-            <div className="flex justify-center gap-8 mt-6 text-sm">
-              <span className="text-gray-500">■ 8 EVENTS</span>
-              <span className="text-gray-500">■ ₹150-200 ENTRY</span>
+            <p className="text-gray-400 text-sm tracking-wider mb-8">
+              EXPLORE OUR CINEMATIC COMPETITIONS AND HANDS-ON CREATIVE WORKSHOPS
+            </p>
+
+            {/* Filter Buttons */}
+            <div className="flex justify-center gap-6">
+              <button
+                onClick={() => setFilter("competition")}
+                className={`px-6 py-2 rounded-full border-2 ${
+                  filter === "competition"
+                    ? "bg-red-600 border-red-600 text-white"
+                    : "border-red-600 text-red-500 hover:bg-red-600 hover:text-white"
+                } transition-all duration-300`}
+              >
+                Competitions
+              </button>
+              <button
+                onClick={() => setFilter("workshop")}
+                className={`px-6 py-2 rounded-full border-2 ${
+                  filter === "workshop"
+                    ? "bg-red-600 border-red-600 text-white"
+                    : "border-red-600 text-red-500 hover:bg-red-600 hover:text-white"
+                } transition-all duration-300`}
+              >
+                Workshops
+              </button>
             </div>
           </div>
 
           {/* Events Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {events.map((event) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {displayedEvents.map((event) => (
               <EventCard
                 key={event.id}
                 title={event.title}
                 description={event.description}
                 entryFee={event.entryFee}
                 image={event.image}
-                highlighted={event.highlighted}
                 registrationPath={event.registrationPath}
               />
             ))}

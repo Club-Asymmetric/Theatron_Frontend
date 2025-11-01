@@ -4,17 +4,8 @@ import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
 import { useState, useEffect } from "react"
 
-export default function AdaptTuneRegistration() {
-  const [formData, setFormData] = useState({
-    team_name: "",
-    team_size: 1,
-    name1: "",
-    college1: "",
-    name2: "",
-    college2: "",
-    phone: "",
-    email: ""
-  })
+export default function AdapTuneRegistration() {
+  const [formData, setFormData] = useState({ name: "", phone: "", email: "", college: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState(null)
 
@@ -25,11 +16,7 @@ export default function AdaptTuneRegistration() {
   }, [])
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData({
-      ...formData,
-      [name]: name === "team_size" ? parseInt(value) : value
-    })
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const handlePayment = async (e) => {
@@ -38,44 +25,37 @@ export default function AdaptTuneRegistration() {
     setErrorMsg(null)
 
     try {
-      // 1️⃣ Create Razorpay order from backend
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/get_order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: 150, currency: "INR", receipt: `adapt_tune_${Date.now()}` })
+        body: JSON.stringify({ amount: 150, currency: "INR", receipt: `adaptune_${Date.now()}` })
       })
       const order = await res.json()
 
-      // 2️⃣ Launch Razorpay Checkout
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: order.amount,
         currency: order.currency,
-        name: "CIT Immerse - Adapt Tune",
-        description: "Dance Competition",
+        name: "CIT Immerse - AdapTune",
+        description: "Dance Performance Competition",
         order_id: order.id,
         prefill: {
-          name: formData.name1,
+          name: formData.name,
           email: formData.email,
           contact: formData.phone
         },
         theme: { color: "#EF4444" },
         handler: async function (response) {
-          // 3️⃣ Redirect to success page with payment details in query
           const query = new URLSearchParams({
             payment_id: response.razorpay_payment_id,
             order_id: response.razorpay_order_id,
             signature: response.razorpay_signature,
-            team_name: formData.team_name,
-            team_size: formData.team_size,
-            name1: formData.name1,
-            college1: formData.college1,
-            name2: formData.name2,
-            college2: formData.college2,
+            name: formData.name,
             phone: formData.phone,
-            email: formData.email
+            email: formData.email,
+            college: formData.college
           }).toString()
-          window.location.href = `/success?${query}`
+          window.location.href = `/success/adaptune?${query}`
         }
       }
 
@@ -100,68 +80,34 @@ export default function AdaptTuneRegistration() {
       <section className="pt-32 pb-20 px-8 relative z-10">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-6xl font-bold mb-4">ADAPT TUNE</h1>
-            <p className="text-red-600 text-sm tracking-wider mb-4">DANCE COMPETITION</p>
+            <h1 className="text-6xl font-bold mb-4">ADAPTUNE</h1>
+            <p className="text-red-600 text-sm tracking-wider mb-4">DANCE PERFORMANCE COMPETITION</p>
             <p className="text-gray-500 text-sm">
-              This innovative dance competition challenges participants to adapt to musical transitions and maintain seamless, fluid movement to music provided by the organizers.
+              Let rhythm and expression define your performance. Dance to cinematic tunes that blend storytelling,
+              passion, and energy, creating a stage experience that resonates deeply.
             </p>
           </div>
 
           <div className="border border-gray-700 p-8 rounded-lg">
             {errorMsg && <div className="mb-6 p-4 bg-red-900 border border-red-600 text-red-200 rounded">{errorMsg}</div>}
             <form className="space-y-6" onSubmit={handlePayment}>
-              <div>
-                <label className="block text-sm font-bold mb-2">Number of Participants</label>
-                <select
-                  name="team_size"
-                  value={formData.team_size}
-                  onChange={handleInputChange}
-                  className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-red-600 focus:outline-none transition"
-                  required
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-bold mb-2">Team Name</label>
-                <input
-                  type="text"
-                  name="team_name"
-                  value={formData.team_name}
-                  onChange={handleInputChange}
-                  className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-red-600 focus:outline-none transition"
-                  placeholder="Enter team name"
-                  required
-                />
-              </div>
-
-              {["name1", "college1", "name2", "college2", "phone", "email"].map((field, i) => (
+              {["name", "phone", "email", "college"].map((field) => (
                 <div key={field}>
-                  <label className="block text-sm font-bold mb-2 capitalize">
-                    {field.includes("name") ? `Participant ${field.slice(-1)} Name` :
-                     field.includes("college") ? `Participant ${field.slice(-1)} College` :
-                     field === "phone" ? "Phone Number" : "Email ID"}
-                    {i >= 2 && i < 4 ? <span className="text-gray-500"> (Optional)</span> : ""}
-                  </label>
+                  <label className="block text-sm font-bold mb-2 capitalize">{field}</label>
                   <input
                     type={field === "email" ? "email" : field === "phone" ? "tel" : "text"}
                     name={field}
                     value={formData[field]}
                     onChange={handleInputChange}
                     className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-red-600 focus:outline-none transition"
-                    placeholder={`Enter ${field.replace(/[0-9]/, " ").trim()}`}
-                    required={i < 4 ? false : true}
+                    required
                   />
                 </div>
               ))}
-
               <div className="border-t border-gray-700 pt-6 flex justify-between items-center">
                 <span className="text-lg font-bold">Entry Fee</span>
                 <span className="text-red-600 text-xl font-bold">₹150</span>
               </div>
-
               <button
                 type="submit"
                 disabled={isSubmitting}

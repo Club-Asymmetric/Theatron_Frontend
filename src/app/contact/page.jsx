@@ -17,7 +17,7 @@ export default function Contact() {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-6xl font-bold mb-8">CONTACT</h1>
-            <p className="text-gray-500 text-sm tracking-wider">Get in touch with us</p>
+            <p className="text-gray-500 text-sm tracking-wider">GET IN TOUCH WITH US</p>
           </div>
 
           {/* Contact Form */}

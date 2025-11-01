@@ -4,7 +4,7 @@ import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
 import { useState, useEffect } from "react"
 
-export default function TrailerCutRegistration() {
+export default function StagePlayRegistration() {
   const [formData, setFormData] = useState({ name: "", phone: "", email: "", college: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState(null)
@@ -25,21 +25,19 @@ export default function TrailerCutRegistration() {
     setErrorMsg(null)
 
     try {
-      // 1️⃣ Create Razorpay order from backend
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/get_order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: 150, currency: "INR", receipt: `trailercut_${Date.now()}` })
+        body: JSON.stringify({ amount: 150, currency: "INR", receipt: `stageplay_${Date.now()}` })
       })
       const order = await res.json()
 
-      // 2️⃣ Launch Razorpay Checkout
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: order.amount,
         currency: order.currency,
-        name: "CIT Immerse - Trailer Cut",
-        description: "Editing Competition",
+        name: "CIT Immerse - Stage Play",
+        description: "Drama Performance Competition",
         order_id: order.id,
         prefill: {
           name: formData.name,
@@ -48,7 +46,6 @@ export default function TrailerCutRegistration() {
         },
         theme: { color: "#EF4444" },
         handler: async function (response) {
-          // 3️⃣ Redirect to success page with payment details in query
           const query = new URLSearchParams({
             payment_id: response.razorpay_payment_id,
             order_id: response.razorpay_order_id,
@@ -58,7 +55,7 @@ export default function TrailerCutRegistration() {
             email: formData.email,
             college: formData.college
           }).toString()
-          window.location.href = `/success?${query}`
+          window.location.href = `/success/stage-play?${query}`
         }
       }
 
@@ -83,8 +80,11 @@ export default function TrailerCutRegistration() {
       <section className="pt-32 pb-20 px-8 relative z-10">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-6xl font-bold mb-4">TRAILER CUT</h1>
-            <p className="text-red-600 text-sm tracking-wider mb-4">EDITING COMPETITION</p>
+            <h1 className="text-6xl font-bold mb-4">STAGE PLAY</h1>
+            <p className="text-red-600 text-sm tracking-wider mb-4">DRAMA PERFORMANCE COMPETITION</p>
+            <p className="text-gray-500 text-sm">
+              Bring stories to life on stage. Perform dramatic or comedic plays that capture emotion, passion, and creativity, leaving audiences spellbound through your art.
+            </p>
           </div>
 
           <div className="border border-gray-700 p-8 rounded-lg">

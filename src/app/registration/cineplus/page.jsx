@@ -4,7 +4,7 @@ import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
 import { useState, useEffect } from "react"
 
-export default function TheFinalDraftRegistration() {
+export default function CinePulseRegistration() {
   const [formData, setFormData] = useState({ name: "", phone: "", email: "", college: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState(null)
@@ -25,19 +25,21 @@ export default function TheFinalDraftRegistration() {
     setErrorMsg(null)
 
     try {
+      // 1️⃣ Create Razorpay order from backend
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/get_order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: 150, currency: "INR", receipt: `thefinaldraft_${Date.now()}` })
+        body: JSON.stringify({ amount: 150, currency: "INR", receipt: `cinepulse_${Date.now()}` })
       })
       const order = await res.json()
 
+      // 2️⃣ Launch Razorpay Checkout
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: order.amount,
         currency: order.currency,
-        name: "CIT Immerse - The Final Draft",
-        description: "Scriptwriting Competition",
+        name: "CIT Immerse - Cine Pulse",
+        description: "Short Film Competition",
         order_id: order.id,
         prefill: {
           name: formData.name,
@@ -46,6 +48,7 @@ export default function TheFinalDraftRegistration() {
         },
         theme: { color: "#EF4444" },
         handler: async function (response) {
+          // 3️⃣ Redirect to success page with payment details in query
           const query = new URLSearchParams({
             payment_id: response.razorpay_payment_id,
             order_id: response.razorpay_order_id,
@@ -70,24 +73,26 @@ export default function TheFinalDraftRegistration() {
   }
 
   return (
-    <main className="bg-black text-white min-h-screen">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] animate-pulse-slow z-0 pointer-events-none"></div>
+    <main className="bg-black text-white min-h-screen relative">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] z-0 pointer-events-none"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)] z-0 pointer-events-none"></div>
 
       <Navigation />
       <Sidebar />
 
-      <section className="pt-32 pb-20 px-8">
+      <section className="pt-32 pb-20 px-8 relative z-10">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-6xl font-bold mb-4">THE FINAL DRAFT</h1>
-            <p className="text-red-600 text-sm tracking-wider mb-4">SCRIPTWRITING COMPETITION</p>
-            <p className="text-gray-500 text-sm">This scriptwriting competition invites solo participants to submit a two-page original English script, with the final round featuring on-the-spot writing based on a given topic.</p>
+            <h1 className="text-6xl font-bold mb-4">CINEPLUS</h1>
+            <p className="text-red-600 text-sm tracking-wider mb-4">SHORT FILM COMPETITION</p>
+            <p className="text-gray-500 text-sm">
+              This short film competition invites participants to showcase their creativity, storytelling, and cinematic
+              vision in a 4–5 minute film.
+            </p>
           </div>
 
           <div className="border border-gray-700 p-8 rounded-lg">
             {errorMsg && <div className="mb-6 p-4 bg-red-900 border border-red-600 text-red-200 rounded">{errorMsg}</div>}
-
             <form className="space-y-6" onSubmit={handlePayment}>
               {["name", "phone", "email", "college"].map((field) => (
                 <div key={field}>
