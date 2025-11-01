@@ -31,15 +31,15 @@ export default function Countdown() {
 
   const TimeBox = ({ value, label }) => (
     <div className="flex flex-col items-center">
-      <div className="border-2 border-red-600 px-10 py-10 mb-2">
-        <p className="text-5xl font-bold text-red-600">{String(value).padStart(2, "0")}</p>
+      <div className="border-2 border-red-600 px-4 py-4 sm:px-6 sm:py-6 md:px-10 md:py-10 mb-2">
+        <p className="text-2xl sm:text-3xl md:text-5xl font-bold text-red-600">{String(value).padStart(2, "0")}</p>
       </div>
-      <p className="text-gray-500 text-lg tracking-wider">{label}</p>
+      <p className="text-gray-500 text-xs sm:text-sm md:text-lg tracking-wider">{label}</p>
     </div>
   )
 
   return (
-    <div className="flex justify-center gap-8">
+    <div className="flex justify-center gap-2 sm:gap-4 md:gap-8">
       <TimeBox value={time.days} label="DAYS" />
       <TimeBox value={time.hours} label="HOURS" />
       <TimeBox value={time.minutes} label="MINUTES" />
