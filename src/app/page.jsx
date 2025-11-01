@@ -40,7 +40,7 @@ export default function Home() {
     }}
   >
     <img
-      src="/Theatron_logo.png"
+      src="/Theatron_Logo.png"
       alt="Theatron Logo"
       className="mx-auto drop-shadow-[0_0_40px_rgba(255,0,0,0.7)] transition-transform duration-500"
       style={{
