@@ -16,8 +16,9 @@ export default function Footer() {
     <img
       src="/Asymmetric_logo.png"
       alt="Asymmetric Logo"
-      className="w-20 sm:w-24 h-auto mt-1"
+      className="w-20 sm:w-24 h-auto mt-1 mb-1"
     />
+    <p className="text-xs text-gray-400 uppercase text-center tracking-widest">Asymmetric</p>
   </div>
 </div>
 
@@ -36,7 +37,23 @@ export default function Footer() {
         </div>
 
         {/* Gradient Divider */}
-        <div className="h-0.5 md:h-1 rounded-full bg-gradient-to-r from-transparent via-red-600 to-transparent shadow-lg"></div>
+        <div className="h-0.5 md:h-1 rounded-full bg-gradient-to-r from-transparent via-red-600 to-transparent shadow-lg mb-6"></div>
+
+        {/* Contact Info Section - Bottom */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-center text-sm">
+          <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-2">
+            <span className="text-gray-400 text-xs uppercase tracking-wider">Email:</span>
+            <a href="mailto:immersecit@gmail.com" className="text-white hover:text-red-600 transition break-all">
+              immersecit@gmail.com
+            </a>
+          </div>
+          <div className="flex flex-col md:flex-row items-center justify-center md:justify-end gap-1 md:gap-2">
+            <span className="text-gray-400 text-xs uppercase tracking-wider">Phone:</span>
+            <a href="tel:+917904849032" className="text-white hover:text-red-600 transition">
+              +91 7904849032
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );

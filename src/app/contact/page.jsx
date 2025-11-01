@@ -69,14 +69,18 @@ export default function Contact() {
           </div>
 
           {/* Contact Info */}
-          <div className="mt-12 grid grid-cols-2 gap-8 text-center text-white">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 text-center text-white">
             <div>
               <p className="text-gray-400 text-xs mb-2 uppercase tracking-widest">Email</p>
-              <p className="font-bold">info@theatron.com</p>
+              <a href="mailto:immersecit@gmail.com" className="font-bold hover:text-red-600 transition break-all">
+                immersecit@gmail.com
+              </a>
             </div>
             <div>
               <p className="text-gray-400 text-xs mb-2 uppercase tracking-widest">Phone</p>
-              <p className="font-bold">+91 XXXX XXXX XX</p>
+              <a href="tel:+917904849032" className="font-bold hover:text-red-600 transition">
+                +91 7904849032
+              </a>
             </div>
           </div>
         </div>
