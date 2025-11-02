@@ -2,12 +2,11 @@
 import Navigation from "@/components/navigation"
 import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 export default function QuizcornRegistration() {
   const [formData, setFormData] = useState({
     team_name: "",
-    team_size: 1,
     name1: "",
     college1: "",
     name2: "",
@@ -20,18 +19,9 @@ export default function QuizcornRegistration() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState(null)
 
-  useEffect(() => {
-    const script = document.createElement("script")
-    script.src = "https://checkout.razorpay.com/v1/checkout.js"
-    document.body.appendChild(script)
-  }, [])
-
   const handleInputChange = (e) => {
     const { name, value } = e.target
-    setFormData({
-      ...formData,
-      [name]: name === 'team_size' ? parseInt(value) : value
-    })
+    setFormData({ ...formData, [name]: value })
   }
 
   const handlePayment = async (e) => {
@@ -40,49 +30,24 @@ export default function QuizcornRegistration() {
     setErrorMsg(null)
 
     try {
-      // Create Razorpay order from backend
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/get_order`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: 150, currency: "INR", receipt: `quizcorn_${Date.now()}` })
-      })
-      const order = await res.json()
+      const params = new URLSearchParams({
+        event: "Quizcorn",
+        team_name: formData.team_name,
+        name1: formData.name1,
+        college1: formData.college1,
+        name2: formData.name2,
+        college2: formData.college2,
+        name3: formData.name3,
+        college3: formData.college3,
+        phone: formData.phone,
+        email: formData.email,
+        amount: 150,
+        currency: "INR",
+        receipt: `quizcorn_${Date.now()}`,
+        redirect: "https://theatron-nu.vercel.app/success"
+      }).toString()
 
-      // Launch Razorpay Checkout
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        amount: order.amount,
-        currency: order.currency,
-        name: "CIT Immerse - Quizcorn",
-        description: "Cinema Quiz Competition",
-        order_id: order.id,
-        prefill: {
-          name: formData.name1,
-          email: formData.email,
-          contact: formData.phone
-        },
-        theme: { color: "#EF4444" },
-        handler: async function (response) {
-          const query = new URLSearchParams({
-            payment_id: response.razorpay_payment_id,
-            order_id: response.razorpay_order_id,
-            signature: response.razorpay_signature,
-            team_name: formData.team_name,
-            name1: formData.name1,
-            college1: formData.college1,
-            name2: formData.name2,
-            college2: formData.college2,
-            name3: formData.name3,
-            college3: formData.college3,
-            phone: formData.phone,
-            email: formData.email
-          }).toString()
-          window.location.href = `/success?${query}`
-        }
-      }
-
-      const razor = new window.Razorpay(options)
-      razor.open()
+      window.location.href = `https://farhansohail07.github.io/Project-/payment.html?${params}`
     } catch (err) {
       console.error(err)
       setErrorMsg("Something went wrong while starting payment.")
@@ -93,22 +58,31 @@ export default function QuizcornRegistration() {
 
   return (
     <main className="bg-black text-white min-h-screen relative">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] z-0 pointer-events-none"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)] z-0 pointer-events-none"></div>
+      {/* Background gradients */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)] pointer-events-none"></div>
 
       <Navigation />
       <Sidebar />
 
-      <section className="pt-32 pb-20 px-8 relative z-10">
+      <section className="pt-32 pb-20 px-8 relative">
         <div className="max-w-2xl mx-auto">
+          {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-6xl font-bold mb-4">QUIZCORN</h1>
             <p className="text-red-600 text-sm tracking-wider mb-4">CINEMA QUIZ COMPETITION</p>
-            <p className="text-gray-500 text-sm">This quiz competition tests your knowledge of Tamil and English cinema, covering actors, directors, scripts, and film production.</p>
+            <p className="text-gray-500 text-sm">
+              Test your knowledge of Tamil and English cinema — from actors and directors to storylines and iconic
+              moments. Form a team and compete for cinematic glory!
+            </p>
           </div>
 
+          {/* Form */}
           <div className="border border-gray-700 p-8 rounded-lg">
-            {errorMsg && <div className="mb-6 p-4 bg-red-900 border border-red-600 text-red-200 rounded">{errorMsg}</div>}
+            {errorMsg && (
+              <div className="mb-6 p-4 bg-red-900 border border-red-600 text-red-200 rounded">{errorMsg}</div>
+            )}
+
             <form className="space-y-6" onSubmit={handlePayment}>
               <div>
                 <label className="block text-sm font-bold mb-2">Team Name</label>
@@ -122,25 +96,40 @@ export default function QuizcornRegistration() {
                 />
               </div>
 
-              {["name1", "college1", "name2", "college2", "name3", "college3"].map((field, idx) => (
-                <div key={field}>
-                  <label className="block text-sm font-bold mb-2 capitalize">
-                    {field.includes("name") ? `Participant ${Math.ceil((idx + 1) / 2)} Name` : `Participant ${Math.ceil((idx + 1) / 2)} College`}
-                    {idx > 1 && <span className="text-gray-500"> (Optional)</span>}
+              {/* Team members */}
+              {["1", "2", "3"].map((num, idx) => (
+                <div key={num}>
+                  <label className="block text-sm font-bold mb-2">
+                    Participant {num} Name {idx > 0 && <span className="text-gray-500">(Optional)</span>}
                   </label>
                   <input
                     type="text"
-                    name={field}
-                    value={formData[field]}
+                    name={`name${num}`}
+                    value={formData[`name${num}`]}
+                    onChange={handleInputChange}
+                    className="w-full bg-gray-900 border border-gray-700 px-4 py-2 mb-3 text-white focus:border-red-600 focus:outline-none transition"
+                    required={num === "1"}
+                  />
+                  <label className="block text-sm font-bold mb-2">
+                    Participant {num} College {idx > 0 && <span className="text-gray-500">(Optional)</span>}
+                  </label>
+                  <input
+                    type="text"
+                    name={`college${num}`}
+                    value={formData[`college${num}`]}
                     onChange={handleInputChange}
                     className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-red-600 focus:outline-none transition"
+                    required={num === "1"}
                   />
                 </div>
               ))}
 
+              {/* Contact */}
               {["phone", "email"].map((field) => (
                 <div key={field}>
-                  <label className="block text-sm font-bold mb-2 capitalize">{field === "phone" ? "Phone Number" : "Email ID"}</label>
+                  <label className="block text-sm font-bold mb-2 capitalize">
+                    {field === "phone" ? "Phone Number" : "Email ID"}
+                  </label>
                   <input
                     type={field === "email" ? "email" : "tel"}
                     name={field}

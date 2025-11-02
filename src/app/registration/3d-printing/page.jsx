@@ -2,18 +2,12 @@
 import Navigation from "@/components/navigation"
 import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 export default function ThreeDPrintingWorkshop() {
   const [formData, setFormData] = useState({ name: "", phone: "", email: "", college: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState(null)
-
-  useEffect(() => {
-    const script = document.createElement("script")
-    script.src = "https://checkout.razorpay.com/v1/checkout.js"
-    document.body.appendChild(script)
-  }, [])
 
   const handleInputChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
 
@@ -22,33 +16,21 @@ export default function ThreeDPrintingWorkshop() {
     setIsSubmitting(true)
     setErrorMsg(null)
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/get_order`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: 150, currency: "INR", receipt: `3dprinting_${Date.now()}` })
-      })
-      const order = await res.json()
+      // Create URL parameters to pass to GitHub-hosted payment.html
+      const params = new URLSearchParams({
+        event: "3D Printing Workshop",
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        college: formData.college,
+        amount: 150,
+        currency: "INR",
+        receipt: `3dprinting_${Date.now()}`,
+        redirect: "https://theatron-nu.vercel.app/success"
+      }).toString()
 
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        amount: order.amount,
-        currency: order.currency,
-        name: "CIT Immerse - 3D Printing workshop",
-        description: "Learn Design, Modeling & Prototyping",
-        order_id: order.id,
-        prefill: { name: formData.name, email: formData.email, contact: formData.phone },
-        theme: { color: "#EF4444" },
-        handler: function (response) {
-          const query = new URLSearchParams({
-            payment_id: response.razorpay_payment_id,
-            order_id: response.razorpay_order_id,
-            signature: response.razorpay_signature,
-            ...formData
-          }).toString()
-          window.location.href = `/success/3d-printing?${query}`
-        }
-      }
-      new window.Razorpay(options).open()
+      // Redirect to GitHub Pages Razorpay handler
+      window.location.href = `https://farhansohail07.github.io/Project-/payment.html?${params}`
     } catch (err) {
       console.error(err)
       setErrorMsg("Something went wrong while starting payment.")
@@ -74,7 +56,12 @@ export default function ThreeDPrintingWorkshop() {
           </div>
 
           <div className="border border-gray-700 p-8 rounded-lg">
-            {errorMsg && <div className="mb-6 p-4 bg-red-900 border border-red-600 text-red-200 rounded">{errorMsg}</div>}
+            {errorMsg && (
+              <div className="mb-6 p-4 bg-red-900 border border-red-600 text-red-200 rounded">
+                {errorMsg}
+              </div>
+            )}
+
             <form className="space-y-6 text-left" onSubmit={handlePayment}>
               {["name", "phone", "email", "college"].map((field) => (
                 <div key={field}>
@@ -89,10 +76,12 @@ export default function ThreeDPrintingWorkshop() {
                   />
                 </div>
               ))}
+
               <div className="border-t border-gray-700 pt-6 flex justify-between items-center">
                 <span className="text-lg font-bold">Entry Fee</span>
                 <span className="text-red-600 text-xl font-bold">₹150</span>
               </div>
+
               <button
                 type="submit"
                 disabled={isSubmitting}
