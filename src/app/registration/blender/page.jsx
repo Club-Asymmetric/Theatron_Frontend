@@ -23,7 +23,7 @@ export default function BlastInBlenderWorkshop() {
         phone: formData.phone,
         email: formData.email,
         college: formData.college,
-        amount: "150",
+        amount: "1",
         currency: "INR",
         receipt: `blast_in_blender_${Date.now()}`,
         redirect: "https://theatron-nu.vercel.app/success"
