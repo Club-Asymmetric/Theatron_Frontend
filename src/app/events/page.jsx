@@ -104,6 +104,15 @@ export default function Events() {
       image: "/3d-printing.png",
       registrationPath: "/registration/3d-printing",
     },
+    {
+  id: 4,
+  title: "Blender Workshop",
+  description:
+    "Unleash your creativity with Blender! Dive into 3D modeling, animation, and rendering using the industry’s favorite open-source tool. Learn to design, animate, and bring your ideas to life with professional techniques.",
+  entryFee: "₹150",
+  image: "/blender.jpg",
+  registrationPath: "/registration/blender",
+},
   ]
 
   const displayedEvents = filter === "competition" ? competitions : workshops

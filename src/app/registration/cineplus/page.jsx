@@ -60,7 +60,7 @@ export default function CinePulseRegistration() {
           <div className="text-center mb-12">
             <h1 className="text-6xl font-bold mb-4">CINE PULSE</h1>
             <p className="text-red-600 text-sm tracking-wider mb-4">SHORT FLIM COMPETITION</p>
-            <p className="text-gray-500 text-sm">This short flim competition invites participants to showcase their creativity, storytelling, and cinematic vision in a 4–5 minute film.</p>
+            <p className="text-gray-500 text-sm">This short flim competition invites participants to showcase their creativity, storytelling, and cinematic vision in a max of 2 mins.</p>
           </div>
 
           {/* Registration Form */}
