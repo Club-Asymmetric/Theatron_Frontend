@@ -17,7 +17,7 @@ export default function ScriptWritingRegistration() {
     setErrorMsg(null)
     try {
       const params = new URLSearchParams({
-        event: "Script Writing Workshop",
+        event: "Script_Writing",
         name: formData.name,
         phone: formData.phone,
         email: formData.email,

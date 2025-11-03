@@ -19,7 +19,7 @@ export default function CinePulseRegistration() {
     try {
       // Redirect to GitHub Pages payment handler with event details
       const params = new URLSearchParams({
-        event: "Cine Pulse",
+        event: "CinePlus",
         name: formData.name,
         phone: formData.phone,
         email: formData.email,

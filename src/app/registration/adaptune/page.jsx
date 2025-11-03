@@ -19,7 +19,7 @@ export default function AdapTuneRegistration() {
     try {
       // Prepare query parameters for the GitHub-hosted Razorpay HTML
       const params = new URLSearchParams({
-        event: "AdapTune",
+        event: "AdaptTune",
         name: formData.name,
         phone: formData.phone,
         email: formData.email,

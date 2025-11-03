@@ -18,7 +18,7 @@ export default function StillsOfSoulRegistration() {
 
     try {
       const params = new URLSearchParams({
-        event: "Stills of Soul",
+        event: "Stills_Of_Soul",
         name: formData.name,
         phone: formData.phone,
         email: formData.email,

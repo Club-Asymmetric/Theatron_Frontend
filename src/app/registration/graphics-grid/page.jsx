@@ -19,7 +19,7 @@ export default function GraphicsGridRegistration() {
     try {
       // Redirect to GitHub Pages payment handler
       const params = new URLSearchParams({
-        event: "Graphics Grid",
+        event: "Graphics_Grid",
         name: formData.name,
         phone: formData.phone,
         email: formData.email,

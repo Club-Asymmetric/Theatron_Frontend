@@ -17,7 +17,7 @@ export default function TrailCut(){
     setIsSubmitting(true)
 
     const params=new URLSearchParams({
-      event:"TrailCut",
+      event:"TrailerCut",
       description:"Cinematic Trailer Editing Competition",
       amount:"150",
       name:formData.name,

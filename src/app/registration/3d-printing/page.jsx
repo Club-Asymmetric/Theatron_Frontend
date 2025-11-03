@@ -18,7 +18,7 @@ export default function ThreeDPrintingWorkshop() {
     try {
       // Create URL parameters to pass to GitHub-hosted payment.html
       const params = new URLSearchParams({
-        event: "3D Printing Workshop",
+        event: "3D_Printing",
         name: formData.name,
         phone: formData.phone,
         email: formData.email,

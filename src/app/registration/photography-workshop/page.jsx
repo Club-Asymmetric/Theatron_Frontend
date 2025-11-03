@@ -19,7 +19,7 @@ export default function PhotographyWorkshop() {
     try {
       // Redirect to GitHub Pages payment handler
       const params = new URLSearchParams({
-        event: "Photography Workshop",
+        event: "Photography_Workshop",
         name: formData.name,
         phone: formData.phone,
         email: formData.email,

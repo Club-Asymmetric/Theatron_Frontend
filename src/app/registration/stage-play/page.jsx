@@ -18,7 +18,7 @@ export default function StagePlayRegistration() {
 
     try {
       const params = new URLSearchParams({
-        event: "Stage Play",
+        event: "Stage_Play",
         name: formData.name,
         phone: formData.phone,
         email: formData.email,
