@@ -83,7 +83,7 @@ export default function Events() {
       description:
         "Discover the fundamentals of cinematic storytelling. Learn to craft original scripts with compelling plots, powerful characters, and natural dialogue. Turn your creative thoughts into scripts ready for the big screen.",
       entryFee: "₹150",
-      image: "/scriptwriting-draft.jpg",
+      image: "/scriptwriting-draft.png",
       registrationPath: "/registration/script-writing",
     },
     {
@@ -92,7 +92,7 @@ export default function Events() {
       description:
         "Dive deep into the art and science of photography. Explore lighting, framing, and visual storytelling guided by experts. Transform everyday scenes into captivating frames that tell stories without words.",
       entryFee: "₹150",
-      image: "/photography-workshop.jpg",
+      image: "/photography-workshop.png",
       registrationPath: "/registration/photography-workshop",
     },
     {
@@ -101,7 +101,7 @@ export default function Events() {
       description:
         "Step into the future of innovation and design. Learn how 3D printing brings imagination to life— from concept modeling to tangible creations. Build, create, and innovate using cutting-edge printing technology.",
       entryFee: "₹150",
-      image: "/3d-printing.jpg",
+      image: "/3d-printing.png",
       registrationPath: "/registration/3d-printing",
     },
   ]
