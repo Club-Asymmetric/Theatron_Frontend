@@ -43,7 +43,7 @@ export default function Events() {
       description:
         "Craft short films that blend emotion, vision, and storytelling brilliance. From scripting to direction, bring your imagination to life on screen. Let your creativity shape narratives that touch hearts and inspire audiences.",
       entryFee: "₹150",
-      image: "/cineplus.jpg",
+      image: "/cine-pulse.jpg",
       registrationPath: "/registration/cineplus",
     },
     {
@@ -61,7 +61,7 @@ export default function Events() {
   description:
     "Let rhythm and expression define your performance. Dance to cinematic tunes that combine passion, choreography, and storytelling. Move beyond beats to create an experience that connects art, energy, and raw emotion seamlessly.",
   entryFee: "₹150",
-  image: "/adaptune.jpg",
+  image: "/adapttune.jpg",
   registrationPath: "/registration/adaptune",
 },
 
