@@ -10,7 +10,7 @@ export default function CinePulseRegistration() {
     phone: "",
     email: "",
     college: "",
-    short_film_link: ""
+    short_flim_link: ""
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
@@ -38,7 +38,7 @@ export default function CinePulseRegistration() {
 
       if (response.ok) {
         setSubmitStatus('success')
-        setFormData({ name: "", phone: "", email: "", college: "", short_film_link: "" })
+        setFormData({ name: "", phone: "", email: "", college: "", short_flim_link: "" })
       } else {
         setSubmitStatus('error')
       }
@@ -59,8 +59,8 @@ export default function CinePulseRegistration() {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-6xl font-bold mb-4">CINE PULSE</h1>
-            <p className="text-red-600 text-sm tracking-wider mb-4">SHORT FILM COMPETITION</p>
-            <p className="text-gray-500 text-sm">This short film competition invites participants to showcase their creativity, storytelling, and cinematic vision in a 4–5 minute film.</p>
+            <p className="text-red-600 text-sm tracking-wider mb-4">SHORT FLIM COMPETITION</p>
+            <p className="text-gray-500 text-sm">This short flim competition invites participants to showcase their creativity, storytelling, and cinematic vision in a 4–5 minute film.</p>
           </div>
 
           {/* Registration Form */}
@@ -129,14 +129,14 @@ export default function CinePulseRegistration() {
               </div>
 
               <div>
-                <label className="block text-sm font-bold mb-2">Short Film Link</label>
+                <label className="block text-sm font-bold mb-2">Short Flim Link</label>
                 <input
                   type="url"
-                  name="short_film_link"
-                  value={formData.short_film_link}
+                  name="short_flim_link"
+                  value={formData.short_flim_link}
                   onChange={handleInputChange}
                   className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-red-600 focus:outline-none transition"
-                  placeholder="Enter link to your short film (Google Drive, YouTube, etc.)"
+                  placeholder="Enter link to your short flim (Google Drive, YouTube, etc.)"
                   required
                 />
                 <p className="text-xs text-gray-500 mt-1">
