@@ -129,14 +129,14 @@ export default function CinePulseRegistration() {
               </div>
 
               <div>
-                <label className="block text-sm font-bold mb-2">Short Flim Link</label>
+                <label className="block text-sm font-bold mb-2">Short Film Link</label>
                 <input
                   type="url"
                   name="short_flim_link"
                   value={formData.short_flim_link}
                   onChange={handleInputChange}
                   className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-red-600 focus:outline-none transition"
-                  placeholder="Enter link to your short flim (Google Drive, YouTube, etc.)"
+                  placeholder="Enter link to your short film (Google Drive, YouTube, etc.)"
                   required
                 />
                 <p className="text-xs text-gray-500 mt-1">

@@ -41,7 +41,7 @@ export default function Events() {
       id: 4,
       title: "CinePlus",
       description:
-        "Craft short flims that blend emotion, vision, and storytelling brilliance. From scripting to direction, bring your imagination to life on screen. Let your creativity shape narratives that touch hearts and inspire audiences.",
+        "Craft short films that blend emotion, vision, and storytelling brilliance. From scripting to direction, bring your imagination to life on screen. Let your creativity shape narratives that touch hearts and inspire audiences.",
       entryFee: "₹150",
       image: "/cine-pulse.jpg",
       registrationPath: "/registration/cineplus",
