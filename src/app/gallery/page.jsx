@@ -6,13 +6,18 @@ export default function Gallery() {
   const images = [
     {id: 1, src: "/img1.jpg", alt: "Gallery moment 1"},
     {id: 2, src: "/img2.jpg", alt: "Gallery moment 2"},
-    {id: 3, src: "/img3.jpg", alt: "Gallery moment 3"},
     {id: 4, src: "/img4.jpg", alt: "Gallery moment 4"},
     {id: 5, src: "/img5.jpg", alt: "Gallery moment 5"},
     {id: 6, src: "/img10.jpg", alt: "Gallery moment 6"},
     {id: 7, src: "/img7.jpg", alt: "Gallery moment 7"},
     {id: 8, src: "/img11.jpg", alt: "Gallery moment 8"},
     {id: 9, src: "/img12.jpg", alt: "Gallery moment 9"},
+    {id: 9, src: "/img13.jpeg", alt: "Gallery moment 10"},
+    {id: 9, src: "/img14.jpeg", alt: "Gallery moment 11"},
+    {id: 9, src: "/img15.jpeg", alt: "Gallery moment 12"},
+    {id: 9, src: "/img16.jpeg", alt: "Gallery moment 13"},
+    {id: 9, src: "/img17.jpeg", alt: "Gallery moment 1"},
+    {id: 9, src: "/img18.jpeg", alt: "Gallery moment 15"},
   ]
 
   return (
