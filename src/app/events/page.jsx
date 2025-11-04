@@ -128,7 +128,7 @@ export default function Events() {
       "Unleash your creativity with Blender! Dive into 3D modeling, animation, and rendering using the industry’s favorite open-source tool. Learn to design, animate, and bring your ideas to life with professional techniques.",
     entryFee: "₹150",
     image: "/blender.jpg",
-    registrationPath: "/registration/blender",
+    registrationPath: "/registration/Blender_",
   },
 ];
 

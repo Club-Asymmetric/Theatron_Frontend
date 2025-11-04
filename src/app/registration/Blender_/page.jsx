@@ -15,6 +15,7 @@ export default function BlenderWorkshop() {
     e.preventDefault()
     setIsSubmitting(true)
     setErrorMsg(null)
+
     try {
       const params = new URLSearchParams({
         event: "Blast_in_Blender",
@@ -24,7 +25,7 @@ export default function BlenderWorkshop() {
         college: formData.college,
         amount: 150,
         currency: "INR",
-        receipt: `blender_${Date.now()}`,
+       receipt: `blender_${Date.now()}`,
         redirect: "https://theatron-nu.vercel.app/success"
       }).toString()
 
@@ -39,38 +40,42 @@ export default function BlenderWorkshop() {
 
   return (
     <main className="bg-black text-white min-h-screen relative">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,165,0,0.25),transparent_60%)]"></div>
+      {/* Background gradients */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)] pointer-events-none"></div>
+
       <Navigation />
       <Sidebar />
 
       <section className="pt-32 pb-20 px-8 relative">
         <div className="max-w-2xl mx-auto">
+          {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-6xl font-bold mb-4">BLAST_IN_BLENDER</h1>
-            <p className="text-orange-500 text-sm tracking-wider mb-4">CREATE, DESIGN, AND ANIMATE</p>
+            <p className="text-red-600 text-sm tracking-wider mb-4">CREATE, DESIGN, AND ANIMATE</p>
             <p className="text-gray-500 text-sm">
               Learn 3D modeling, animation, and rendering using Blender — the most powerful open-source 3D tool. 
               Get hands-on experience and bring your creative ideas to life.
             </p>
           </div>
 
+          {/* Registration Form */}
           <div className="border border-gray-700 p-8 rounded-lg">
             {errorMsg && (
-              <div className="mb-6 p-4 bg-red-900 border border-red-600 text-red-200 rounded">
-                {errorMsg}
-              </div>
+              <div className="mb-6 p-4 bg-red-900 border border-red-600 text-red-200 rounded">{errorMsg}</div>
             )}
-
             <form className="space-y-6 text-left" onSubmit={handlePayment}>
               {["name", "phone", "email", "college"].map((field) => (
                 <div key={field}>
-                  <label className="block text-sm font-bold mb-2 capitalize text-left">{field}</label>
+                  <label className="block text-sm font-bold mb-2 capitalize text-left">
+                    {field === "phone" ? "Phone Number" : field === "email" ? "Email ID" : field}
+                  </label>
                   <input
                     type={field === "email" ? "email" : field === "phone" ? "tel" : "text"}
                     name={field}
                     value={formData[field]}
                     onChange={handleInputChange}
-                    className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-orange-500 focus:outline-none transition"
+                    className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-red-600 focus:outline-none transition"
                     required
                   />
                 </div>
@@ -78,15 +83,15 @@ export default function BlenderWorkshop() {
 
               <div className="border-t border-gray-700 pt-6 flex justify-between items-center">
                 <span className="text-lg font-bold">Entry Fee</span>
-                <span className="text-orange-500 text-xl font-bold">₹150</span>
+                <span className="text-red-600 text-xl font-bold">₹150</span>
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-orange-500 px-6 py-3 text-white font-bold hover:bg-orange-600 transition disabled:opacity-50"
+                className="w-full bg-red-600 px-6 py-3 text-white font-bold hover:bg-red-700 transition disabled:opacity-50"
               >
-                {isSubmitting ? "PROCESSING..." : "REGISTER & PAY ₹200"}
+                {isSubmitting ? "PROCESSING..." : "REGISTER & PAY ₹150"}
               </button>
             </form>
           </div>
