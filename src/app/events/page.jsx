@@ -113,14 +113,15 @@ export default function Events() {
     registrationPath: "/registration/photography-workshop",
   },
   {
-    id: 3,
-    title: "3D Printing",
-    description:
-      "Step into the future of innovation and design. Learn how 3D printing brings imagination to life— from concept modeling to tangible creations. Build, create, and innovate using cutting-edge printing technology.",
-    entryFee: "₹99",
-    image: "/3d-printing.png",
-    registrationPath: "/registration/3d-printing",
-  },
+  id: 3,
+  title: "Dance Workshop",
+  description:
+    "Move to the rhythm and express yourself through dance! Join our workshop to learn choreography, stage presence, and performance techniques from talented instructors. Perfect for beginners and enthusiasts alike.",
+  entryFee: "₹99",
+  image: "/danceworkshop.jpg",
+  registrationPath: "/registration/dance-workshop",
+},
+
   {
     id: 4,
     title: "Blender Workshop",

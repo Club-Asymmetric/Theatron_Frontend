@@ -4,7 +4,7 @@ import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
 import { useState } from "react"
 
-export default function ThreeDPrintingWorkshop() {
+export default function DanceWorkshop() {
   const [formData, setFormData] = useState({ name: "", phone: "", email: "", college: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState(null)
@@ -18,14 +18,14 @@ export default function ThreeDPrintingWorkshop() {
     try {
       // Create URL parameters to pass to GitHub-hosted payment.html
       const params = new URLSearchParams({
-        event: "3D_Printing",
+        event: "Dance_Workshop",
         name: formData.name,
         phone: formData.phone,
         email: formData.email,
         college: formData.college,
         amount: 99,
         currency: "INR",
-        receipt: `3dprinting_${Date.now()}`,
+        receipt: `Danceworkshop_${Date.now()}`,
         redirect: "https://theatron-nu.vercel.app/success"
       }).toString()
 
@@ -48,10 +48,10 @@ export default function ThreeDPrintingWorkshop() {
       <section className="pt-32 pb-20 px-8 relative">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-6xl font-bold mb-4">3D PRINTING</h1>
-            <p className="text-red-600 text-sm tracking-wider mb-4">BUILD YOUR IDEAS INTO REALITY</p>
+            <h1 className="text-6xl font-bold mb-4">DANCE WORKSHOP</h1>
+            <p className="text-red-600 text-sm tracking-wider mb-4">DANCE TO EXPRESS, NOT TO IMPRESS.</p>
             <p className="text-gray-500 text-sm">
-              Gain hands-on experience with 3D modeling and printing. Learn how to design, slice, and print your own creations using the latest tools and technology.
+              Move to the rhythm and express yourself through dance! Join our workshop to learn choreography, stage presence, and performance techniques from talented instructors. Perfect for beginners and enthusiasts alike.
             </p>
           </div>
 
