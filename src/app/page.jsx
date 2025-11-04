@@ -123,14 +123,23 @@ export default function Home() {
 
           {/* CTA Button */}
           <div className="flex flex-col sm:flex-row justify-center gap-4 md:gap-8 px-4">
-            <Link
-              className="relative bg-red-600 px-6 md:px-10 py-2.5 md:py-3 text-sm md:text-base font-semibold rounded-full overflow-hidden transition-transform transform hover:scale-105 hover:shadow-[0_0_20px_rgba(255,0,0,0.6)]"
-              href="/events"
-            >
-              <span className="relative z-10">REGISTER NOW →</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-red-700 via-red-500 to-red-700 opacity-0 hover:opacity-100 transition-opacity"></span>
-            </Link>
-          </div>
+  <Link
+    className="relative bg-red-600 px-6 md:px-10 py-2.5 md:py-3 text-sm md:text-base font-semibold rounded-full overflow-hidden transition-transform transform hover:scale-105 hover:shadow-[0_0_20px_rgba(255,0,0,0.6)]"
+    href="/events"
+  >
+    <span className="relative z-10">REGISTER NOW →</span>
+    <span className="absolute inset-0 bg-gradient-to-r from-red-700 via-red-500 to-red-700 opacity-0 hover:opacity-100 transition-opacity"></span>
+  </Link>
+
+  <Link
+    className="relative bg-white text-black px-6 md:px-10 py-2.5 md:py-3 text-sm md:text-base font-semibold rounded-full overflow-hidden transition-transform transform hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.6)]"
+    href="/registration/general-pass"
+  >
+    <span className="relative z-10">GENERAL PASS</span>
+    <span className="absolute inset-0 bg-gradient-to-r from-gray-300 via-white to-gray-300 opacity-0 hover:opacity-100 transition-opacity"></span>
+  </Link>
+</div>
+
         </div>
       </section>
 
