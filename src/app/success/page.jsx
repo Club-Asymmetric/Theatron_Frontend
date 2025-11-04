@@ -15,7 +15,6 @@ export default function SuccessPage() {
     const college = params.get("college");
 
     if (event) {
-      // Format event name nicely (e.g., "3d_printing" → "3D Printing")
       const formattedEvent = event
         .replace(/_/g, " ")
         .replace(/\b\w/g, (c) => c.toUpperCase());
@@ -23,7 +22,12 @@ export default function SuccessPage() {
     }
 
     if (paymentStatus === "success") {
-      fetch(`https://theatron-backend.onrender.com/register/solo/${event}`, {
+      // 👇 Determine if the event is solo or group
+      const groupEvents = ["Quizcorn", "AdaptTune"];
+      const isGroupEvent = groupEvents.includes(event.toLowerCase());
+      const apiType = isGroupEvent ? "group" : "solo";
+
+      fetch(`https://theatron-backend.onrender.com/register/${apiType}/${event}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, email, college }),

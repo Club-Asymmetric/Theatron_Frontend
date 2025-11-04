@@ -5,11 +5,20 @@ import Footer from "@/components/footer"
 import { useState } from "react"
 
 export default function AdapTuneRegistration() {
-  const [formData, setFormData] = useState({ name: "", phone: "", email: "", college: "" })
+  const [formData, setFormData] = useState({
+    teamName: "",
+    participant1: "",
+    college1: "",
+    participant2: "",
+    college2: "",
+    phone: "",
+    email: "",
+  })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState(null)
 
-  const handleInputChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
+  const handleInputChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value })
 
   const handlePayment = async (e) => {
     e.preventDefault()
@@ -17,20 +26,23 @@ export default function AdapTuneRegistration() {
     setErrorMsg(null)
 
     try {
-      // Prepare query parameters for the GitHub-hosted Razorpay HTML
+      // Prepare query parameters for Razorpay
       const params = new URLSearchParams({
-        event: "AdaptTune",
-        name: formData.name,
+        event: "adaptune",
+        teamName: formData.teamName,
+        participant1: formData.participant1,
+        college1: formData.college1,
+        participant2: formData.participant2,
+        college2: formData.college2,
         phone: formData.phone,
         email: formData.email,
-        college: formData.college,
         amount: 150,
         currency: "INR",
         receipt: `adaptune_${Date.now()}`,
-        redirect: "https://theatron-nu.vercel.app/success"
+        redirect: "https://theatron-nu.vercel.app/success",
       }).toString()
 
-      // Redirect to common Razorpay handler page
+      // Redirect to payment handler
       window.location.href = `https://farhansohail07.github.io/Project-/payment.html?${params}`
     } catch (err) {
       console.error(err)
@@ -52,9 +64,13 @@ export default function AdapTuneRegistration() {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-6xl font-bold mb-4">ADAPTUNE</h1>
-            <p className="text-red-600 text-sm tracking-wider mb-4">DANCE PERFORMANCE COMPETITION</p>
+            <p className="text-red-600 text-sm tracking-wider mb-4">
+              DANCE PERFORMANCE COMPETITION
+            </p>
             <p className="text-gray-500 text-sm">
-              Let rhythm and expression define your performance. Dance to cinematic tunes that blend storytelling, passion, and energy, creating a stage experience that resonates deeply.
+              Let rhythm and expression define your performance. Dance to
+              cinematic tunes that blend storytelling, passion, and energy,
+              creating a stage experience that resonates deeply.
             </p>
           </div>
 
@@ -66,13 +82,27 @@ export default function AdapTuneRegistration() {
             )}
 
             <form className="space-y-6" onSubmit={handlePayment}>
-              {["name", "phone", "email", "college"].map((field) => (
-                <div key={field}>
-                  <label className="block text-sm font-bold mb-2 capitalize">{field}</label>
+              {[
+                { label: "Team Name", name: "teamName" },
+                { label: "Participant 1 Name", name: "participant1" },
+                { label: "College Name (Participant 1)", name: "college1" },
+                { label: "Participant 2 Name", name: "participant2" },
+                { label: "College Name (Participant 2)", name: "college2" },
+                { label: "Phone Number", name: "phone" },
+                { label: "Email", name: "email" },
+              ].map((field) => (
+                <div key={field.name}>
+                  <label className="block text-sm font-bold mb-2">{field.label}</label>
                   <input
-                    type={field === "email" ? "email" : field === "phone" ? "tel" : "text"}
-                    name={field}
-                    value={formData[field]}
+                    type={
+                      field.name === "email"
+                        ? "email"
+                        : field.name === "phone"
+                        ? "tel"
+                        : "text"
+                    }
+                    name={field.name}
+                    value={formData[field.name]}
                     onChange={handleInputChange}
                     className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-red-600 focus:outline-none transition"
                     required
