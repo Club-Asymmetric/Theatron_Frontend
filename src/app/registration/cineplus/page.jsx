@@ -22,55 +22,111 @@ export default function CinePulseRegistration() {
     })
   }
 
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script")
+      script.src = "https://checkout.razorpay.com/v1/checkout.js"
+      script.onload = () => resolve(true)
+      script.onerror = () => resolve(false)
+      document.body.appendChild(script)
+    })
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitStatus(null)
 
+    const res = await loadRazorpayScript()
+    if (!res) {
+      alert("Failed to load Razorpay SDK")
+      setIsSubmitting(false)
+      return
+    }
+
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/register/solo/cine-pulse`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      // Create Razorpay order from your backend
+      const orderRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/payment/create-order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: 150,
+          currency: "INR",
+          receipt: `cinepulse_${Date.now()}`,
+          event: "Cine Pulse"
+        }),
       })
 
-      if (response.ok) {
-        setSubmitStatus('success')
-        setFormData({ name: "", phone: "", email: "", college: "", short_flim_link: "" })
-      } else {
-        setSubmitStatus('error')
+      const data = await orderRes.json()
+      if (!data.id) throw new Error("Order creation failed")
+
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: data.amount,
+        currency: data.currency,
+        name: "Cine Pulse Registration",
+        description: "Short Film Competition",
+        order_id: data.id,
+        handler: async function (response) {
+          try {
+            // After successful payment, store registration in backend
+            const registerRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/register/solo/cine-pulse`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(formData),
+            })
+
+            if (registerRes.ok) {
+              setSubmitStatus("success")
+              setFormData({ name: "", phone: "", email: "", college: "", short_flim_link: "" })
+            } else {
+              setSubmitStatus("error")
+            }
+          } catch (error) {
+            console.error("Registration failed after payment:", error)
+            setSubmitStatus("error")
+          }
+        },
+        prefill: {
+          name: formData.name,
+          email: formData.email,
+          contact: formData.phone
+        },
+        theme: { color: "#ef4444" }
       }
+
+      const rzp = new window.Razorpay(options)
+      rzp.open()
     } catch (error) {
-      console.error('Error submitting form:', error)
-      setSubmitStatus('error')
+      console.error("Error initiating payment:", error)
+      setSubmitStatus("error")
     } finally {
       setIsSubmitting(false)
     }
   }
+
   return (
     <main className="bg-black text-white min-h-screen">
       <Navigation />
       <Sidebar />
 
-      {/* Registration Section */}
       <section className="pt-32 pb-20 px-8">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-6xl font-bold mb-4">CINE PULSE</h1>
-            <p className="text-red-600 text-sm tracking-wider mb-4">SHORT FLIM COMPETITION</p>
-            <p className="text-gray-500 text-sm">This short flim competition invites participants to showcase their creativity, storytelling, and cinematic vision in a max of 2 mins.</p>
+            <p className="text-red-600 text-sm tracking-wider mb-4">SHORT FILM COMPETITION</p>
+            <p className="text-gray-500 text-sm">
+              This short film competition invites participants to showcase their creativity, storytelling, and cinematic vision in a max of 2 mins.
+            </p>
           </div>
 
-          {/* Registration Form */}
           <div className="border border-gray-700 p-8">
-            {submitStatus === 'success' && (
+            {submitStatus === "success" && (
               <div className="mb-6 p-4 bg-green-900 border border-green-600 text-green-200 rounded">
                 Registration successful! You will receive a confirmation email shortly.
               </div>
             )}
-            {submitStatus === 'error' && (
+            {submitStatus === "error" && (
               <div className="mb-6 p-4 bg-red-900 border border-red-600 text-red-200 rounded">
                 Registration failed. Please try again.
               </div>
@@ -144,11 +200,9 @@ export default function CinePulseRegistration() {
                 </p>
               </div>
 
-              <div className="border-t border-gray-700 pt-6">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-lg font-bold">Entry Fee</span>
-                  <span className="text-red-600 text-xl font-bold">₹150</span>
-                </div>
+              <div className="border-t border-gray-700 pt-6 flex justify-between items-center">
+                <span className="text-lg font-bold">Entry Fee</span>
+                <span className="text-red-600 text-xl font-bold">₹150</span>
               </div>
 
               <button
@@ -156,7 +210,7 @@ export default function CinePulseRegistration() {
                 disabled={isSubmitting}
                 className="w-full bg-red-600 px-6 py-3 text-white font-bold hover:bg-red-700 transition disabled:opacity-50"
               >
-                {isSubmitting ? 'SUBMITTING...' : 'REGISTER FOR CINE PULSE'}
+                {isSubmitting ? "PROCESSING..." : "REGISTER & PAY ₹150"}
               </button>
             </form>
           </div>

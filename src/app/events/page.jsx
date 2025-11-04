@@ -24,7 +24,7 @@ export default function Events() {
     title: "Graphics Grid",
     description:
       "Unleash your creativity through digital art and design. Create visually stunning posters that speak louder than words, combining imagination, style, and originality. Transform ideas into visuals that inspire emotion and cinematic impact.",
-    entryFee: "₹150",
+    entryFee: "₹99",
     image: "/graphics-design-poster.jpg",
     registrationPath: "/registration/graphics-grid",
   },
@@ -33,7 +33,7 @@ export default function Events() {
     title: "Stage Play",
     description:
       "Bring stories to life under the spotlight. Perform powerful dramas or lighthearted comedies that express emotion, passion, and creativity. Let your performance reflect the art of storytelling that connects deeply with every audience.",
-    entryFee: "₹150",
+    entryFee: "₹99",
     image: "/stage-play.jpg",
     registrationPath: "/registration/stage-play",
   },
@@ -42,7 +42,7 @@ export default function Events() {
     title: "Stills of Soul",
     description:
       "Capture the essence of emotion through your lens. Freeze powerful moments that tell stories words cannot. Each photograph should mirror your creative vision, turning still images into timeless expressions of cinematic storytelling.",
-    entryFee: "₹150",
+    entryFee: "₹99",
     image: "/still-of-soul.jpg",
     registrationPath: "/registration/stills-of-soul",
   },
@@ -51,7 +51,7 @@ export default function Events() {
     title: "CinePlus",
     description:
       "Craft short films that blend emotion, vision, and storytelling brilliance. From scripting to direction, bring your imagination to life on screen. Let your creativity shape narratives that touch hearts and inspire audiences.",
-    entryFee: "₹150",
+    entryFee: "₹149",
     image: "/cine-pulse.jpg",
     registrationPath: "/registration/cineplus",
   },
@@ -69,7 +69,7 @@ export default function Events() {
     title: "AdapTune",
     description:
       "Let rhythm and expression define your performance. Dance to cinematic tunes that combine passion, choreography, and storytelling. Move beyond beats to create an experience that connects art, energy, and raw emotion seamlessly.",
-    entryFee: "₹150",
+    entryFee: "₹99",
     image: "/adapttune.jpg",
     registrationPath: "/registration/adaptune",
   },
@@ -78,7 +78,7 @@ export default function Events() {
     title: "Quizcorn",
     description:
       "Step into the world of film trivia. Test your knowledge of actors, directors, scripts, and iconic moments in cinema. Compete with fellow cinephiles and prove that your love for movies goes far beyond the screen.",
-    entryFee: "₹150",
+    entryFee: "₹99",
     image: "/quiz.jpg",
     registrationPath: "/registration/quizcorn",
   },
