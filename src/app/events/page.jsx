@@ -108,7 +108,7 @@ export default function Events() {
     title: "Photography Workshop",
     description:
       "Dive deep into the art and science of photography. Explore lighting, framing, and visual storytelling guided by experts. Transform everyday scenes into captivating frames that tell stories without words.",
-    entryFee: "₹150",
+    entryFee: "₹99",
     image: "/photography-workshop.png",
     registrationPath: "/registration/photography-workshop",
   },
@@ -117,7 +117,7 @@ export default function Events() {
     title: "3D Printing",
     description:
       "Step into the future of innovation and design. Learn how 3D printing brings imagination to life— from concept modeling to tangible creations. Build, create, and innovate using cutting-edge printing technology.",
-    entryFee: "₹150",
+    entryFee: "₹99",
     image: "/3d-printing.png",
     registrationPath: "/registration/3d-printing",
   },
@@ -126,7 +126,7 @@ export default function Events() {
     title: "Blender Workshop",
     description:
       "Unleash your creativity with Blender! Dive into 3D modeling, animation, and rendering using the industry’s favorite open-source tool. Learn to design, animate, and bring your ideas to life with professional techniques.",
-    entryFee: "₹150",
+    entryFee: "₹99",
     image: "/blender.jpg",
     registrationPath: "/registration/Blender_",
   },

@@ -23,7 +23,7 @@ export default function BlenderWorkshop() {
         phone: formData.phone,
         email: formData.email,
         college: formData.college,
-        amount: 150,
+        amount: 99,
         currency: "INR",
        receipt: `blender_${Date.now()}`,
         redirect: "https://theatron-nu.vercel.app/success"
@@ -83,7 +83,7 @@ export default function BlenderWorkshop() {
 
               <div className="border-t border-gray-700 pt-6 flex justify-between items-center">
                 <span className="text-lg font-bold">Entry Fee</span>
-                <span className="text-red-600 text-xl font-bold">₹150</span>
+                <span className="text-red-600 text-xl font-bold">₹99</span>
               </div>
 
               <button
@@ -91,7 +91,7 @@ export default function BlenderWorkshop() {
                 disabled={isSubmitting}
                 className="w-full bg-red-600 px-6 py-3 text-white font-bold hover:bg-red-700 transition disabled:opacity-50"
               >
-                {isSubmitting ? "PROCESSING..." : "REGISTER & PAY ₹150"}
+                {isSubmitting ? "PROCESSING..." : "REGISTER & PAY ₹99"}
               </button>
             </form>
           </div>
