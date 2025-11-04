@@ -12,29 +12,30 @@ export default function Contact(){
   const[successMsg,setSuccessMsg]=useState("")
   const[errorMsg,setErrorMsg]=useState("")
 
-  const handleSubmit=async(e)=>{
-    e.preventDefault()
-    setSuccessMsg("")
-    setErrorMsg("")
-    try{
-      const res=await fetch("https://script.google.com/macros/s/AKfycbwfYCbP7fpwBcysK0n76M2QzcP_Zqt47QRSDtCLB453S6utHbKMZL3ty7JtqKzVGMgu/exec",{
-        method:"POST",
-        mode:"no-cors",
-        headers:{"Content-Type":"application/x-www-form-urlencoded"},
-        body:new URLSearchParams({
-          Name:name,
-          Email:email,
-          Subject:subject,
-          Message:message
-        })
+  const handleSubmit = async (e) => {
+  e.preventDefault()
+  setSuccessMsg("")
+  setErrorMsg("")
+  try {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbxpjbdTT0V1w2ho_jVO0y4Tu08PIRi_cdr9rZW_QCq6hjgdnaw0w8TRSOsXdEkQFfM4/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        Name: name,
+        Email: email,
+        Subject: subject,
+        Message: message
       })
-      setSuccessMsg("✅ Message sent successfully! We’ll get back to you soon.")
-      setName("");setEmail("");setSubject("");setMessage("")
-    }catch(err){
-      setErrorMsg("❌ Something went wrong. Please try again later.")
-      console.error(err)
-    }
+    })
+    setSuccessMsg("✅ Message sent successfully! We’ll get back to you soon.")
+    setName(""); setEmail(""); setSubject(""); setMessage("")
+  } catch (err) {
+    setErrorMsg("❌ Something went wrong. Please try again later.")
+    console.error(err)
   }
+}
+
 
   return(
     <main className="relative bg-black text-white min-h-screen overflow-hidden">
