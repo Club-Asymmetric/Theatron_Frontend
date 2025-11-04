@@ -74,6 +74,16 @@ export default function Events() {
       image: "/quiz.jpg",
       registrationPath: "/registration/quizcorn",
     },
+    {
+  id: 8,
+  title: "General Pass",
+  description:
+    "Exclusive entry pass for CIT students to access all on-campus events. Only valid for students with a @citchennai.net email address. Grab your pass and be part of the excitement!",
+  entryFee: "₹89",
+  image: "/general-pass.jpg",
+  registrationPath: "/registration/general-pass"
+},
+
   ]
 
   const workshops = [
@@ -113,6 +123,16 @@ export default function Events() {
   image: "/blender.jpg",
   registrationPath: "/registration/blender",
 },
+{
+  id: 5,
+  title: "General Pass",
+  description:
+    "Exclusive entry pass for CIT students to access all on-campus events. Only valid for students with a @citchennai.net email address. Grab your pass and be part of the excitement!",
+  entryFee: "₹89",
+  image: "/general-pass.jpg",
+  registrationPath: "/registration/general-pass"
+},
+
   ]
 
   const displayedEvents = filter === "competition" ? competitions : workshops
