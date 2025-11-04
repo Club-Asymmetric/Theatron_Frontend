@@ -10,130 +10,128 @@ export default function Events() {
   const [filter, setFilter] = useState("competition")
 
   const competitions = [
-    {
-      id: 1,
-      title: "Graphics Grid",
-      description:
-        "Unleash your creativity through digital art and design. Create visually stunning posters that speak louder than words, combining imagination, style, and originality. Transform ideas into visuals that inspire emotion and cinematic impact.",
-      entryFee: "₹150",
-      image: "/graphics-design-poster.jpg",
-      registrationPath: "/registration/graphics-grid",
-    },
-    {
-      id: 2,
-      title: "Stage Play",
-      description:
-        "Bring stories to life under the spotlight. Perform powerful dramas or lighthearted comedies that express emotion, passion, and creativity. Let your performance reflect the art of storytelling that connects deeply with every audience.",
-      entryFee: "₹150",
-      image: "/stage-play.jpg",
-      registrationPath: "/registration/stage-play",
-    },
-    {
-      id: 3,
-      title: "Stills of Soul",
-      description:
-        "Capture the essence of emotion through your lens. Freeze powerful moments that tell stories words cannot. Each photograph should mirror your creative vision, turning still images into timeless expressions of cinematic storytelling.",
-      entryFee: "₹150",
-      image: "/still-of-soul.jpg",
-      registrationPath: "/registration/stills-of-soul",
-    },
-    {
-      id: 4,
-      title: "CinePlus",
-      description:
-        "Craft short films that blend emotion, vision, and storytelling brilliance. From scripting to direction, bring your imagination to life on screen. Let your creativity shape narratives that touch hearts and inspire audiences.",
-      entryFee: "₹150",
-      image: "/cine-pulse.jpg",
-      registrationPath: "/registration/cineplus",
-    },
-    {
-  id: 5,
-  title: "TrailCut",
-  description:
-    "Master the precision of cinematic editing. Create thrilling trailers that captivate viewers with energy and rhythm. Every second counts—craft motion, mood, and momentum that leaves audiences eager for more, celebrating true cinematic brilliance.",
-  entryFee: "₹150",
-  image: "/trailer-cut.jpg",
-  registrationPath: "/registration/trail-cut",
-},
-{
-  id: 6,
-  title: "AdapTune",
-  description:
-    "Let rhythm and expression define your performance. Dance to cinematic tunes that combine passion, choreography, and storytelling. Move beyond beats to create an experience that connects art, energy, and raw emotion seamlessly.",
-  entryFee: "₹150",
-  image: "/adapttune.jpg",
-  registrationPath: "/registration/adaptune",
-},
-
-    {
-      id: 7,
-      title: "Quizcorn",
-      description:
-        "Step into the world of film trivia. Test your knowledge of actors, directors, scripts, and iconic moments in cinema. Compete with fellow cinephiles and prove that your love for movies goes far beyond the screen.",
-      entryFee: "₹150",
-      image: "/quiz.jpg",
-      registrationPath: "/registration/quizcorn",
-    },
-    {
-  id: 8,
-  title: "General Pass",
-  description:
-    "Exclusive entry pass for CIT students to access all on-campus events. Only valid for students with a @citchennai.net email address. Grab your pass and be part of the excitement!",
-  entryFee: "₹89",
-  image: "/general-pass.jpg",
-  registrationPath: "/registration/general-pass"
-},
-
-  ]
+  {
+    id: 8,
+    title: "General Pass",
+    description:
+      "Exclusive entry pass for CIT students to access all on-campus events. Only valid for students with a @citchennai.net email address. Grab your pass and be part of the excitement!",
+    entryFee: "₹89",
+    image: "/general-pass.jpg",
+    registrationPath: "/registration/general-pass",
+  },
+  {
+    id: 1,
+    title: "Graphics Grid",
+    description:
+      "Unleash your creativity through digital art and design. Create visually stunning posters that speak louder than words, combining imagination, style, and originality. Transform ideas into visuals that inspire emotion and cinematic impact.",
+    entryFee: "₹150",
+    image: "/graphics-design-poster.jpg",
+    registrationPath: "/registration/graphics-grid",
+  },
+  {
+    id: 2,
+    title: "Stage Play",
+    description:
+      "Bring stories to life under the spotlight. Perform powerful dramas or lighthearted comedies that express emotion, passion, and creativity. Let your performance reflect the art of storytelling that connects deeply with every audience.",
+    entryFee: "₹150",
+    image: "/stage-play.jpg",
+    registrationPath: "/registration/stage-play",
+  },
+  {
+    id: 3,
+    title: "Stills of Soul",
+    description:
+      "Capture the essence of emotion through your lens. Freeze powerful moments that tell stories words cannot. Each photograph should mirror your creative vision, turning still images into timeless expressions of cinematic storytelling.",
+    entryFee: "₹150",
+    image: "/still-of-soul.jpg",
+    registrationPath: "/registration/stills-of-soul",
+  },
+  {
+    id: 4,
+    title: "CinePlus",
+    description:
+      "Craft short films that blend emotion, vision, and storytelling brilliance. From scripting to direction, bring your imagination to life on screen. Let your creativity shape narratives that touch hearts and inspire audiences.",
+    entryFee: "₹150",
+    image: "/cine-pulse.jpg",
+    registrationPath: "/registration/cineplus",
+  },
+  {
+    id: 5,
+    title: "TrailCut",
+    description:
+      "Master the precision of cinematic editing. Create thrilling trailers that captivate viewers with energy and rhythm. Every second counts—craft motion, mood, and momentum that leaves audiences eager for more, celebrating true cinematic brilliance.",
+    entryFee: "₹150",
+    image: "/trailer-cut.jpg",
+    registrationPath: "/registration/trail-cut",
+  },
+  {
+    id: 6,
+    title: "AdapTune",
+    description:
+      "Let rhythm and expression define your performance. Dance to cinematic tunes that combine passion, choreography, and storytelling. Move beyond beats to create an experience that connects art, energy, and raw emotion seamlessly.",
+    entryFee: "₹150",
+    image: "/adapttune.jpg",
+    registrationPath: "/registration/adaptune",
+  },
+  {
+    id: 7,
+    title: "Quizcorn",
+    description:
+      "Step into the world of film trivia. Test your knowledge of actors, directors, scripts, and iconic moments in cinema. Compete with fellow cinephiles and prove that your love for movies goes far beyond the screen.",
+    entryFee: "₹150",
+    image: "/quiz.jpg",
+    registrationPath: "/registration/quizcorn",
+  },
+];
 
   const workshops = [
-    {
-      id: 1,
-      title: "Script Writing",
-      description:
-        "Discover the fundamentals of cinematic storytelling. Learn to craft original scripts with compelling plots, powerful characters, and natural dialogue. Turn your creative thoughts into scripts ready for the big screen.",
-      entryFee: "₹150",
-      image: "/scriptwriting-draft.png",
-      registrationPath: "/registration/script-writing",
-    },
-    {
-      id: 2,
-      title: "Photography Workshop",
-      description:
-        "Dive deep into the art and science of photography. Explore lighting, framing, and visual storytelling guided by experts. Transform everyday scenes into captivating frames that tell stories without words.",
-      entryFee: "₹150",
-      image: "/photography-workshop.png",
-      registrationPath: "/registration/photography-workshop",
-    },
-    {
-      id: 3,
-      title: "3D Printing",
-      description:
-        "Step into the future of innovation and design. Learn how 3D printing brings imagination to life— from concept modeling to tangible creations. Build, create, and innovate using cutting-edge printing technology.",
-      entryFee: "₹150",
-      image: "/3d-printing.png",
-      registrationPath: "/registration/3d-printing",
-    },
-    {
-  id: 4,
-  title: "Blender Workshop",
-  description:
-    "Unleash your creativity with Blender! Dive into 3D modeling, animation, and rendering using the industry’s favorite open-source tool. Learn to design, animate, and bring your ideas to life with professional techniques.",
-  entryFee: "₹150",
-  image: "/blender.jpg",
-  registrationPath: "/registration/blender",
-},
-{
-  id: 5,
-  title: "General Pass",
-  description:
-    "Exclusive entry pass for CIT students to access all on-campus events. Only valid for students with a @citchennai.net email address. Grab your pass and be part of the excitement!",
-  entryFee: "₹89",
-  image: "/general-pass.jpg",
-  registrationPath: "/registration/general-pass"
-},
+  {
+    id: 5,
+    title: "General Pass",
+    description:
+      "Exclusive entry pass for CIT students to access all on-campus events. Only valid for students with a @citchennai.net email address. Grab your pass and be part of the excitement!",
+    entryFee: "₹89",
+    image: "/general-pass.jpg",
+    registrationPath: "/registration/general-pass",
+  },
+  {
+    id: 1,
+    title: "Script Writing",
+    description:
+      "Discover the fundamentals of cinematic storytelling. Learn to craft original scripts with compelling plots, powerful characters, and natural dialogue. Turn your creative thoughts into scripts ready for the big screen.",
+    entryFee: "₹150",
+    image: "/scriptwriting-draft.png",
+    registrationPath: "/registration/script-writing",
+  },
+  {
+    id: 2,
+    title: "Photography Workshop",
+    description:
+      "Dive deep into the art and science of photography. Explore lighting, framing, and visual storytelling guided by experts. Transform everyday scenes into captivating frames that tell stories without words.",
+    entryFee: "₹150",
+    image: "/photography-workshop.png",
+    registrationPath: "/registration/photography-workshop",
+  },
+  {
+    id: 3,
+    title: "3D Printing",
+    description:
+      "Step into the future of innovation and design. Learn how 3D printing brings imagination to life— from concept modeling to tangible creations. Build, create, and innovate using cutting-edge printing technology.",
+    entryFee: "₹150",
+    image: "/3d-printing.png",
+    registrationPath: "/registration/3d-printing",
+  },
+  {
+    id: 4,
+    title: "Blender Workshop",
+    description:
+      "Unleash your creativity with Blender! Dive into 3D modeling, animation, and rendering using the industry’s favorite open-source tool. Learn to design, animate, and bring your ideas to life with professional techniques.",
+    entryFee: "₹150",
+    image: "/blender.jpg",
+    registrationPath: "/registration/blender",
+  },
+];
 
-  ]
 
   const displayedEvents = filter === "competition" ? competitions : workshops
 
