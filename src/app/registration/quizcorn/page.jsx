@@ -5,24 +5,11 @@ import Footer from "@/components/footer"
 import { useState } from "react"
 
 export default function QuizcornRegistration() {
-  const [formData, setFormData] = useState({
-    team_name: "",
-    name1: "",
-    college1: "",
-    name2: "",
-    college2: "",
-    name3: "",
-    college3: "",
-    phone: "",
-    email: ""
-  })
+  const [formData, setFormData] = useState({ name: "", phone: "", email: "", college: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState(null)
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
+  const handleInputChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
 
   const handlePayment = async (e) => {
     e.preventDefault()
@@ -32,15 +19,10 @@ export default function QuizcornRegistration() {
     try {
       const params = new URLSearchParams({
         event: "Quizcorn",
-        team_name: formData.team_name,
-        name1: formData.name1,
-        college1: formData.college1,
-        name2: formData.name2,
-        college2: formData.college2,
-        name3: formData.name3,
-        college3: formData.college3,
+        name: formData.name,
         phone: formData.phone,
         email: formData.email,
+        college: formData.college,
         amount: 99,
         currency: "INR",
         receipt: `quizcorn_${Date.now()}`,
@@ -84,54 +66,11 @@ export default function QuizcornRegistration() {
             )}
 
             <form className="space-y-6" onSubmit={handlePayment}>
-              <div>
-                <label className="block text-sm font-bold mb-2">Team Name</label>
-                <input
-                  type="text"
-                  name="team_name"
-                  value={formData.team_name}
-                  onChange={handleInputChange}
-                  className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-red-600 focus:outline-none transition"
-                  required
-                />
-              </div>
-
-              {/* Team members */}
-              {["1", "2", "3"].map((num, idx) => (
-                <div key={num}>
-                  <label className="block text-sm font-bold mb-2">
-                    Participant {num} Name {idx > 0 && <span className="text-gray-500">(Optional)</span>}
-                  </label>
-                  <input
-                    type="text"
-                    name={`name${num}`}
-                    value={formData[`name${num}`]}
-                    onChange={handleInputChange}
-                    className="w-full bg-gray-900 border border-gray-700 px-4 py-2 mb-3 text-white focus:border-red-600 focus:outline-none transition"
-                    required={num === "1"}
-                  />
-                  <label className="block text-sm font-bold mb-2">
-                    Participant {num} College {idx > 0 && <span className="text-gray-500">(Optional)</span>}
-                  </label>
-                  <input
-                    type="text"
-                    name={`college${num}`}
-                    value={formData[`college${num}`]}
-                    onChange={handleInputChange}
-                    className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-red-600 focus:outline-none transition"
-                    required={num === "1"}
-                  />
-                </div>
-              ))}
-
-              {/* Contact */}
-              {["phone", "email"].map((field) => (
+              {["name", "phone", "email", "college"].map((field) => (
                 <div key={field}>
-                  <label className="block text-sm font-bold mb-2 capitalize">
-                    {field === "phone" ? "Phone Number" : "Email ID"}
-                  </label>
+                  <label className="block text-sm font-bold mb-2 capitalize">{field}</label>
                   <input
-                    type={field === "email" ? "email" : "tel"}
+                    type={field === "email" ? "email" : field === "phone" ? "tel" : "text"}
                     name={field}
                     value={formData[field]}
                     onChange={handleInputChange}

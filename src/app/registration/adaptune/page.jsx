@@ -5,20 +5,11 @@ import Footer from "@/components/footer"
 import { useState } from "react"
 
 export default function AdapTuneRegistration() {
-  const [formData, setFormData] = useState({
-    teamName: "",
-    participant1: "",
-    college1: "",
-    participant2: "",
-    college2: "",
-    phone: "",
-    email: "",
-  })
+  const [formData, setFormData] = useState({ name: "", phone: "", email: "", college: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState(null)
 
-  const handleInputChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+  const handleInputChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
 
   const handlePayment = async (e) => {
     e.preventDefault()
@@ -29,13 +20,10 @@ export default function AdapTuneRegistration() {
       // Prepare query parameters for Razorpay
       const params = new URLSearchParams({
         event: "adaptune",
-        teamName: formData.teamName,
-        participant1: formData.participant1,
-        college1: formData.college1,
-        participant2: formData.participant2,
-        college2: formData.college2,
+        name: formData.name,
         phone: formData.phone,
         email: formData.email,
+        college: formData.college,
         amount: 99,
         currency: "INR",
         receipt: `adaptune_${Date.now()}`,
@@ -82,27 +70,13 @@ export default function AdapTuneRegistration() {
             )}
 
             <form className="space-y-6" onSubmit={handlePayment}>
-              {[
-                { label: "Team Name", name: "teamName" },
-                { label: "Participant 1 Name", name: "participant1" },
-                { label: "College Name (Participant 1)", name: "college1" },
-                { label: "Participant 2 Name", name: "participant2" },
-                { label: "College Name (Participant 2)", name: "college2" },
-                { label: "Phone Number", name: "phone" },
-                { label: "Email", name: "email" },
-              ].map((field) => (
-                <div key={field.name}>
-                  <label className="block text-sm font-bold mb-2">{field.label}</label>
+              {["name", "phone", "email", "college"].map((field) => (
+                <div key={field}>
+                  <label className="block text-sm font-bold mb-2 capitalize">{field}</label>
                   <input
-                    type={
-                      field.name === "email"
-                        ? "email"
-                        : field.name === "phone"
-                        ? "tel"
-                        : "text"
-                    }
-                    name={field.name}
-                    value={formData[field.name]}
+                    type={field === "email" ? "email" : field === "phone" ? "tel" : "text"}
+                    name={field}
+                    value={formData[field]}
                     onChange={handleInputChange}
                     className="w-full bg-gray-900 border border-gray-700 px-4 py-2 text-white focus:border-red-600 focus:outline-none transition"
                     required
