@@ -123,7 +123,7 @@ export default function CinePulseRegistration() {
                 {isSubmitting ? "PROCESSING..." : "REGISTER & PAY ₹149"}
               </button>
               <div className="text-red-600 text-lg font-bold">
-                Note:- Please fill out the form below after registering to complete your setup.<br/>
+                Note:- Note: Submit Your work by filling the form below.Your work will be considered only if you pay and register.<br/>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSesizujXd4fzW_p7-Q2VGORme-uAI6oYg6gH5kHnkini53Qxw/viewform" target="_blank" className="text-blue-500 hover:text-blue-700 underline">CinePlus Form</a>
               </div>
             </form>
