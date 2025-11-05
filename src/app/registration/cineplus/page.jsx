@@ -26,7 +26,7 @@ export default function CinePulseRegistration() {
     try {
       // Prepare query params for payment redirect
       const params = new URLSearchParams({
-        event: "cinepulse",
+        event: "CinePulse",
         name: formData.name,
         phone: formData.phone,
         email: formData.email,
