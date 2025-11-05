@@ -26,7 +26,7 @@ export default function CinePulseRegistration() {
     try {
       // Prepare query params for payment redirect
       const params = new URLSearchParams({
-        event: "CinePulse",
+        event: "CinePlus",
         name: formData.name,
         phone: formData.phone,
         email: formData.email,
@@ -34,7 +34,7 @@ export default function CinePulseRegistration() {
         short_flim_link: formData.short_flim_link,
         amount: 149,
         currency: "INR",
-        receipt: `cinepulse_${Date.now()}`,
+        receipt: `cineplus_${Date.now()}`,
         redirect: "https://theatron-nu.vercel.app/success",
       }).toString()
 
@@ -59,7 +59,7 @@ export default function CinePulseRegistration() {
       <section className="pt-32 pb-20 px-8 relative">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-6xl font-bold mb-4">CINE PULSE</h1>
+            <h1 className="text-6xl font-bold mb-4">CINE PLUS</h1>
             <p className="text-red-600 text-sm tracking-wider mb-4">
               SHORT FILM COMPETITION
             </p>
