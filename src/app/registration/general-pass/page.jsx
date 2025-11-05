@@ -27,7 +27,7 @@ export default function GeneralPass() {
         phone: formData.phone,
         email: formData.email,
         department: formData.department,
-        amount: 150,
+        amount: 89,
         currency: "INR",
         receipt: `generalpass_${Date.now()}`,
         redirect: "https://theatron-nu.vercel.app/success"
