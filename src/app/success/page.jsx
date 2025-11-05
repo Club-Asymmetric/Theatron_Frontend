@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 export default function SuccessPage() {
   const [status, setStatus] = useState("Processing your registration...");
   const [eventName, setEventName] = useState("Loading event...");
+  const [showButton, setShowButton] = useState(false); // 👈 controls button visibility
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -22,8 +23,7 @@ export default function SuccessPage() {
     }
 
     if (paymentStatus === "success") {
-      // 👇 Determine if the event is solo or group
-      const groupEvents = ["Quizcorn", "AdaptTune"];
+      const groupEvents = ["quizcorn", "adapttune"]; // 👈 lowercase comparison
       const isGroupEvent = groupEvents.includes(event.toLowerCase());
       const apiType = isGroupEvent ? "group" : "solo";
 
@@ -40,16 +40,17 @@ export default function SuccessPage() {
             body: JSON.stringify({ to: email }),
           })
         )
-        .then(() =>
-          setStatus("✅ Registration confirmed! Confirmation email sent.")
-        )
-        .catch(() =>
-          setStatus(
-            "⚠️ Payment successful, but registration/email failed. Contact support."
-          )
-        );
+        .then(() => {
+          setStatus("✅ Registration confirmed! Confirmation email sent.");
+          setShowButton(true); // 👈 show button after success
+        })
+        .catch(() => {
+          setStatus("⚠️ Payment successful, but registration/email failed. Contact support.");
+          setShowButton(true); // 👈 also show button on error
+        });
     } else {
       setStatus("❌ Payment verification failed. Please contact support.");
+      setShowButton(true); // 👈 show button for failure
     }
   }, []);
 
@@ -57,12 +58,16 @@ export default function SuccessPage() {
     <main className="flex flex-col justify-center items-center min-h-screen bg-black text-white text-center px-6">
       <h1 className="text-4xl font-bold mb-4">{eventName}</h1>
       <p className="text-lg text-red-400">{status}</p>
-      <a
-        href="/"
-        className="mt-6 bg-red-600 px-6 py-3 rounded hover:bg-red-700 transition"
-      >
-        Back to Home
-      </a>
+
+      {/* 👇 only show button when done (success or fail) */}
+      {showButton && (
+        <a
+          href="/"
+          className="mt-6 bg-red-600 px-6 py-3 rounded hover:bg-red-700 transition"
+        >
+          Back to Home
+        </a>
+      )}
     </main>
   );
 }
