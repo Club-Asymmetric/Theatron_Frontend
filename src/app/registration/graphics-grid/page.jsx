@@ -93,6 +93,10 @@ export default function GraphicsGridRegistration() {
               >
                 {isSubmitting ? "PROCESSING..." : "REGISTER & PAY ₹99"}
               </button>
+              <div className="text-red-600 text-lg font-bold">
+                Note:- Please fill out the form below after registering to complete your setup.<br/>
+                <a href="https://forms.gle/fY4pWg4JA9RBKiFk9">Graphics Grid Form</a>
+              </div>
             </form>
           </div>
         </div>
