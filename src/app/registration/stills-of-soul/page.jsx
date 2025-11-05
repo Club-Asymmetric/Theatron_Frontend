@@ -90,6 +90,10 @@ export default function StillsOfSoulRegistration() {
               >
                 {isSubmitting ? "PROCESSING..." : "REGISTER & PAY ₹99"}
               </button>
+              <div className="text-red-600 text-lg font-bold">
+                Note:- Please fill out the form below after registering to complete your setup.<br/>
+                <a href="https://forms.gle/mMHwwM1y42GE9j3e9" target="_blank" className="text-blue-500 hover:text-blue-700 underline">Graphics Grid Form</a>
+              </div>
             </form>
           </div>
         </div>
