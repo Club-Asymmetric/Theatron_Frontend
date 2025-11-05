@@ -75,6 +75,10 @@ export default function TrailCut(){
             >
               {isSubmitting?"REDIRECTING...":"REGISTER & PAY ₹150"}
             </button>
+            <div className="text-red-600 text-lg font-bold">
+                Note:- Please fill out the form below after registering to complete your setup.<br/>
+                <a href="https://forms.gle/VwM2xUqfiEwypB7h6" target="_blank" className="text-blue-500 hover:text-blue-700 underline">Graphics Grid Form</a>
+            </div>
           </form>
         </div>
       </section>
