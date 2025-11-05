@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 export default function SuccessPage() {
   const [status, setStatus] = useState("Processing your registration...");
   const [eventName, setEventName] = useState("Loading event...");
-  const [showButton, setShowButton] = useState(false); // 👈 controls button visibility
+  const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -23,7 +23,7 @@ export default function SuccessPage() {
     }
 
     if (paymentStatus === "success") {
-      const groupEvents = ["quizcorn", "adapttune"]; // 👈 lowercase comparison
+      const groupEvents = ["quizcorn", "adapttune"];
       const isGroupEvent = groupEvents.includes(event.toLowerCase());
       const apiType = isGroupEvent ? "group" : "solo";
 
@@ -42,15 +42,15 @@ export default function SuccessPage() {
         )
         .then(() => {
           setStatus("✅ Registration confirmed! Confirmation email sent.");
-          setShowButton(true); // 👈 show button after success
+          setShowButton(true);
         })
         .catch(() => {
           setStatus("⚠️ Payment successful, but registration/email failed. Contact support.");
-          setShowButton(true); // 👈 also show button on error
+          setShowButton(true);
         });
     } else {
       setStatus("❌ Payment verification failed. Please contact support.");
-      setShowButton(true); // 👈 show button for failure
+      setShowButton(true);
     }
   }, []);
 
@@ -59,7 +59,6 @@ export default function SuccessPage() {
       <h1 className="text-4xl font-bold mb-4">{eventName}</h1>
       <p className="text-lg text-red-400">{status}</p>
 
-      {/* 👇 only show button when done (success or fail) */}
       {showButton && (
         <a
           href="/"
