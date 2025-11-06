@@ -23,7 +23,7 @@ export default function DanceWorkshop() {
         phone: formData.phone,
         email: formData.email,
         college: formData.college,
-        amount: 99,
+        amount: 199,
         currency: "INR",
         receipt: `Danceworkshop_${Date.now()}`,
         redirect: "https://theatron-nu.vercel.app/success"
@@ -79,7 +79,7 @@ export default function DanceWorkshop() {
 
               <div className="border-t border-gray-700 pt-6 flex justify-between items-center">
                 <span className="text-lg font-bold">Entry Fee</span>
-                <span className="text-red-600 text-xl font-bold">₹99</span>
+                <span className="text-red-600 text-xl font-bold">₹199</span>
               </div>
 
               <button
@@ -87,7 +87,7 @@ export default function DanceWorkshop() {
                 disabled={isSubmitting}
                 className="w-full bg-red-600 px-6 py-3 text-white font-bold hover:bg-red-700 transition disabled:opacity-50"
               >
-                {isSubmitting ? "PROCESSING..." : "REGISTER & PAY ₹99"}
+                {isSubmitting ? "PROCESSING..." : "REGISTER & PAY ₹199"}
               </button>
             </form>
           </div>
