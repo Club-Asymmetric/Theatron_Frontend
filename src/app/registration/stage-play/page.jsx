@@ -23,7 +23,7 @@ export default function StagePlayRegistration() {
         phone: formData.phone,
         email: formData.email,
         college: formData.college,
-        amount: 1,
+        amount: 99,
         currency: "INR",
         receipt: `stageplay_${Date.now()}`,
         redirect: "https://theatron-nu.vercel.app/success"
