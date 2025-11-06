@@ -97,12 +97,18 @@ export default function Contact(){
                 immersecit@gmail.com
               </a>
             </div>
-            <div>
-              <p className="text-gray-400 text-xs mb-2 uppercase tracking-widest">Phone</p>
-              <a href="tel:+917904849032" className="font-bold hover:text-red-600 transition">
-                +91 7904849032
-              </a>
-            </div>
+           <div>
+  <p className="text-gray-400 text-xs mb-2 uppercase tracking-widest">Phone</p>
+  <div className="flex flex-col space-y-1">
+    <a href="tel:+917904849032" className="font-bold hover:text-red-600 transition">
+      +91 7904849032
+    </a>
+    <a href="tel:+919884912815" className="font-bold hover:text-red-600 transition">
+      +91 9884912815
+    </a>
+  </div>
+</div>
+
           </div>
         </div>
       </section>
