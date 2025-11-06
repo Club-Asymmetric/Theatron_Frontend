@@ -23,11 +23,7 @@ export default function SuccessPage() {
     }
 
     if (paymentStatus === "success") {
-      const groupEvents = ["quizcorn", "adapttune"];
-      const isGroupEvent = groupEvents.includes(event.toLowerCase());
-      const apiType = isGroupEvent ? "group" : "solo";
-
-      fetch(`https://theatron-backend.onrender.com/register/${apiType}/${event}`, {
+      fetch(`https://theatron-backend.onrender.com/register/solo/${event}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, email, college }),
