@@ -131,6 +131,15 @@ export default function Events() {
     image: "/blender.jpg",
     registrationPath: "/registration/Blender_",
   },
+  {
+  id: 6,
+  title: "Modeling Workshop",
+  description:
+    "Unleash your creativity in our hands-on fashion workshop — learn, design, and bring your style ideas to life!",
+  entryFee: "₹199",
+  image: "/model.jpg",
+  registrationPath: "/registration/modeling-workshop",
+},
 ];
 
 
