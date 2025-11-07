@@ -24,7 +24,7 @@ export default function AdapTuneRegistration() {
         phone: formData.phone,
         email: formData.email,
         college: formData.college,
-        amount: 99,
+        amount: 0.1,
         currency: "INR",
         receipt: `adaptune_${Date.now()}`,
         redirect: "https://theatron-nu.vercel.app/success",
