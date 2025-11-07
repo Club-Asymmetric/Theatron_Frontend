@@ -117,7 +117,7 @@ export default function Events() {
   title: "Dance Workshop",
   description:
     "Move to the rhythm and express yourself through dance! Join our workshop to learn choreography, stage presence, and performance techniques from talented instructors. Perfect for beginners and enthusiasts alike.",
-  entryFee: "₹99",
+  entryFee: "₹199",
   image: "/danceworkshop.jpg",
   registrationPath: "/registration/dance-workshop",
 },
