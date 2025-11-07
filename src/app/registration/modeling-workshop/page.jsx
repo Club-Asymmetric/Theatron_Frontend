@@ -24,7 +24,7 @@ export default function ModelingWorkshopRegistration() {
         phone: formData.phone,
         email: formData.email,
         college: formData.college,
-        amount: 199,
+        amount: 1,
         currency: "INR",
         receipt: `modeling_workshop_${Date.now()}`,
         redirect: "https://theatron-nu.vercel.app/success",
