@@ -12,8 +12,7 @@ export default function GeneralPass() {
 
       <section className="pt-32 pb-20 px-8 relative">
         <div className="max-w-2xl mx-auto text-center">
-          <h1 className="text-6xl font-bold mb-4">GENERAL PASS</h1>
-          <p className="text-red-600 text-sm tracking-wider mb-6">EXCLUSIVE FOR CIT STUDENTS</p>
+          <h1 className="text-6xl font-bold mb-4">Quizcorn</h1>
 
           <div className="border border-gray-700 p-10 rounded-lg bg-gray-900 shadow-lg">
             <h2 className="text-2xl font-bold text-red-500 mb-4">Registration Closed</h2>
