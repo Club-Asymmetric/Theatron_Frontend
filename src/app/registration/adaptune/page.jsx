@@ -12,12 +12,12 @@ export default function GeneralPass() {
 
       <section className="pt-32 pb-20 px-8 relative">
         <div className="max-w-2xl mx-auto text-center">
-          <h1 className="text-6xl font-bold mb-4">General Pass</h1>
+          <h1 className="text-6xl font-bold mb-4">AdapTune</h1>
 
           <div className="border border-gray-700 p-10 rounded-lg bg-gray-900 shadow-lg">
             <h2 className="text-2xl font-bold text-red-500 mb-4">Registration Closed</h2>
             <p className="text-gray-400">
-              Registrations for the <span className="text-white font-semibold">General Pass</span> are now closed.
+              Registrations for the <span className="text-white font-semibold">AdapTune</span> are now closed.
               <br />
               Try registering for other exciting events available on our platform.
             </p>
