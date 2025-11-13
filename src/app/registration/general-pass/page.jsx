@@ -25,7 +25,7 @@ export default function DanceWorkshop() {
         college: formData.college,
         amount: 89,
         currency: "INR",
-        receipt: `Danceworkshop_${Date.now()}`,
+        receipt: `General_Pass_${Date.now()}`,
         redirect: "https://theatron-nu.vercel.app/success"
       }).toString()
 
