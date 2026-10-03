@@ -1,0 +1,339 @@
+/* =========================================================
+
+   COUNTDOWN WRAPPER
+
+   ========================================================= */
+
+
+
+.theatron-countdown-wrap {
+
+  margin-top: 28px;
+
+
+
+  margin-bottom: 30px;
+
+}
+
+/* =========================================================
+
+   COUNTDOWN ROW
+
+   ========================================================= */
+
+
+
+.theatron-countdown {
+
+  display: flex;
+
+
+
+  align-items: flex-start;
+
+
+
+  width: fit-content;
+
+
+
+  gap: 34px;
+
+
+
+  border: none;
+
+
+
+  padding: 0;
+
+
+
+  margin: 0;
+
+
+
+  background: transparent;
+
+}
+
+/* =========================================================
+
+   COUNTDOWN UNIT
+
+   ========================================================= */
+
+
+
+.countdown-unit {
+
+  width: auto;
+
+
+
+  min-width: 92px;
+
+
+
+  padding: 0;
+
+
+
+  position: relative;
+
+
+
+  text-align: center;
+
+}
+
+/* =========================================================
+
+   NUMBER CONTAINER
+
+   ========================================================= */
+
+
+
+.countdown-card {
+
+  position: relative;
+
+
+
+  height: auto;
+
+
+
+  width: auto;
+
+
+
+  display: block;
+
+
+
+  padding: 0;
+
+
+
+  margin: 0;
+
+
+
+  border: none;
+
+
+
+  border-radius: 0;
+
+
+
+  background: transparent;
+
+
+
+  box-shadow: none;
+
+
+
+  overflow: visible;
+
+}
+
+
+
+
+
+.countdown-card::before,
+
+.countdown-card::after {
+
+  display: none;
+
+}
+
+/* =========================================================
+
+   COUNTDOWN NUMBER
+
+   ========================================================= */
+
+
+
+.countdown-value {
+
+  display: block;
+
+
+
+  font-family:
+
+    "Bebas Neue",
+
+    "Arial Narrow",
+
+    Impact,
+
+    sans-serif;
+
+
+
+  font-size: clamp(4.2rem, 5vw, 5.8rem);
+
+
+
+  font-weight: 400;
+
+
+
+  line-height: 0.82;
+
+
+
+  letter-spacing: 0.025em;
+
+
+
+  color: #eee2c9;
+
+
+
+  text-shadow:
+
+    0 0 18px rgba(190, 156, 94, 0.08);
+
+
+
+  transition:
+
+    color 0.3s ease,
+
+    transform 0.3s ease,
+
+    text-shadow 0.3s ease;
+
+}
+
+
+
+
+
+.countdown-unit:hover .countdown-value {
+
+  color: #c5a66f;
+
+
+
+  transform: translateY(-2px);
+
+
+
+  text-shadow:
+
+    0 0 22px rgba(190, 156, 94, 0.18);
+
+}
+
+/* =========================================================
+
+   COUNTDOWN LABEL
+
+   ========================================================= */
+
+
+
+.countdown-label {
+
+  display: block;
+
+
+
+  margin-top: 12px;
+
+
+
+  font-family:
+
+    "DM Sans",
+
+    sans-serif;
+
+
+
+  font-size: 8px;
+
+
+
+  font-weight: 600;
+
+
+
+  line-height: 1;
+
+
+
+  letter-spacing: 0.27em;
+
+
+
+  text-transform: uppercase;
+
+
+
+  color: rgba(238, 228, 207, 0.48);
+
+
+
+  transition:
+
+    color 0.3s ease,
+
+    letter-spacing 0.3s ease;
+
+}
+
+
+
+
+
+.countdown-unit:hover .countdown-label {
+
+  color: #b99a66;
+
+
+
+  letter-spacing: 0.31em;
+
+}
+
+
+
+
+
+.countdown-unit:not(:last-child)::after {
+
+  display: none;
+
+}
+
+
+
+
+
+.countdown-split {
+
+  display: none;
+
+}
+
+
+
+
+
+.countdown-unit + .countdown-unit {
+
+  margin-left: 2px;
+
+}

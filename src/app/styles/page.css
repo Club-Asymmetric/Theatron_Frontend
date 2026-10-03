@@ -1,0 +1,1388 @@
+/* =========================================================
+
+   HERO
+
+   ========================================================= */
+
+
+
+.theatron-hero {
+
+  position: relative;
+
+
+
+  min-height: 100svh;
+
+
+
+  overflow: hidden;
+
+
+
+  display: flex;
+
+
+
+  align-items: center;
+
+
+
+  border-bottom: 1px solid var(--line);
+
+
+
+  isolation: isolate;
+
+}
+
+
+
+
+
+.theatron-hero-image {
+
+  position: absolute;
+
+
+
+  inset: 0;
+
+
+
+  z-index: -3;
+
+
+
+  background-image: url('/theatron-hero.jpg');
+
+
+
+  background-position: center center;
+
+
+
+  background-size: cover;
+
+
+
+  transform: scale(1.015);
+
+}
+
+/* =========================================================
+
+   CINEMATIC IMAGE OVERLAY
+
+   ========================================================= */
+
+
+
+.theatron-hero-vignette {
+
+  position: absolute;
+
+
+
+  inset: 0;
+
+
+
+  z-index: -2;
+
+
+
+  background:
+
+    linear-gradient(
+
+      90deg,
+
+      rgba(4, 4, 3, 0.95) 0%,
+
+      rgba(4, 4, 3, 0.80) 28%,
+
+      rgba(4, 4, 3, 0.27) 63%,
+
+      rgba(4, 4, 3, 0.10) 100%
+
+    ),
+
+    linear-gradient(
+
+      0deg,
+
+      rgba(3, 3, 2, 0.70) 0%,
+
+      transparent 36%,
+
+      rgba(3, 3, 2, 0.15) 100%
+
+    );
+
+}
+
+/* =========================================================
+
+   FILM GRAIN
+
+   ========================================================= */
+
+
+
+.theatron-hero-grain {
+
+  position: absolute;
+
+
+
+  inset: -50%;
+
+
+
+  z-index: -1;
+
+
+
+  pointer-events: none;
+
+
+
+  opacity: 0.055;
+
+
+
+  background-image: url(
+
+    "data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http\\\\://www\\\\.w3\\\\.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E"
+
+  );
+
+
+
+  animation: grain 8s steps(8) infinite;
+
+}
+
+
+
+
+
+@keyframes grain {
+
+
+
+  0%,
+
+  100% {
+
+    transform: translate(0, 0);
+
+  }
+
+
+
+  20% {
+
+    transform: translate(-2%, 1%);
+
+  }
+
+
+
+  40% {
+
+    transform: translate(1%, -2%);
+
+  }
+
+
+
+  60% {
+
+    transform: translate(2%, 2%);
+
+  }
+
+
+
+  80% {
+
+    transform: translate(-1%, -1%);
+
+  }
+
+}
+
+/* =========================================================
+
+   HERO CONTENT
+
+   ========================================================= */
+
+
+
+.theatron-hero-content {
+
+  width: min(720px, 52vw);
+
+
+
+  margin-left: 5%;
+
+
+
+  padding-top: 65px;
+
+}
+
+/* =========================================================
+
+   KICKER
+
+   ========================================================= */
+
+
+
+.theatron-kicker {
+
+  display: flex;
+
+
+
+  align-items: center;
+
+
+
+  gap: 10px;
+
+
+
+  margin: 0 0 18px;
+
+
+
+  color: #b69a6b;
+
+
+
+  font-family: "DM Sans", sans-serif;
+
+
+
+  font-size: 10px;
+
+
+
+  font-weight: 600;
+
+
+
+  letter-spacing: 0.28em;
+
+}
+
+
+
+
+
+.theatron-kicker-dot {
+
+  width: 6px;
+
+  height: 6px;
+
+
+
+  border-radius: 50%;
+
+
+
+  background: #a98b5d;
+
+}
+
+/* =========================================================
+
+   MAIN TITLE
+
+   ========================================================= */
+
+
+
+.theatron-title {
+
+  max-width: 700px;
+
+
+
+  margin: 0;
+
+
+
+  font-family: "Bebas Neue", Impact, sans-serif;
+
+
+
+  font-size: clamp(5.5rem, 8vw, 8.5rem);
+
+
+
+  font-weight: 400;
+
+
+
+  line-height: 0.78;
+
+
+
+  letter-spacing: 0.015em;
+
+
+
+  color: #eee4cf;
+
+
+
+  text-shadow: none;
+
+
+
+  transform-origin: left center;
+
+}
+
+/* =========================================================
+
+   YEAR
+
+   ========================================================= */
+
+
+
+.theatron-year {
+
+  margin: 14px 0 0;
+
+
+
+  font-family: "DM Sans", sans-serif;
+
+
+
+  font-size: clamp(2rem, 3vw, 3.2rem);
+
+
+
+  font-weight: 500;
+
+
+
+  line-height: 1;
+
+
+
+  letter-spacing: 0.08em;
+
+
+
+  color: #a98b5d;
+
+}
+
+/* =========================================================
+
+   TAGLINE
+
+   ========================================================= */
+
+
+
+.theatron-tagline {
+
+  display: flex;
+
+
+
+  align-items: center;
+
+
+
+  gap: 18px;
+
+
+
+  margin: 27px 0 22px;
+
+}
+
+
+
+
+
+.theatron-tagline span {
+
+  width: 62px;
+
+
+
+  height: 1px;
+
+
+
+  flex-shrink: 0;
+
+
+
+  background: #a98b5d;
+
+
+
+  opacity: 0.85;
+
+}
+
+
+
+
+
+.theatron-tagline p {
+
+  margin: 0;
+
+
+
+  font-family: "Cormorant Garamond", Georgia, serif;
+
+
+
+  font-size: clamp(1.7rem, 2.2vw, 2.5rem);
+
+
+
+  font-weight: 500;
+
+
+
+  font-style: italic;
+
+
+
+  line-height: 1;
+
+
+
+  letter-spacing: -0.015em;
+
+
+
+  color: #e9dfca;
+
+
+
+  transition:
+
+    color 0.25s ease,
+
+    transform 0.25s ease;
+
+}
+
+
+
+
+
+.theatron-tagline p:hover {
+
+  color: #c5aa79;
+
+
+
+  transform: translateX(3px);
+
+}
+
+/* =========================================================
+
+   SHOW BEGINS TEXT
+
+   ========================================================= */
+
+
+
+.theatron-description {
+
+  margin: 0 0 14px;
+
+
+
+  font-family: "DM Sans", sans-serif;
+
+
+
+  font-size: 9px;
+
+
+
+  font-weight: 600;
+
+
+
+  line-height: 1.7;
+
+
+
+  letter-spacing: 0.28em;
+
+
+
+  text-transform: uppercase;
+
+
+
+  color: rgba(238, 228, 207, 0.58);
+
+
+
+  transition:
+
+    color 0.3s ease,
+
+    letter-spacing 0.3s ease;
+
+}
+
+
+
+
+
+.theatron-description:hover {
+
+  color: #c8aa76;
+
+
+
+  letter-spacing: 0.34em;
+
+}
+
+/* =========================================================
+
+   ACTION BUTTONS
+
+   ========================================================= */
+
+
+
+.theatron-actions {
+
+  display: flex;
+
+
+
+  align-items: center;
+
+
+
+  gap: 18px;
+
+
+
+  margin-top: 28px;
+
+}
+
+/* =========================================================
+
+   BASE BUTTON
+
+   ========================================================= */
+
+
+
+.theatron-button {
+
+  position: relative;
+
+
+
+  display: inline-flex;
+
+
+
+  align-items: center;
+
+
+
+  justify-content: center;
+
+
+
+  gap: 14px;
+
+
+
+  min-width: 220px;
+
+
+
+  height: 54px;
+
+
+
+  padding: 0 26px;
+
+
+
+  font-family: "DM Sans", sans-serif;
+
+
+
+  font-size: 10px;
+
+
+
+  font-weight: 600;
+
+
+
+  letter-spacing: 0.20em;
+
+
+
+  text-transform: uppercase;
+
+
+
+  cursor: pointer;
+
+
+
+  transition:
+
+    color 0.35s ease,
+
+    background 0.35s ease,
+
+    border-color 0.35s ease,
+
+    transform 0.35s ease,
+
+    box-shadow 0.35s ease;
+
+}
+
+/* =========================================================
+
+   EXPLORE EVENTS
+
+   ========================================================= */
+
+
+
+.theatron-button-primary {
+
+  position: relative;
+
+
+
+  color: #e7d2a5;
+
+
+
+  background: rgba(169, 139, 93, 0.045);
+
+
+
+  border: 1px solid rgba(198, 164, 103, 0.72);
+
+
+
+  overflow: hidden;
+
+}
+
+
+
+
+
+/* light sweep */
+
+
+
+.theatron-button-primary::before {
+
+  content: "";
+
+
+
+  position: absolute;
+
+
+
+  inset: 0;
+
+
+
+  background:
+
+    linear-gradient(
+
+      110deg,
+
+      transparent 20%,
+
+      rgba(220, 190, 130, 0.10) 50%,
+
+      transparent 80%
+
+    );
+
+
+
+  transform: translateX(-120%);
+
+
+
+  transition: transform 0.6s ease;
+
+
+
+  pointer-events: none;
+
+}
+
+
+
+
+
+/* remove old underline */
+
+
+
+.theatron-button-primary::after {
+
+  display: none;
+
+}
+
+
+
+
+
+.theatron-button-primary > \* {
+
+  position: relative;
+
+
+
+  z-index: 1;
+
+}
+
+
+
+
+
+.theatron-button-primary:hover {
+
+  color: #120f0b;
+
+
+
+  background: #c6a568;
+
+
+
+  border-color: #d8b979;
+
+
+
+  transform: translateY(-2px);
+
+
+
+  box-shadow:
+
+    0 8px 24px rgba(0, 0, 0, 0.28),
+
+    0 0 18px rgba(198, 165, 104, 0.10);
+
+}
+
+
+
+
+
+.theatron-button-primary:hover::before {
+
+  transform: translateX(120%);
+
+}
+
+
+
+
+
+.theatron-button-primary svg {
+
+  width: 17px;
+
+
+
+  height: 17px;
+
+
+
+  color: currentColor;
+
+
+
+  transition:
+
+    transform 0.35s ease,
+
+    color 0.35s ease;
+
+}
+
+
+
+
+
+.theatron-button-primary:hover svg {
+
+  transform: translateX(5px);
+
+}
+
+/* =========================================================
+
+   WATCH TRAILER
+
+   ========================================================= */
+
+
+
+.theatron-button-secondary {
+
+  position: relative;
+
+
+
+  color: rgba(238, 228, 207, 0.82);
+
+
+
+  background: rgba(8, 7, 6, 0.16);
+
+
+
+  border: 1px solid rgba(198, 164, 103, 0.38);
+
+
+
+  overflow: hidden;
+
+}
+
+
+
+
+
+/* bottom gold line */
+
+
+
+.theatron-button-secondary::before {
+
+  content: "";
+
+
+
+  position: absolute;
+
+
+
+  left: 0;
+
+
+
+  bottom: 0;
+
+
+
+  width: 0;
+
+
+
+  height: 1px;
+
+
+
+  background: #c6a568;
+
+
+
+  transition: width 0.4s ease;
+
+
+
+  pointer-events: none;
+
+}
+
+
+
+
+
+.theatron-button-secondary:hover {
+
+  color: #ead8b0;
+
+
+
+  background: rgba(169, 139, 93, 0.07);
+
+
+
+  border-color: rgba(198, 164, 103, 0.72);
+
+
+
+  transform: translateY(-2px);
+
+
+
+  box-shadow:
+
+    0 8px 24px rgba(0, 0, 0, 0.22);
+
+}
+
+
+
+
+
+.theatron-button-secondary:hover::before {
+
+  width: 100%;
+
+}
+
+
+
+
+
+.theatron-button-secondary svg {
+
+  width: 16px;
+
+
+
+  height: 16px;
+
+
+
+  stroke-width: 1.4;
+
+
+
+  color: #c6a568;
+
+
+
+  transition:
+
+    transform 0.35s ease,
+
+    color 0.35s ease,
+
+    filter 0.35s ease;
+
+}
+
+
+
+
+
+.theatron-button-secondary:hover svg {
+
+  transform: translateX(3px);
+
+
+
+  color: #e0c184;
+
+
+
+  filter:
+
+    drop-shadow(
+
+      0 0 5px rgba(198, 165, 104, 0.35)
+
+    );
+
+}
+
+
+
+
+
+.theatron-button span {
+
+  position: relative;
+
+
+
+  z-index: 2;
+
+}
+
+/* =========================================================
+
+   DATE / CURTAIN CUE
+
+   ========================================================= */
+
+
+
+.theatron-date-note {
+
+  position: relative;
+
+
+
+  display: flex;
+
+
+
+  align-items: center;
+
+
+
+  gap: 13px;
+
+
+
+  margin-top: 22px;
+
+
+
+  padding-left: 0;
+
+
+
+  font-family: "DM Sans", sans-serif;
+
+
+
+  font-size: 8px;
+
+
+
+  font-weight: 600;
+
+
+
+  letter-spacing: 0.20em;
+
+
+
+  text-transform: uppercase;
+
+
+
+  color: rgba(238, 228, 207, 0.38);
+
+
+
+  transition: color 0.3s ease;
+
+}
+
+
+
+
+
+.theatron-date-note:hover {
+
+  color: rgba(238, 228, 207, 0.68);
+
+}
+
+
+
+
+
+.theatron-date-note svg {
+
+  width: 13px;
+
+
+
+  height: 13px;
+
+
+
+  color: #b99a66;
+
+
+
+  transition:
+
+    transform 0.3s ease,
+
+    color 0.3s ease;
+
+}
+
+
+
+
+
+.theatron-date-note:hover svg {
+
+  color: #d1b477;
+
+
+
+  transform: translateY(-1px);
+
+}
+
+
+
+
+
+.theatron-date-note::before {
+
+  content: "CURTAIN RISES";
+
+
+
+  color: #a98b5d;
+
+
+
+  font-size: 7px;
+
+
+
+  letter-spacing: 0.24em;
+
+
+
+  margin-right: 2px;
+
+}
+
+/* =========================================================
+
+   BOTTOM HERO UI
+
+   ========================================================= */
+
+
+
+.theatron-scroll-cue {
+
+  position: absolute;
+
+
+
+  left: 5%;
+
+
+
+  bottom: 20px;
+
+
+
+  display: flex;
+
+
+
+  align-items: center;
+
+
+
+  gap: 13px;
+
+
+
+  font-family: "DM Sans", sans-serif;
+
+
+
+  color: rgba(238, 228, 207, 0.48);
+
+
+
+  font-size: 10px;
+
+
+
+  letter-spacing: 0.18em;
+
+}
+
+
+
+
+
+.theatron-scroll-cue svg {
+
+  color: #a98b5d;
+
+}
+
+
+
+
+
+.theatron-venue {
+
+  position: absolute;
+
+
+
+  right: 5%;
+
+
+
+  bottom: 20px;
+
+
+
+  display: flex;
+
+
+
+  flex-direction: column;
+
+
+
+  align-items: flex-end;
+
+
+
+  gap: 6px;
+
+
+
+  font-family: "DM Sans", sans-serif;
+
+
+
+  color: rgba(238, 228, 207, 0.45);
+
+
+
+  font-size: 9px;
+
+
+
+  letter-spacing: 0.18em;
+
+}
+
+
+
+
+
+.theatron-progress {
+
+  position: absolute;
+
+
+
+  right: 2.4%;
+
+
+
+  top: 54%;
+
+
+
+  display: flex;
+
+
+
+  flex-direction: column;
+
+
+
+  align-items: center;
+
+
+
+  gap: 10px;
+
+
+
+  font-family: "DM Sans", sans-serif;
+
+
+
+  color: rgba(238, 228, 207, 0.45);
+
+
+
+  font-size: 9px;
+
+
+
+  writing-mode: vertical-rl;
+
+
+
+  letter-spacing: 0.12em;
+
+}
+
+
+
+
+
+.theatron-progress i {
+
+  display: block;
+
+
+
+  width: 1px;
+
+
+
+  height: 62px;
+
+
+
+  background:
+
+    linear-gradient(
+
+      #a98b5d,
+
+      transparent
+
+    );
+
+}
+
+
+
+
+
+.theatron-anchor {
+
+  height: 0;
+
+
+
+  scroll-margin-top: 90px;
+
+}
+

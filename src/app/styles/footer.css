@@ -1,0 +1,355 @@
+/* =========================================================
+
+   FOOTER
+
+   ========================================================= */
+
+
+
+.theatron-footer {
+
+  background: #080706;
+
+
+
+  border-top: 1px solid var(--line);
+
+
+
+  padding: 38px 5% 28px;
+
+}
+
+
+
+
+
+.theatron-footer-grid {
+
+  max-width: 1400px;
+
+
+
+  margin: 0 auto 25px;
+
+
+
+  display: grid;
+
+
+
+  grid-template-columns: 1fr 1fr 1fr;
+
+
+
+  gap: 30px;
+
+
+
+  align-items: center;
+
+}
+
+
+
+
+
+.theatron-footer-created {
+
+  display: flex;
+
+
+
+  flex-direction: column;
+
+
+
+  align-items: flex-start;
+
+}
+
+
+
+
+
+.theatron-footer-created p,
+
+.theatron-footer-created span {
+
+  margin: 0;
+
+
+
+  font-family: "DM Sans", sans-serif;
+
+
+
+  color: rgba(244, 234, 213, 0.48);
+
+
+
+  font-size: 9px;
+
+
+
+  text-transform: uppercase;
+
+
+
+  letter-spacing: 0.18em;
+
+}
+
+
+
+
+
+.theatron-footer-created img {
+
+  width: 70px;
+
+
+
+  height: auto;
+
+
+
+  margin: 8px 0;
+
+
+
+  filter:
+
+    grayscale(1)
+
+    brightness(1.6)
+
+    sepia(0.35);
+
+}
+
+
+
+
+
+.theatron-footer-center {
+
+  text-align: center;
+
+}
+
+
+
+
+
+.theatron-footer-brand {
+
+  margin: 0 0 5px;
+
+
+
+  font-family: "DM Sans", sans-serif;
+
+
+
+  color: var(--gold-light);
+
+
+
+  font-size: 13px;
+
+
+
+  font-weight: 700;
+
+
+
+  letter-spacing: 0.14em;
+
+}
+
+
+
+
+
+.theatron-footer-brand span {
+
+  color: #b9653b;
+
+}
+
+
+
+
+
+.theatron-footer-center p:last-child,
+
+.theatron-footer-right p {
+
+  margin: 0;
+
+
+
+  font-family: "DM Sans", sans-serif;
+
+
+
+  color: rgba(244, 234, 213, 0.46);
+
+
+
+  font-size: 9px;
+
+
+
+  text-transform: uppercase;
+
+
+
+  letter-spacing: 0.15em;
+
+}
+
+
+
+
+
+.theatron-footer-right {
+
+  text-align: right;
+
+}
+
+
+
+
+
+.theatron-footer-divider {
+
+  max-width: 1400px;
+
+
+
+  height: 1px;
+
+
+
+  margin: 0 auto 22px;
+
+
+
+  background:
+
+    linear-gradient(
+
+      90deg,
+
+      transparent,
+
+      rgba(169, 139, 93, 0.42),
+
+      transparent
+
+    );
+
+}
+
+
+
+
+
+.theatron-footer-contact {
+
+  max-width: 1400px;
+
+
+
+  margin: 0 auto;
+
+
+
+  display: flex;
+
+
+
+  justify-content: space-between;
+
+
+
+  gap: 20px;
+
+
+
+  font-family: "DM Sans", sans-serif;
+
+
+
+  color: rgba(244, 234, 213, 0.55);
+
+
+
+  font-size: 11px;
+
+}
+
+
+
+
+
+.theatron-footer-contact div {
+
+  display: flex;
+
+
+
+  gap: 8px;
+
+
+
+  align-items: center;
+
+}
+
+
+
+
+
+.theatron-footer-contact span {
+
+  color: rgba(244, 234, 213, 0.35);
+
+
+
+  text-transform: uppercase;
+
+
+
+  letter-spacing: 0.12em;
+
+}
+
+
+
+
+
+.theatron-footer-contact a {
+
+  transition: color 0.2s ease;
+
+}
+
+
+
+
+
+.theatron-footer-contact a:hover {
+
+  color: var(--gold-light);
+
+}
+
+
+/* Full-width footer when used as the persistent lower layer of a section. */
+.theatron-footer {
+  width: 100%;
+}

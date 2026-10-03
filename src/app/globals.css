@@ -1,0 +1,2016 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+@import "./styles/navigation.css";
+@import "./styles/page.css";
+@import "./styles/countdown.css";
+@import "./styles/footer.css";
+@import "./styles/sidebar.css";
+@import "./styles/responsive.css";
+/* =========================================================
+
+   ROOT
+
+   ========================================================= */
+
+
+
+:root {
+
+  --charcoal: #090807;
+
+  --charcoal-soft: #11100e;
+
+
+
+  --cream: #eee4cf;
+
+  --cream-soft: #d8ccb5;
+
+
+
+  --gold: #a98b5d;
+
+  --gold-light: #c5aa79;
+
+  --gold-bright: #d8b979;
+
+
+
+  --burgundy: #4b1117;
+
+
+
+  --line: rgba(214, 180, 122, 0.20);
+
+  --muted: rgba(238, 228, 207, 0.62);
+
+}
+
+/* =========================================================
+
+   RESET
+
+   ========================================================= */
+
+
+
+\* {
+
+  box-sizing: border-box;
+
+}
+
+
+
+html {
+
+  scroll-behavior: smooth;
+
+  background: var(--charcoal);
+
+}
+
+
+
+body {
+
+  margin: 0;
+
+  background: var(--charcoal);
+
+  color: var(--cream);
+
+  overflow-x: hidden;
+
+}
+
+
+
+a {
+
+  color: inherit;
+
+  text-decoration: none;
+
+}
+
+
+
+button {
+
+  font: inherit;
+
+}
+
+/* =========================================================
+
+   SITE
+
+   ========================================================= */
+
+
+
+.theatron-site {
+
+  min-height: 100vh;
+
+  background: var(--charcoal);
+
+}
+
+
+/* =========================================================
+   CINEMATIC SINGLE-SCREEN NAVIGATION
+   ========================================================= */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.theatron-site {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--charcoal);
+}
+
+/* The original navigation is fixed over the cinematic page, exactly as in the source UI. */
+.theatron-screen {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 100svh;
+  overflow: hidden;
+}
+
+.theatron-nav-link,
+.theatron-mobile-link {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.theatron-nav-link.is-active {
+  color: var(--gold-light);
+}
+
+.theatron-nav-link.is-active::after {
+  width: 100%;
+  opacity: 1;
+}
+
+.home-screen,
+.events-screen,
+.gallery-screen,
+.contact-screen {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 100svh;
+  overflow: hidden;
+}
+
+/* Non-home screens reserve a clean bottom band for the footer without changing the Home composition. */
+.events-screen,
+.gallery-screen,
+.contact-screen {
+  display: flex;
+  flex-direction: column;
+}
+
+.events-screen > .theatron-footer,
+.gallery-screen > .theatron-footer,
+.contact-screen > .theatron-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 12;
+}
+
+@media (max-width: 768px) {
+  .theatron-site,
+  .theatron-screen,
+  .home-screen,
+  .events-screen,
+  .gallery-screen,
+  .contact-screen {
+    height: 100svh;
+    min-height: 100svh;
+  }
+}
+
+
+.gallery-screen > :first-child {
+  min-height: 100%;
+}
+
+.events-screen .events-section {
+  min-height: 100%;
+  padding-bottom: 170px;
+}
+
+.contact-screen {
+  align-items: stretch;
+  justify-content: flex-end;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(169,139,93,0.08), transparent 45%),
+    var(--charcoal);
+}
+/* =========================================================
+   THEATRON GALLERY
+   ========================================================= */
+
+.gallery-section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100svh;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(112, 32, 22, 0.14),
+      transparent 45%
+    ),
+    #090807;
+
+  color: #f4eee4;
+
+  display: flex;
+  flex-direction: column;
+  padding: 105px 5% 25px;
+  box-sizing: border-box;
+}
+
+/* Background atmospheric glow */
+
+.gallery-glow {
+  position: absolute;
+  width: 55vw;
+  height: 55vw;
+
+  left: 50%;
+  top: 48%;
+
+  transform: translate(-50%, -50%);
+
+  background: radial-gradient(
+    circle,
+    rgba(156, 55, 35, 0.10),
+    transparent 68%
+  );
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gallery-noise {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.045;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.7'/%3E%3C/svg%3E");
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.gallery-heading {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+}
+
+.gallery-heading > div:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-heading > div:first-child > span {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+
+  color: rgba(244, 238, 228, 0.55);
+
+  margin-bottom: 6px;
+}
+
+.gallery-heading h2 {
+  margin: 0;
+
+  font-family: "Bebas Neue", sans-serif;
+
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 0.82;
+
+  letter-spacing: 0.025em;
+
+  font-weight: 400;
+
+  color: #eee7dc;
+}
+
+.gallery-heading h2 b {
+  color: #a98b5d;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   INDEX 01 / 06
+   ========================================================= */
+
+.gallery-index {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-family: "Montserrat", sans-serif;
+
+  padding-bottom: 5px;
+}
+
+.gallery-index strong {
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  color: #d9b978;
+}
+
+.gallery-index span {
+  font-size: 0.65rem;
+
+  color: rgba(244, 238, 228, 0.4);
+}
+
+.gallery-index i {
+  display: block;
+
+  width: 45px;
+  height: 1px;
+
+  background: rgba(169, 139, 93, 0.45);
+}
+
+
+/* =========================================================
+   MAIN STAGE
+   ========================================================= */
+
+.gallery-stage {
+  position: relative;
+  z-index: 4;
+
+  flex: 1;
+
+  min-height: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(120px, 15vw)
+    minmax(400px, 1fr)
+    minmax(120px, 15vw);
+
+  align-items: center;
+
+  gap: 22px;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   MAIN FRAME
+   ========================================================= */
+
+.gallery-frame {
+  position: relative;
+
+  width: 100%;
+  height: min(53vh, 520px);
+
+  border: 1px solid rgba(169, 139, 93, 0.42);
+
+  background: #0e0c0a;
+
+  padding: 8px;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 20px 70px rgba(0, 0, 0, 0.65),
+    0 0 45px rgba(112, 32, 22, 0.07);
+
+  overflow: visible;
+}
+
+
+/* Inner frame line */
+
+.gallery-frame::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 4px;
+
+  border: 1px solid rgba(255, 255, 255, 0.055);
+
+  pointer-events: none;
+
+  z-index: 5;
+}
+
+
+/* =========================================================
+   CORNER DETAILS
+   ========================================================= */
+
+.gallery-corner {
+  position: absolute;
+
+  width: 22px;
+  height: 22px;
+
+  z-index: 10;
+
+  pointer-events: none;
+}
+
+.gallery-corner-tl {
+  left: -1px;
+  top: -1px;
+
+  border-left: 2px solid #b99355;
+  border-top: 2px solid #b99355;
+}
+
+.gallery-corner-br {
+  right: -1px;
+  bottom: -1px;
+
+  border-right: 2px solid #b99355;
+  border-bottom: 2px solid #b99355;
+}
+
+
+/* =========================================================
+   MAIN IMAGE
+   ========================================================= */
+
+.gallery-main-media {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #15110e,
+      #080706
+    );
+}
+
+.gallery-main-media .gallery-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  transition:
+    transform 0.7s ease,
+    filter 0.7s ease;
+}
+
+.gallery-frame:hover
+.gallery-main-media
+.gallery-image {
+  transform: scale(1.025);
+
+  filter: brightness(1.04);
+}
+
+
+/* Image shine */
+
+.gallery-media-shine {
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 45%;
+  height: 100%;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.025) 35%,
+    rgba(255, 255, 255, 0.11) 50%,
+    rgba(255, 255, 255, 0.025) 65%,
+    transparent 100%
+  );
+
+  transform: skewX(-15deg);
+
+  transition: left 1s ease;
+}
+
+.gallery-frame:hover .gallery-media-shine {
+  left: 150%;
+}
+
+
+/* Dark cinematic overlay */
+
+.gallery-media-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.02),
+      transparent 45%,
+      rgba(0, 0, 0, 0.48)
+    );
+}
+
+
+/* =========================================================
+   CAPTION
+   ========================================================= */
+
+.gallery-caption {
+  position: absolute;
+
+  left: 18px;
+  right: 18px;
+  bottom: 16px;
+
+  z-index: 8;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-end;
+
+  pointer-events: none;
+}
+
+.gallery-caption > div {
+  display: flex;
+  flex-direction: column;
+
+  text-shadow:
+    0 2px 15px rgba(0, 0, 0, 0.8);
+}
+
+.gallery-caption span {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 0.25em;
+
+  color: #d0ae70;
+
+  margin-bottom: 4px;
+}
+
+.gallery-caption h3 {
+  margin: 0;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: clamp(1.5rem, 2.2vw, 2.3rem);
+
+  line-height: 1;
+
+  font-weight: 500;
+
+  color: #f5eee4;
+}
+
+.gallery-caption button {
+  pointer-events: auto;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  background: rgba(8, 7, 6, 0.6);
+
+  color: #eee7dc;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(5px);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.gallery-caption button:hover {
+  background: rgba(169, 139, 93, 0.2);
+
+  border-color: #a98b5d;
+
+  color: #d9b978;
+}
+
+
+/* =========================================================
+   SIDE PREV / NEXT IMAGES
+   ========================================================= */
+
+.gallery-side {
+  position: relative;
+
+  width: 100%;
+  height: min(30vh, 280px);
+
+  padding: 0;
+
+  border: 1px solid rgba(169, 139, 93, 0.22);
+
+  background: #0b0908;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  opacity: 0.55;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.gallery-side:hover {
+  opacity: 0.9;
+
+  border-color: rgba(169, 139, 93, 0.6);
+}
+
+.gallery-side-left:hover {
+  transform: translateX(5px);
+}
+
+.gallery-side-right:hover {
+  transform: translateX(-5px);
+}
+
+.gallery-side .gallery-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  filter: brightness(0.58) saturate(0.75);
+
+  transition: transform 0.4s ease;
+}
+
+.gallery-side:hover .gallery-image {
+  transform: scale(1.04);
+}
+
+.gallery-side small {
+  position: absolute;
+
+  left: 12px;
+  bottom: 10px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 0.65rem;
+
+  color: #d7b675;
+
+  z-index: 3;
+}
+
+
+/* =========================================================
+   IMAGE PLACEHOLDER
+   ========================================================= */
+
+.gallery-placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #16120f,
+      #080706
+    );
+
+  color: rgba(244, 238, 228, 0.55);
+
+  font-family: "Bebas Neue", sans-serif;
+
+  font-size: 1.3rem;
+
+  letter-spacing: 0.12em;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   THUMBNAIL CONTROLS
+   ========================================================= */
+
+.gallery-controls {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+
+  margin-top: 14px;
+}
+
+.gallery-arrow {
+  flex: 0 0 auto;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(169, 139, 93, 0.3);
+
+  background: rgba(13, 11, 9, 0.85);
+
+  color: #d8c6a9;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.gallery-arrow:hover {
+  background: rgba(169, 139, 93, 0.13);
+
+  border-color: #a98b5d;
+
+  color: #e2c483;
+}
+
+
+/* Thumbnail row */
+
+.gallery-thumbnails {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  max-width: min(65vw, 720px);
+
+  overflow: hidden;
+}
+
+.gallery-thumb {
+  position: relative;
+
+  flex: 0 0 72px;
+
+  width: 72px;
+  height: 48px;
+
+  padding: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  background: #0c0a09;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  opacity: 0.55;
+
+  transition:
+    opacity 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.gallery-thumb:hover {
+  opacity: 0.85;
+
+  transform: translateY(-2px);
+}
+
+.gallery-thumb.is-active {
+  opacity: 1;
+
+  border-color: #b08b50;
+
+  box-shadow:
+    0 0 0 1px rgba(176, 139, 80, 0.15);
+}
+
+.gallery-thumb .gallery-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  filter: brightness(0.62);
+
+  transition: filter 0.25s ease;
+}
+
+.gallery-thumb.is-active .gallery-image {
+  filter: brightness(0.9);
+}
+
+.gallery-thumb span {
+  position: absolute;
+
+  right: 5px;
+  bottom: 3px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 0.48rem;
+
+  color: #fff;
+
+  text-shadow:
+    0 1px 4px #000;
+
+  z-index: 3;
+}
+
+
+/* =========================================================
+   LIGHTBOX
+   ========================================================= */
+
+.gallery-lightbox {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 35px;
+
+  background: rgba(3, 3, 3, 0.94);
+
+  backdrop-filter: blur(12px);
+}
+
+.gallery-lightbox-inner {
+  position: relative;
+
+  width: min(1000px, 92vw);
+
+  max-height: 90vh;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.gallery-lightbox-inner .gallery-image {
+  display: block;
+
+  width: 100%;
+
+  max-height: 78vh;
+
+  object-fit: contain;
+
+  border: 1px solid rgba(169, 139, 93, 0.5);
+
+  background: #080706;
+}
+
+.gallery-lightbox-inner > div:last-child {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+}
+
+.gallery-lightbox-inner > div:last-child span {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 0.25em;
+
+  color: #b9965b;
+}
+
+.gallery-lightbox-inner > div:last-child strong {
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 1.7rem;
+
+  font-weight: 500;
+
+  color: #eee6d9;
+}
+
+.gallery-close {
+  position: absolute;
+
+  right: -15px;
+  top: -15px;
+
+  z-index: 5;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(169, 139, 93, 0.45);
+
+  background: #0d0b09;
+
+  color: #eee7dc;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.gallery-close:hover {
+  background: #a98b5d;
+
+  color: #090807;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .gallery-section {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .gallery-stage {
+    grid-template-columns: 90px minmax(0, 1fr) 90px;
+
+    gap: 12px;
+  }
+
+  .gallery-side {
+    height: 24vh;
+  }
+
+  .gallery-frame {
+    height: min(50vh, 460px);
+  }
+
+  .gallery-thumb {
+    flex-basis: 62px;
+
+    width: 62px;
+    height: 43px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .gallery-section {
+    padding:
+      95px
+      20px
+      18px;
+  }
+
+  .gallery-heading {
+    margin-bottom: 12px;
+  }
+
+  .gallery-heading h2 {
+    font-size: clamp(2.8rem, 11vw, 4rem);
+  }
+
+  .gallery-heading > div:first-child > span {
+    font-size: 0.52rem;
+
+    letter-spacing: 0.2em;
+  }
+
+  .gallery-index {
+    gap: 7px;
+  }
+
+  .gallery-index i {
+    width: 25px;
+  }
+
+  .gallery-stage {
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+
+    display: flex;
+
+    justify-content: center;
+  }
+
+  .gallery-side {
+    display: none;
+  }
+
+  .gallery-frame {
+    width: 100%;
+
+    height: min(54vh, 440px);
+  }
+
+  .gallery-controls {
+    margin-top: 10px;
+  }
+
+  .gallery-thumbnails {
+    max-width: calc(100vw - 120px);
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+  }
+
+  .gallery-thumbnails::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-thumb {
+    flex-basis: 58px;
+
+    width: 58px;
+    height: 40px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+  .gallery-section {
+    padding:
+      88px
+      14px
+      12px;
+  }
+
+  .gallery-heading h2 {
+    font-size: 3rem;
+  }
+
+  .gallery-heading > div:first-child > span {
+    font-size: 0.46rem;
+
+    letter-spacing: 0.15em;
+  }
+
+  .gallery-index strong,
+  .gallery-index span {
+    font-size: 0.55rem;
+  }
+
+  .gallery-frame {
+    height: min(48vh, 340px);
+
+    padding: 5px;
+  }
+
+  .gallery-caption {
+    left: 12px;
+    right: 12px;
+    bottom: 11px;
+  }
+
+  .gallery-caption h3 {
+    font-size: 1.35rem;
+  }
+
+  .gallery-caption span {
+    font-size: 0.48rem;
+  }
+
+  .gallery-caption button {
+    width: 34px;
+    height: 34px;
+  }
+
+  .gallery-controls {
+    gap: 7px;
+  }
+
+  .gallery-arrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .gallery-thumbnails {
+    max-width: calc(100vw - 90px);
+
+    gap: 5px;
+  }
+
+  .gallery-thumb {
+    flex-basis: 52px;
+
+    width: 52px;
+    height: 36px;
+  }
+
+  .gallery-lightbox {
+    padding: 15px;
+  }
+
+  .gallery-lightbox-inner {
+    width: 100%;
+  }
+
+  .gallery-close {
+    right: -4px;
+    top: -48px;
+  }
+
+}
+/* =========================================================
+   THEATRON GALLERY
+   ========================================================= */
+
+.gallery-screen {
+  position: relative;
+  width: 100%;
+  height: calc(100svh - 80px);
+  min-height: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  box-sizing: border-box;
+
+  background: #090807;
+
+  scrollbar-width: thin;
+  scrollbar-color: #8f744c #0b0908;
+}
+
+.gallery-screen::-webkit-scrollbar {
+  width: 5px;
+}
+
+.gallery-screen::-webkit-scrollbar-track {
+  background: #0b0908;
+}
+
+.gallery-screen::-webkit-scrollbar-thumb {
+  background: #8f744c;
+}
+
+
+/* =========================================================
+   GALLERY CONTAINER
+   ========================================================= */
+
+.gallery-section {
+  position: relative;
+
+  width: 100%;
+  min-height: 100%;
+
+  height: auto;
+
+  box-sizing: border-box;
+
+  padding: 32px 5% 35px;
+
+  overflow: visible;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(112, 32, 22, 0.10),
+      transparent 55%
+    ),
+    #090807;
+
+  color: #f4eee4;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.gallery-heading {
+  position: relative;
+
+  z-index: 20;
+
+  width: 100%;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin: 0 0 22px 0;
+
+  flex-shrink: 0;
+}
+
+.gallery-heading > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.gallery-heading > div:first-child > span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.65rem;
+  line-height: 1;
+  letter-spacing: 0.27em;
+
+  color: #a98b5d;
+}
+
+.gallery-heading h2 {
+  margin: 0;
+
+  font-family: "Bebas Neue", sans-serif;
+
+  font-size: clamp(4rem, 6vw, 6.2rem);
+
+  line-height: 0.82;
+
+  font-weight: 400;
+
+  letter-spacing: 0.01em;
+
+  color: #eee8de;
+}
+
+.gallery-heading h2 b {
+  color: #a98b5d;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   INDEX
+   ========================================================= */
+
+.gallery-index {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding-bottom: 8px;
+}
+
+.gallery-index strong {
+  color: #d9b978;
+
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.gallery-index i {
+  display: block;
+
+  width: 55px;
+  height: 1px;
+
+  background: rgba(169, 139, 93, 0.6);
+}
+
+.gallery-index span {
+  color: rgba(244, 238, 228, 0.45);
+
+  font-size: 0.62rem;
+}
+
+
+/* =========================================================
+   MAIN STAGE
+   ========================================================= */
+
+.gallery-stage {
+  position: relative;
+
+  z-index: 10;
+
+  width: 100%;
+
+  height: 460px;
+
+  min-height: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(150px, 17vw)
+    minmax(0, 1fr)
+    minmax(150px, 17vw);
+
+  align-items: center;
+
+  gap: 26px;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SIDE IMAGES
+   ========================================================= */
+
+.gallery-side {
+  position: relative;
+
+  width: 100%;
+  height: 315px;
+
+  min-height: 0;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(169, 139, 93, 0.25);
+
+  background: #0c0a09;
+
+  opacity: 0.55;
+
+  cursor: pointer;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.gallery-side:hover {
+  opacity: 0.9;
+
+  border-color: rgba(169, 139, 93, 0.7);
+}
+
+.gallery-side-left:hover {
+  transform: translateX(5px);
+}
+
+.gallery-side-right:hover {
+  transform: translateX(-5px);
+}
+
+.gallery-side .gallery-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  filter:
+    brightness(0.55)
+    saturate(0.7);
+}
+
+.gallery-side small {
+  position: absolute;
+
+  left: 14px;
+  bottom: 12px;
+
+  z-index: 5;
+
+  color: #c19d5d;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 0.6rem;
+}
+
+
+/* =========================================================
+   MAIN FRAME
+   ========================================================= */
+
+.gallery-frame {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  min-height: 0;
+
+  padding: 8px;
+
+  box-sizing: border-box;
+
+  border: 1px solid rgba(169, 139, 93, 0.5);
+
+  background: #0c0a09;
+
+  overflow: visible;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.55);
+}
+
+.gallery-frame::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 4px;
+
+  border: 1px solid rgba(255, 255, 255, 0.045);
+
+  z-index: 20;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   CORNERS
+   ========================================================= */
+
+.gallery-corner {
+  position: absolute;
+
+  width: 26px;
+  height: 26px;
+
+  z-index: 30;
+
+  pointer-events: none;
+}
+
+.gallery-corner-tl {
+  top: -1px;
+  left: -1px;
+
+  border-top: 2px solid #b89451;
+  border-left: 2px solid #b89451;
+}
+
+.gallery-corner-br {
+  right: -1px;
+  bottom: -1px;
+
+  border-right: 2px solid #b89451;
+  border-bottom: 2px solid #b89451;
+}
+
+
+/* =========================================================
+   MAIN IMAGE
+   ========================================================= */
+
+.gallery-main-media {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  background: #0b0908;
+}
+
+.gallery-main-media .gallery-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition: transform 0.6s ease;
+}
+
+.gallery-frame:hover
+.gallery-main-media
+.gallery-image {
+  transform: scale(1.02);
+}
+
+
+/* =========================================================
+   IMAGE OVERLAY
+   ========================================================= */
+
+.gallery-media-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.03),
+      transparent 50%,
+      rgba(0, 0, 0, 0.55)
+    );
+}
+
+
+/* =========================================================
+   CAPTION
+   ========================================================= */
+
+.gallery-caption {
+  position: absolute;
+
+  left: 20px;
+  right: 20px;
+  bottom: 18px;
+
+  z-index: 30;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  pointer-events: none;
+}
+
+.gallery-caption > div {
+  display: flex;
+  flex-direction: column;
+
+  text-shadow:
+    0 2px 15px rgba(0, 0, 0, 0.9);
+}
+
+.gallery-caption span {
+  margin-bottom: 5px;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 0.55rem;
+
+  letter-spacing: 0.25em;
+
+  color: #c19d5d;
+}
+
+.gallery-caption h3 {
+  margin: 0;
+
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: clamp(1.4rem, 2vw, 2.1rem);
+
+  line-height: 1;
+
+  font-weight: 500;
+
+  color: #f2ebe0;
+}
+
+
+/* =========================================================
+   CONTROLS
+   ========================================================= */
+
+.gallery-controls {
+  position: relative;
+
+  z-index: 20;
+
+  width: 100%;
+
+  height: 60px;
+
+  margin-top: 10px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  box-sizing: border-box;
+}
+
+.gallery-arrow {
+  flex-shrink: 0;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(169, 139, 93, 0.45);
+
+  background: #0d0b09;
+
+  color: #ded3c2;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.gallery-arrow:hover {
+  background: rgba(169, 139, 93, 0.15);
+
+  border-color: #a98b5d;
+
+  color: #e0bd78;
+}
+
+
+/* =========================================================
+   THUMBNAILS
+   ========================================================= */
+
+.gallery-thumbnails {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  height: 48px;
+
+  max-width: 650px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scrollbar-width: none;
+}
+
+.gallery-thumbnails::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-thumb {
+  position: relative;
+
+  flex: 0 0 68px;
+
+  width: 68px;
+  height: 44px;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  background: #0b0908;
+
+  cursor: pointer;
+
+  opacity: 0.48;
+
+  transition:
+    opacity 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.gallery-thumb:hover {
+  opacity: 0.85;
+
+  transform: translateY(-2px);
+}
+
+.gallery-thumb.is-active {
+  opacity: 1;
+
+  border-color: #b89451;
+}
+
+.gallery-thumb .gallery-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.gallery-thumb span {
+  position: absolute;
+
+  right: 5px;
+  bottom: 3px;
+
+  color: white;
+
+  font-size: 0.48rem;
+
+  text-shadow: 0 1px 4px #000;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.gallery-screen > .theatron-footer {
+  position: relative;
+
+  width: 100%;
+
+  margin-top: 25px;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   LOW HEIGHT DESKTOP
+   ========================================================= */
+
+@media (max-height: 800px) and (min-width: 769px) {
+  .gallery-section {
+    padding-top: 25px;
+  }
+
+  .gallery-heading {
+    margin-bottom: 14px;
+  }
+
+  .gallery-heading h2 {
+    font-size: 4.5rem;
+  }
+
+  .gallery-stage {
+    height: 400px;
+  }
+
+  .gallery-side {
+    height: 270px;
+  }
+
+  .gallery-controls {
+    height: 55px;
+    margin-top: 5px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .gallery-screen {
+    height: calc(100svh - 70px);
+  }
+
+  .gallery-section {
+    min-height: 100%;
+
+    padding:
+      28px
+      20px
+      30px;
+  }
+
+  .gallery-heading {
+    margin-bottom: 18px;
+  }
+
+  .gallery-heading h2 {
+    font-size: clamp(3rem, 10vw, 4.5rem);
+  }
+
+  .gallery-stage {
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  .gallery-side {
+    display: none;
+  }
+
+  .gallery-frame {
+    width: 100%;
+
+    height: 50vh;
+
+    min-height: 280px;
+    max-height: 440px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+  .gallery-section {
+    padding:
+      22px
+      14px
+      30px;
+  }
+
+  .gallery-heading h2 {
+    font-size: 3rem;
+  }
+
+  .gallery-heading > div:first-child > span {
+    font-size: 0.48rem;
+
+    letter-spacing: 0.17em;
+  }
+
+  .gallery-stage {
+    gap: 8px;
+  }
+
+  .gallery-frame {
+    height: 43vh;
+
+    min-height: 240px;
+  }
+
+  .gallery-controls {
+    height: 48px;
+
+    gap: 6px;
+  }
+
+  .gallery-arrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .gallery-thumbnails {
+    max-width: calc(100vw - 90px);
+
+    gap: 5px;
+  }
+
+  .gallery-thumb {
+    flex-basis: 52px;
+
+    width: 52px;
+    height: 36px;
+  }
+}
+/* =========================================================
+   GALLERY TITLE — NAVBAR OVERLAP FIX
+   ========================================================= */
+
+.gallery-heading {
+  position: relative;
+  z-index: 50;
+
+  /* Push the complete title block below the navbar */
+  padding-top: 65px;
+  box-sizing: border-box;
+}
+
+/* Keep the title itself fully visible */
+.gallery-heading h2 {
+  position: relative;
+  z-index: 51;
+
+  margin-top: 0;
+}
+
+/* Keep the small archive label visible too */
+.gallery-heading > div:first-child > span {
+  position: relative;
+  z-index: 51;
+}
+
+/* Keep the 06 — 06 indicator aligned with the title */
+.gallery-index {
+  position: relative;
+  z-index: 51;
+}
