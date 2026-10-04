@@ -15,7 +15,9 @@ import {
   CheckCircle2,
   AlertCircle,
   Tag,
-  Loader2
+  Loader2,
+  Instagram,
+  Share2
 } from "lucide-react"
 
 export default function Contact() {
@@ -60,6 +62,39 @@ export default function Contact() {
     }
   }
 
+  const contacts = [
+    {
+      role: "Overall Student Coordinator",
+      name: "Santhosh Kumar",
+      phone: "+91 79048 49032",
+      tel: "+917904849032"
+    },
+    {
+      role: "Event & Registrations Lead",
+      name: "Venkatesh R",
+      phone: "+91 98849 12815",
+      tel: "+919884912815"
+    }
+  ]
+
+  const emails = [
+    { label: "General & Entry Queries", address: "immersecit@gmail.com" },
+    { label: "Official Support & Helpdesk", address: "theatroncit@gmail.com" }
+  ]
+
+  const socialLinks = [
+    {
+      name: "Immerse Instagram",
+      handle: "@immerse_cit",
+      url: "https://www.instagram.com/immerse_cit?igsh=bmpiOWtmM29xcXZn"
+    },
+    {
+      name: "Resolution Instagram",
+      handle: "@resolution_cit",
+      url: "https://www.instagram.com/resolution_cit"
+    }
+  ]
+
   return (
     <main className="relative bg-black text-white min-h-screen overflow-x-hidden selection:bg-[#8F1111] selection:text-white">
       {/* Background Gradients - Warm Atmosphere */}
@@ -71,7 +106,7 @@ export default function Contact() {
 
       {/* Contact Section */}
       <section className="relative z-10 pt-28 sm:pt-36 pb-20 px-4 sm:px-6 md:px-10 max-w-7xl mx-auto">
-        
+
         {/* Contact Hero Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 md:mb-16">
           {/* Muted Gold Badge with Richer Text Intensity */}
@@ -79,7 +114,7 @@ export default function Contact() {
             <Sparkles className="w-3.5 h-3.5 text-[#C9A74E]" />
             <span>THEATRON FESTIVAL HELP DESK</span>
           </div>
-          
+
           {/* Title with Deep Red & Rich Gold Accent Gradient */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4 text-white">
             GET IN <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8F1111] via-[#A31621] to-[#D4B76A] drop-shadow-[0_0_15px_rgba(201,167,78,0.25)]">TOUCH</span>
@@ -99,7 +134,7 @@ export default function Contact() {
 
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          
+
           {/* Left Column: Event Contacts */}
           <div className="lg:col-span-5 space-y-5">
             <div className="mb-2">
@@ -108,8 +143,40 @@ export default function Contact() {
                 Event Contacts
               </h2>
               <p className="text-xs sm:text-sm text-gray-400 mt-1">
-                Connect with the organizing team via email, phone, or visit our campus.
+                Connect directly with our student organizers, send an email, or visit our campus.
               </p>
+            </div>
+
+            {/* Phone & Student Organizers Card */}
+            <div className="group relative bg-zinc-950/90 border border-[#8F742E]/40 hover:border-[#C9A74E]/70 p-5 sm:p-6 rounded-2xl transition-all duration-300 hover:shadow-[0_0_14px_rgba(201,167,78,0.15)] backdrop-blur-md">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-gradient-to-br from-[#650000] to-[#8F1111] border border-[#C9A74E]/50 rounded-xl text-[#D4B76A] shrink-0">
+                  <Phone className="w-5 h-5 text-[#D4B76A]" />
+                </div>
+                <div className="space-y-3 min-w-0 flex-1">
+                  <div>
+                    <p className="text-xs uppercase font-extrabold tracking-widest text-[#D4B76A]">Student Organizers</p>
+                    <h3 className="text-base font-semibold text-white">Direct Phone Support</h3>
+                  </div>
+                  <div className="space-y-2 pt-1">
+                    {contacts.map((c, idx) => (
+                      <div key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-2.5 rounded-xl bg-zinc-900/80 border border-[#8F742E]/30">
+                        <div>
+                          <p className="text-xs text-gray-400 font-medium">{c.role}</p>
+                          <p className="text-sm font-semibold text-white">{c.name}</p>
+                        </div>
+                        <a
+                          href={`tel:${c.tel}`}
+                          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#D4B76A] hover:text-white transition-colors bg-[#8F1111]/40 px-3 py-1.5 rounded-lg border border-[#C9A74E]/40 hover:bg-[#8F1111] shrink-0 mt-1 sm:mt-0"
+                        >
+                          <Phone className="w-3.5 h-3.5" />
+                          {c.phone}
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Email Card */}
@@ -118,41 +185,55 @@ export default function Contact() {
                 <div className="p-3 bg-gradient-to-br from-[#650000] to-[#8F1111] border border-[#C9A74E]/50 rounded-xl text-[#D4B76A] shrink-0">
                   <Mail className="w-5 h-5 text-[#D4B76A]" />
                 </div>
-                <div className="space-y-1 min-w-0 flex-1">
-                  <p className="text-xs uppercase font-extrabold tracking-widest text-[#D4B76A]">Official Email</p>
-                  <h3 className="text-base font-semibold text-white">General & Entry Queries</h3>
-                  <a
-                    href="mailto:immersecit@gmail.com"
-                    className="inline-block text-gray-300 font-medium hover:text-[#D4B76A] transition-colors text-sm sm:text-base break-all"
-                  >
-                    immersecit@gmail.com
-                  </a>
+                <div className="space-y-3 min-w-0 flex-1">
+                  <div>
+                    <p className="text-xs uppercase font-extrabold tracking-widest text-[#D4B76A]">Official Emails</p>
+                    <h3 className="text-base font-semibold text-white">General & Entry Queries</h3>
+                  </div>
+                  <div className="space-y-2">
+                    {emails.map((item, idx) => (
+                      <div key={idx} className="p-2.5 rounded-xl bg-zinc-900/80 border border-[#8F742E]/30">
+                        <p className="text-xs text-gray-400 font-medium">{item.label}</p>
+                        <a
+                          href={`mailto:${item.address}`}
+                          className="inline-block text-sm font-semibold text-[#D4B76A] hover:text-white transition-colors break-all mt-0.5"
+                        >
+                          {item.address}
+                        </a>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Phone Card */}
+            {/* Social Media Card */}
             <div className="group relative bg-zinc-950/90 border border-[#8F742E]/40 hover:border-[#C9A74E]/70 p-5 sm:p-6 rounded-2xl transition-all duration-300 hover:shadow-[0_0_14px_rgba(201,167,78,0.15)] backdrop-blur-md">
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-gradient-to-br from-[#650000] to-[#8F1111] border border-[#C9A74E]/50 rounded-xl text-[#D4B76A] shrink-0">
-                  <Phone className="w-5 h-5 text-[#D4B76A]" />
+                  <Share2 className="w-5 h-5 text-[#D4B76A]" />
                 </div>
-                <div className="space-y-1 min-w-0 flex-1">
-                  <p className="text-xs uppercase font-extrabold tracking-widest text-[#D4B76A]">Event Helpdesk</p>
-                  <h3 className="text-base font-semibold text-white">Call Student Organizers</h3>
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-1">
-                    <a
-                      href="tel:+917904849032"
-                      className="inline-flex items-center gap-1.5 text-gray-300 font-medium hover:text-[#D4B76A] transition-colors text-sm sm:text-base bg-zinc-900/90 px-3 py-1.5 rounded-lg border border-[#8F742E]/40 hover:border-[#C9A74E]/70"
-                    >
-                      +91 7904849032
-                    </a>
-                    <a
-                      href="tel:+919884912815"
-                      className="inline-flex items-center gap-1.5 text-gray-300 font-medium hover:text-[#D4B76A] transition-colors text-sm sm:text-base bg-zinc-900/90 px-3 py-1.5 rounded-lg border border-[#8F742E]/40 hover:border-[#C9A74E]/70"
-                    >
-                      +91 9884912815
-                    </a>
+                <div className="space-y-3 min-w-0 flex-1">
+                  <div>
+                    <p className="text-xs uppercase font-extrabold tracking-widest text-[#D4B76A]">Social Media</p>
+                    <h3 className="text-base font-semibold text-white">Follow Festival Updates</h3>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {socialLinks.map((s, idx) => (
+                      <a
+                        key={idx}
+                        href={s.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 p-2.5 rounded-xl bg-zinc-900/80 border border-[#8F742E]/30 hover:border-[#C9A74E]/70 text-gray-300 hover:text-[#D4B76A] transition-all"
+                      >
+                        <Instagram className="w-4 h-4 text-[#D4B76A] shrink-0" />
+                        <div className="min-w-0">
+                          <p className="text-xs font-bold truncate text-white">{s.name}</p>
+                          <p className="text-[11px] text-gray-400 truncate">{s.handle}</p>
+                        </div>
+                      </a>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -167,8 +248,8 @@ export default function Contact() {
                 <div className="space-y-1 min-w-0 flex-1">
                   <p className="text-xs uppercase font-extrabold tracking-widest text-[#D4B76A]">Festival Venue</p>
                   <h3 className="text-base font-semibold text-white">Chennai Institute of Technology</h3>
-                  <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                    Sarathy Nagar, Kundrathur, Chennai - 600069, Tamil Nadu
+                  <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                    Sarathy Nagar, Kundrathur, Chennai - 600069, Tamil Nadu, India
                   </p>
                 </div>
               </div>
@@ -183,7 +264,7 @@ export default function Contact() {
                 <div className="space-y-1 min-w-0 flex-1">
                   <p className="text-xs uppercase font-extrabold tracking-widest text-[#D4B76A]">Desk Hours</p>
                   <h3 className="text-base font-semibold text-white">Monday – Saturday</h3>
-                  <p className="text-gray-400 text-xs sm:text-sm">
+                  <p className="text-gray-300 text-xs sm:text-sm">
                     9:00 AM – 6:00 PM IST (Active during Fest Days)
                   </p>
                 </div>
@@ -194,7 +275,7 @@ export default function Contact() {
           {/* Right Column: Contact Form */}
           <div className="lg:col-span-7">
             <div className="relative bg-zinc-950/95 border border-[#8F742E]/50 hover:border-[#C9A74E]/70 rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl shadow-black/80 backdrop-blur-xl overflow-hidden transition-all duration-300">
-              
+
               {/* Form Ambient Warm Glow */}
               <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#C9A74E]/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -318,4 +399,3 @@ export default function Contact() {
     </main>
   )
 }
- 
