@@ -7,12 +7,12 @@ const films = Array.from({ length: 6 }, (_, index) => ({
   src: `/img${index + 1}.jpg`,
   number: String(index + 1).padStart(2, "0"),
   title: [
-    "THE OPENING FRAME",
-    "LIGHTS / CAMERA",
-    "BEHIND THE SCENE",
-    "THE BIG SCREEN",
-    "IN THE MOMENT",
-    "THE FINAL CUT",
+    "THEATRON 2025",
+    "THEATRON 2025",
+    "THEATRON 2025",
+    "THEATRON 2025",
+    "THEATRON 2025",
+    "THEATRON 2025",
   ][index],
 }))
 
