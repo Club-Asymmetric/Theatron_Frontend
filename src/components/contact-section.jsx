@@ -14,18 +14,53 @@ import {
   AlertCircle,
   Tag,
   Loader2,
+  Instagram,
+  Share2,
 } from "lucide-react"
 
 export default function ContactSection() {
-  const [name, setName] = useState<string>("")
-  const [email, setEmail] = useState<string>("")
-  const [subject, setSubject] = useState<string>("")
-  const [message, setMessage] = useState<string>("")
-  const [successMsg, setSuccessMsg] = useState<string>("")
-  const [errorMsg, setErrorMsg] = useState<string>("")
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [subject, setSubject] = useState("")
+  const [message, setMessage] = useState("")
+  const [successMsg, setSuccessMsg] = useState("")
+  const [errorMsg, setErrorMsg] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const contacts = [
+    {
+      role: "Overall Student Coordinator",
+      name: "Santhosh Kumar",
+      phone: "+91 79048 49032",
+      tel: "+917904849032",
+    },
+    {
+      role: "Event & Registrations Lead",
+      name: "Venkatesh R",
+      phone: "+91 98849 12815",
+      tel: "+919884912815",
+    },
+  ]
+
+  const emails = [
+    { label: "General & Entry Queries", address: "immersecit@gmail.com" },
+    { label: "Official Support & Helpdesk", address: "theatroncit@gmail.com" },
+  ]
+
+  const socialLinks = [
+    {
+      name: "Immerse Instagram",
+      handle: "@immerse_cit",
+      url: "https://www.instagram.com/immerse_cit?igsh=bmpiOWtmM29xcXZn",
+    },
+    {
+      name: "Resolution Instagram",
+      handle: "@resolution_cit",
+      url: "https://www.instagram.com/resolution_cit",
+    },
+  ]
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setSuccessMsg("")
     setErrorMsg("")
@@ -100,35 +135,94 @@ export default function ContactSection() {
             </p>
           </div>
 
+          {/* Coordinators Card */}
+          <div className="group relative bg-zinc-950/90 border border-[#8F742E]/40 hover:border-[#C9A74E]/70 p-5 sm:p-6 rounded-2xl transition-all duration-300 hover:shadow-[0_0_14px_rgba(201,167,78,0.15)] backdrop-blur-md">
+            <div className="flex items-start gap-4">
+              <div className="p-3 bg-gradient-to-br from-[#650000] to-[#8F1111] border border-[#C9A74E]/50 rounded-xl text-[#D4B76A] shrink-0">
+                <Phone className="w-5 h-5 text-[#D4B76A]" />
+              </div>
+              <div className="space-y-3 min-w-0 flex-1">
+                <div>
+                  <p className="text-xs uppercase font-extrabold tracking-widest text-[#D4B76A]">Student Coordinators</p>
+                  <h3 className="text-base font-semibold text-white">Call Event Organizers</h3>
+                </div>
+                <div className="space-y-2">
+                  {contacts.map((c, idx) => (
+                    <div key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-2.5 rounded-xl bg-zinc-900/80 border border-[#8F742E]/30">
+                      <div>
+                        <p className="text-xs text-gray-400 font-medium">{c.role}</p>
+                        <p className="text-sm font-semibold text-white">{c.name}</p>
+                      </div>
+                      <a
+                        href={`tel:${c.tel}`}
+                        className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#D4B76A] hover:text-white transition-colors bg-[#8F1111]/40 px-3 py-1.5 rounded-lg border border-[#C9A74E]/40 hover:bg-[#8F1111] shrink-0 mt-1 sm:mt-0"
+                      >
+                        <Phone className="w-3.5 h-3.5" />
+                        {c.phone}
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Email Card */}
           <div className="group relative bg-zinc-950/90 border border-[#8F742E]/40 hover:border-[#C9A74E]/70 p-5 sm:p-6 rounded-2xl transition-all duration-300 hover:shadow-[0_0_14px_rgba(201,167,78,0.15)] backdrop-blur-md">
             <div className="flex items-start gap-4">
               <div className="p-3 bg-gradient-to-br from-[#650000] to-[#8F1111] border border-[#C9A74E]/50 rounded-xl text-[#D4B76A] shrink-0">
                 <Mail className="w-5 h-5 text-[#D4B76A]" />
               </div>
-              <div className="space-y-1 min-w-0 flex-1">
-                <p className="text-xs uppercase font-extrabold tracking-widest text-[#D4B76A]">Official Email</p>
-                <h3 className="text-base font-semibold text-white">General & Entry Queries</h3>
-                <a
-                  href="mailto:immersecit@gmail.com"
-                  className="inline-block text-gray-300 font-medium hover:text-[#D4B76A] transition-colors text-sm sm:text-base break-all"
-                >
-                  immersecit@gmail.com
-                </a>
+              <div className="space-y-3 min-w-0 flex-1">
+                <div>
+                  <p className="text-xs uppercase font-extrabold tracking-widest text-[#D4B76A]">Official Emails</p>
+                  <h3 className="text-base font-semibold text-white">General &amp; Entry Queries</h3>
+                </div>
+                <div className="space-y-2">
+                  {emails.map((item, idx) => (
+                    <div key={idx} className="p-2.5 rounded-xl bg-zinc-900/80 border border-[#8F742E]/30">
+                      <p className="text-xs text-gray-400 font-medium">{item.label}</p>
+                      <a
+                        href={`mailto:${item.address}`}
+                        className="inline-block text-sm font-semibold text-[#D4B76A] hover:text-white transition-colors break-all mt-0.5"
+                      >
+                        {item.address}
+                      </a>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Phone Card */}
+          {/* Social Media Card */}
           <div className="group relative bg-zinc-950/90 border border-[#8F742E]/40 hover:border-[#C9A74E]/70 p-5 sm:p-6 rounded-2xl transition-all duration-300 hover:shadow-[0_0_14px_rgba(201,167,78,0.15)] backdrop-blur-md">
             <div className="flex items-start gap-4">
               <div className="p-3 bg-gradient-to-br from-[#650000] to-[#8F1111] border border-[#C9A74E]/50 rounded-xl text-[#D4B76A] shrink-0">
-                <Phone className="w-5 h-5 text-[#D4B76A]" />
+                <Share2 className="w-5 h-5 text-[#D4B76A]" />
               </div>
-              <div className="space-y-1 min-w-0 flex-1">
-                <p className="text-xs uppercase font-extrabold tracking-widest text-[#D4B76A]">Student Coordinators Hotline</p>
-                <h3 className="text-base font-semibold text-white">+91 94447 65985</h3>
-                <p className="text-gray-400 text-xs sm:text-sm">Available for immediate assistance &amp; directions</p>
+              <div className="space-y-3 min-w-0 flex-1">
+                <div>
+                  <p className="text-xs uppercase font-extrabold tracking-widest text-[#D4B76A]">Social Media</p>
+                  <h3 className="text-base font-semibold text-white">Follow Festival Updates</h3>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {socialLinks.map((s, idx) => (
+                    <a
+                      key={idx}
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 p-2.5 rounded-xl bg-zinc-900/80 border border-[#8F742E]/30 hover:border-[#C9A74E]/70 text-gray-300 hover:text-[#D4B76A] transition-all"
+                    >
+                      <Instagram className="w-4 h-4 text-[#D4B76A] shrink-0" />
+                      <div className="min-w-0">
+                        <p className="text-xs font-bold truncate text-white">{s.name}</p>
+                        <p className="text-[11px] text-gray-400 truncate">{s.handle}</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -142,8 +236,8 @@ export default function ContactSection() {
               <div className="space-y-1 min-w-0 flex-1">
                 <p className="text-xs uppercase font-extrabold tracking-widest text-[#D4B76A]">Campus Venue</p>
                 <h3 className="text-base font-semibold text-white">Chennai Institute of Technology</h3>
-                <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                  Sarathy Nagar, Kundrathur, Chennai - 600069, Tamil Nadu
+                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                  Sarathy Nagar, Kundrathur, Chennai - 600069, Tamil Nadu, India
                 </p>
               </div>
             </div>
@@ -158,7 +252,7 @@ export default function ContactSection() {
               <div className="space-y-1 min-w-0 flex-1">
                 <p className="text-xs uppercase font-extrabold tracking-widest text-[#D4B76A]">Desk Hours</p>
                 <h3 className="text-base font-semibold text-white">Monday – Saturday</h3>
-                <p className="text-gray-400 text-xs sm:text-sm">
+                <p className="text-gray-300 text-xs sm:text-sm">
                   9:00 AM – 6:00 PM IST (Active during Fest Days)
                 </p>
               </div>
@@ -286,4 +380,3 @@ export default function ContactSection() {
     </section>
   )
 }
-

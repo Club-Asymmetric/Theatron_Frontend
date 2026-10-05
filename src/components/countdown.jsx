@@ -1,6 +1,6 @@
 "use client"
 
-const units: [string, string][] = [
+const units = [
   ["00", "DAYS"],
   ["00", "HOURS"],
   ["00", "MINUTES"],

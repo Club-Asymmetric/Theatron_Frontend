@@ -4,27 +4,20 @@ import Image from "next/image"
 import { useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
-import type { NavItem, SectionId } from "@/types"
 
-const navItems: NavItem[] = [
+const navItems = [
   { name: "HOME", id: "home" },
   { name: "EVENTS", id: "events" },
   { name: "GALLERY", id: "gallery" },
   { name: "CONTACT", id: "contact" },
 ]
 
-export interface NavigationProps {
-  activeSection?: SectionId;
-  onNavigate?: (id: SectionId) => void;
-}
-
-export default function Navigation({ activeSection, onNavigate }: NavigationProps) {
-  const [menuOpen, setMenuOpen] = useState<boolean>(false)
+export default function Navigation({ activeSection, onNavigate }) {
+  const [menuOpen, setMenuOpen] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
 
-  // Determine effective active section from props or pathname
-  const currentSection: SectionId =
+  const currentSection =
     activeSection ||
     (pathname?.includes("events")
       ? "events"
@@ -34,7 +27,7 @@ export default function Navigation({ activeSection, onNavigate }: NavigationProp
       ? "gallery"
       : "home")
 
-  const handleNavigate = (id: SectionId) => {
+  const handleNavigate = (id) => {
     if (onNavigate) {
       onNavigate(id)
     } else {

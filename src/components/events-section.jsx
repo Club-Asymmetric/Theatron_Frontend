@@ -2,9 +2,8 @@
 
 import { useState } from "react"
 import EventCard from "@/components/event-card"
-import type { EventItem } from "@/types"
 
-const competitions: EventItem[] = [
+const competitions = [
   {
     id: 8,
     title: "General Pass",
@@ -79,7 +78,7 @@ const competitions: EventItem[] = [
   },
 ]
 
-const workshops: EventItem[] = [
+const workshops = [
   {
     id: 5,
     title: "General Pass",
@@ -137,7 +136,7 @@ const workshops: EventItem[] = [
 ]
 
 export default function EventsSection() {
-  const [filter, setFilter] = useState<"competition" | "workshop">("competition")
+  const [filter, setFilter] = useState("competition")
 
   const displayedEvents = filter === "competition" ? competitions : workshops
 
@@ -205,4 +204,3 @@ export default function EventsSection() {
     </section>
   )
 }
-
