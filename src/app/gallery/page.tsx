@@ -1,3 +1,5 @@
+"use client"
+
 import Navigation from "@/components/navigation"
 import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"

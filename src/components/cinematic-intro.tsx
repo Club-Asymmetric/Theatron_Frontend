@@ -13,21 +13,20 @@ export interface CinematicIntroProps {
 /**
  * CinematicIntro
  *
- * Implements the continuous 4-state cinematic transition with full TypeScript typing:
- * 1. INTRO_PLAYING:
- *    - Fullscreen video playback rolling actively
- *    - Real-time 60fps rAF + timeupdate monitoring
- *    - Triggers transition when (video.duration - video.currentTime <= 1.5s)
- * 2. INTRO_ENTERING_SCREEN:
- *    - Video CONTINUES PLAYING (never paused, never held)
- *    - Camera zoom pushes into center of theatre screen (scale: 1.0 -> 2.4, origin: 50% 48%)
- *    - Curtains move outward past viewport edges; screen expands to fill viewport
- * 3. INTRO_REVEALING_HOME:
- *    - At 450ms into zoom: video dissolves opacity 1.0 -> 0.0 over 850ms
- *    - THEATRON Home page (already mounted underneath) emerges through the screen
- * 4. INTRO_COMPLETE:
- *    - At 1350ms total: video layer unmounts completely from DOM
- *    - Zero held frames, zero blank screens, unmounts before video reaches final frame
+ * Flawless continuous cinematic push-in transition:
+ * 1. Fullscreen intro video plays continuously.
+ * 2. 1.5s before video ends, the camera smoothly zooms INTO the center of the screen
+ *    ([transform-origin:50%_48%], scale 2.4).
+ * 3. Video opacity dissolves smoothly (1.0 -> 0.0) with Tailwind CSS transitions.
+ * 4. The Home page underneath emerges cleanly into full view.
+ * 5. Video is unmounted cleanly with multiple failsafes:
+ *    - onTransitionEnd event on CSS opacity
+ *    - setTimeout at 1100ms
+ *    - video onEnded event
+ *    - hard safety timeout at 5800ms
+ *    - click or Escape key skip
+ *
+ * Timer cancellation bug is solved by storing parent callbacks in stable useRef hooks.
  */
 export default function CinematicIntro({
   onEnteringScreen,
@@ -36,46 +35,53 @@ export default function CinematicIntro({
   onStateChange,
 }: CinematicIntroProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [introState, setIntroState] = useState<IntroState>('INTRO_PLAYING');
-  const stateRef = useRef<IntroState>('INTRO_PLAYING');
-  const animFrameIdRef = useRef<number | null>(null);
-  const transitionTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const completeTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
+  const [isComplete, setIsComplete] = useState<boolean>(false);
+  const hasTriggeredRef = useRef<boolean>(false);
+  const hasCompletedRef = useRef<boolean>(false);
 
-  // Synchronize state ref for event handlers and callbacks
+  // Stable callback refs so parent re-renders NEVER cancel active timers
+  const onEnteringScreenRef = useRef(onEnteringScreen);
+  const onRevealingHomeRef = useRef(onRevealingHome);
+  const onCompleteRef = useRef(onComplete);
+  const onStateChangeRef = useRef(onStateChange);
+
   useEffect(() => {
-    stateRef.current = introState;
-  }, [introState]);
+    onEnteringScreenRef.current = onEnteringScreen;
+    onRevealingHomeRef.current = onRevealingHome;
+    onCompleteRef.current = onComplete;
+    onStateChangeRef.current = onStateChange;
+  });
 
-  // Master transition trigger: executed BEFORE the video ever reaches its final frame
-  const triggerTransition = useCallback(() => {
-    if (stateRef.current !== 'INTRO_PLAYING') return;
+  // Master unmount function - idempotent, guaranteed to fire once
+  const finishIntro = useCallback(() => {
+    if (hasCompletedRef.current) return;
+    hasCompletedRef.current = true;
+    setIsComplete(true);
+    onStateChangeRef.current?.('INTRO_COMPLETE');
+    onCompleteRef.current?.();
+  }, []);
 
-    stateRef.current = 'INTRO_ENTERING_SCREEN';
-    setIntroState('INTRO_ENTERING_SCREEN');
-    onEnteringScreen?.();
-    onStateChange?.('INTRO_ENTERING_SCREEN');
+  // Trigger continuous zoom and dissolve transition
+  const startTransition = useCallback(() => {
+    if (hasTriggeredRef.current || hasCompletedRef.current) return;
+    hasTriggeredRef.current = true;
 
-    // 450ms into zoom: screen fills viewport; start fading video to reveal Home page
-    transitionTimerRef.current = setTimeout(() => {
-      if (stateRef.current !== 'INTRO_COMPLETE') {
-        stateRef.current = 'INTRO_REVEALING_HOME';
-        setIntroState('INTRO_REVEALING_HOME');
-        onRevealingHome?.();
-        onStateChange?.('INTRO_REVEALING_HOME');
-      }
-    }, 450);
+    setIsTransitioning(true);
+    onEnteringScreenRef.current?.();
+    onStateChangeRef.current?.('INTRO_ENTERING_SCREEN');
 
-    // 1350ms total: transition completes and video unmounts BEFORE the file reaches its end
-    completeTimerRef.current = setTimeout(() => {
-      if (stateRef.current !== 'INTRO_COMPLETE') {
-        stateRef.current = 'INTRO_COMPLETE';
-        setIntroState('INTRO_COMPLETE');
-        onComplete?.();
-        onStateChange?.('INTRO_COMPLETE');
-      }
-    }, 1350);
-  }, [onEnteringScreen, onRevealingHome, onComplete, onStateChange]);
+    // At 300ms: notify Home page is revealing
+    setTimeout(() => {
+      onRevealingHomeRef.current?.();
+      onStateChangeRef.current?.('INTRO_REVEALING_HOME');
+    }, 300);
+
+    // At 1100ms: complete transition and unmount video layer
+    setTimeout(() => {
+      finishIntro();
+    }, 1100);
+  }, [finishIntro]);
 
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
@@ -94,7 +100,7 @@ export default function CinematicIntro({
           console.warn('Autoplay restricted by browser, waiting for user gesture:', err);
 
           const startPlayback = () => {
-            if (videoRef.current && stateRef.current === 'INTRO_PLAYING') {
+            if (videoRef.current && !hasTriggeredRef.current) {
               videoRef.current.play().catch(() => {});
             }
             window.removeEventListener('pointerdown', startPlayback);
@@ -109,90 +115,104 @@ export default function CinematicIntro({
       }
     }
 
-    // High-frequency 60fps monitor to trigger zoom BEFORE the video reaches its end
+    // High-frequency 60fps monitor: trigger zoom BEFORE video reaches its final frame
+    let animFrameId: number;
     const checkProgress = () => {
       const v = videoRef.current;
       if (v && v.duration && v.duration > 0 && v.currentTime > 0) {
         const remaining = v.duration - v.currentTime;
 
-        // When <= 1.5 seconds remain: start camera zoom INTO the screen
-        if (remaining <= 1.5 && stateRef.current === 'INTRO_PLAYING') {
-          triggerTransition();
+        // When <= 1.5 seconds remain: begin zoom and dissolve
+        if (remaining <= 1.5 && !hasTriggeredRef.current) {
+          startTransition();
           return;
         }
       }
 
-      if (stateRef.current === 'INTRO_PLAYING') {
-        animFrameIdRef.current = requestAnimationFrame(checkProgress);
+      if (!hasTriggeredRef.current) {
+        animFrameId = requestAnimationFrame(checkProgress);
       }
     };
 
-    animFrameIdRef.current = requestAnimationFrame(checkProgress);
+    animFrameId = requestAnimationFrame(checkProgress);
 
-    // Fallback timer: Video is 6.2s; trigger transition at 4.8s if rAF or events were delayed
-    const fallbackTimer = setTimeout(() => {
-      if (stateRef.current === 'INTRO_PLAYING') {
-        triggerTransition();
+    // Safety fallback 1: If video is ~6.2s, trigger transition at 4.6s regardless
+    const safetyTransitionTimer = setTimeout(() => {
+      if (!hasTriggeredRef.current) {
+        startTransition();
       }
-    }, 4800);
+    }, 4600);
+
+    // Safety fallback 2: Guaranteed unmount at 5.8s no matter what happens
+    const safetyCompleteTimer = setTimeout(() => {
+      finishIntro();
+    }, 5800);
+
+    // Escape key to skip intro instantly
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' || e.key === ' ') {
+        finishIntro();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      if (animFrameIdRef.current) cancelAnimationFrame(animFrameIdRef.current);
-      clearTimeout(fallbackTimer);
-      if (transitionTimerRef.current) clearTimeout(transitionTimerRef.current);
-      if (completeTimerRef.current) clearTimeout(completeTimerRef.current);
+      cancelAnimationFrame(animFrameId);
+      clearTimeout(safetyTransitionTimer);
+      clearTimeout(safetyCompleteTimer);
+      window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = originalOverflow;
     };
-  }, [triggerTransition]);
+  }, [startTransition, finishIntro]);
 
   // Monitor timeupdate for immediate reaction
   const handleTimeUpdate = () => {
     const v = videoRef.current;
     if (v && v.duration && v.duration > 0 && v.currentTime > 0) {
-      if (v.duration - v.currentTime <= 1.5 && stateRef.current === 'INTRO_PLAYING') {
-        triggerTransition();
+      if (v.duration - v.currentTime <= 1.5 && !hasTriggeredRef.current) {
+        startTransition();
       }
     }
   };
 
+  // If video fires ended, complete immediately
+  const handleEnded = () => {
+    finishIntro();
+  };
+
+  // When CSS opacity reaches 0, unmount immediately
+  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+    if (e.propertyName === 'opacity') {
+      finishIntro();
+    }
+  };
+
   const handleContainerClick = () => {
-    if (videoRef.current && videoRef.current.paused && stateRef.current === 'INTRO_PLAYING') {
+    if (videoRef.current && videoRef.current.paused && !hasTriggeredRef.current) {
       videoRef.current.play().catch(() => {});
     }
   };
 
-  if (introState === 'INTRO_COMPLETE') {
+  if (isComplete) {
     return null;
   }
-
-  const isZooming = introState === 'INTRO_ENTERING_SCREEN' || introState === 'INTRO_REVEALING_HOME';
-  const isFadingOut = introState === 'INTRO_REVEALING_HOME';
 
   return (
     <div
       onClick={handleContainerClick}
-      className="fixed inset-0 w-screen h-screen h-[100dvh] z-[9999] overflow-hidden select-none"
-      style={{
-        margin: 0,
-        padding: 0,
-        border: 'none',
-        pointerEvents: isZooming ? 'none' : 'auto',
-        backgroundColor: 'transparent',
-      }}
+      className={`fixed inset-0 w-screen h-screen h-[100dvh] z-[9999] overflow-hidden select-none bg-black transition-opacity duration-300 ${
+        isTransitioning ? 'pointer-events-none' : 'pointer-events-auto'
+      }`}
       aria-hidden="true"
     >
-      {/* Zoom Container: Centers on cinema screen (50% 48%) and pushes forward into it while video continues playing */}
+      {/* Zoom Container: Centers on cinema screen (50% 48%) and pushes forward into it while dissolving */}
       <div
-        className="w-full h-full relative"
-        style={{
-          transformOrigin: '50% 48%',
-          transform: isZooming ? 'scale(2.4)' : 'scale(1)',
-          opacity: isFadingOut ? 0 : 1,
-          transition: isZooming
-            ? 'transform 1350ms cubic-bezier(0.22, 0.85, 0.3, 1), opacity 850ms ease-out 450ms'
-            : 'none',
-          willChange: 'transform, opacity',
-        }}
+        onTransitionEnd={handleTransitionEnd}
+        className={`w-full h-full relative will-change-[transform,opacity] [transform-origin:50%_48%] ${
+          isTransitioning
+            ? 'scale-[2.4] opacity-0 transition-all duration-[1100ms] [transition-timing-function:cubic-bezier(0.22,0.85,0.3,1)] [transition-delay:0ms,250ms]'
+            : 'scale-100 opacity-100'
+        }`}
       >
         {/* Fullscreen Video: Continues playing through the zoom; no poster, no pause, no static hold */}
         <video
@@ -215,20 +235,26 @@ export default function CinematicIntro({
           disablePictureInPicture
           disableRemotePlayback
           onTimeUpdate={handleTimeUpdate}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center',
-            display: 'block',
-            border: 'none',
-            outline: 'none',
-          }}
+          onEnded={handleEnded}
+          className="w-full h-full object-cover object-center block border-0 outline-none"
         >
           <source src="/theatron-intro-clean.mp4" type="video/mp4" />
           <source src="/intro-video.mp4" type="video/mp4" />
         </video>
       </div>
+
+      {/* Skip button for user convenience */}
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          finishIntro();
+        }}
+        className="absolute top-6 right-6 z-50 text-white/50 hover:text-white text-xs tracking-widest uppercase bg-black/40 hover:bg-black/80 px-4 py-2 rounded-full border border-white/20 transition-all duration-200 pointer-events-auto cursor-pointer"
+        aria-label="Skip Intro"
+      >
+        Skip ✕
+      </button>
     </div>
   );
 }

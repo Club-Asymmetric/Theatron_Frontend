@@ -12,7 +12,7 @@ const navItems = [
   { name: "CONTACT", id: "contact" },
 ]
 
-export default function Navigation({ activeSection, onNavigate }) {
+export default function Navigation({ activeSection = "home", onNavigate = null } = {}) {
   const [menuOpen, setMenuOpen] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
