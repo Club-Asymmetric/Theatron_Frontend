@@ -6,17 +6,21 @@ import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
 import Countdown from "@/components/countdown"
 import Gallery from "@/components/gallery"
+import CinematicIntro from "@/components/cinematic-intro"
 import { ArrowRight, Play, CalendarDays } from "lucide-react"
+import type { IntroState, SectionId } from "@/types"
 
-const sections = ["home", "events", "gallery", "contact"]
+const sections: SectionId[] = ["home", "events", "gallery", "contact"]
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState("home")
+  const [showIntro, setShowIntro] = useState<boolean>(true)
+  const [introState, setIntroState] = useState<IntroState>("INTRO_PLAYING")
+  const [activeSection, setActiveSection] = useState<SectionId>("home")
 
-  const goTo = (id) => setActiveSection(id)
+  const goTo = (id: SectionId) => setActiveSection(id)
 
   useEffect(() => {
-    const onKeyDown = (event) => {
+    const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "ArrowRight") {
         const current = sections.indexOf(activeSection)
         goTo(sections[Math.min(current + 1, sections.length - 1)])
@@ -32,9 +36,25 @@ export default function Home() {
 
   return (
     <main className="theatron-site">
+      {showIntro && (
+        <CinematicIntro
+          onStateChange={setIntroState}
+          onComplete={() => {
+            setShowIntro(false)
+            setIntroState("INTRO_COMPLETE")
+          }}
+        />
+      )}
       <Navigation activeSection={activeSection} onNavigate={goTo} />
 
-      <div className="theatron-screen">
+      <div
+        className="theatron-screen"
+        style={{
+          transform: showIntro && introState === 'INTRO_ENTERING_SCREEN' ? 'scale(0.96)' : 'scale(1)',
+          filter: showIntro && introState === 'INTRO_ENTERING_SCREEN' ? 'blur(3px)' : 'none',
+          transition: showIntro ? 'transform 1000ms cubic-bezier(0.22, 0.85, 0.3, 1), filter 800ms ease-out' : 'none',
+        }}
+      >
         {activeSection === "home" && (
           <section className="theatron-hero" id="home" aria-label="Theatron 2026">
             <div className="theatron-hero-image" />

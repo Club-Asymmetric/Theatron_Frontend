@@ -2,8 +2,9 @@
 
 import { useState } from "react"
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react"
+import type { FilmItem } from "@/types"
 
-const films = Array.from({ length: 6 }, (_, index) => ({
+const films: FilmItem[] = Array.from({ length: 6 }, (_, index) => ({
   src: `/img${index + 1}.jpg`,
   number: String(index + 1).padStart(2, "0"),
   title: [
@@ -16,7 +17,14 @@ const films = Array.from({ length: 6 }, (_, index) => ({
   ][index],
 }))
 
-function FilmImage({ src, alt, className = "", onError }) {
+interface FilmImageProps {
+  src: string;
+  alt: string;
+  className?: string;
+  onError?: () => void;
+}
+
+function FilmImage({ src, alt, className = "", onError }: FilmImageProps) {
   return (
     <img
       src={src}
@@ -28,9 +36,9 @@ function FilmImage({ src, alt, className = "", onError }) {
 }
 
 export default function Gallery() {
-  const [active, setActive] = useState(0)
-  const [lightbox, setLightbox] = useState(false)
-  const [failedImages, setFailedImages] = useState({})
+  const [active, setActive] = useState<number>(0)
+  const [lightbox, setLightbox] = useState<boolean>(false)
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({})
 
   const previous = () => {
     setActive((current) => (current === 0 ? films.length - 1 : current - 1))
@@ -40,11 +48,11 @@ export default function Gallery() {
     setActive((current) => (current === films.length - 1 ? 0 : current + 1))
   }
 
-  const markFailed = (src) => {
+  const markFailed = (src: string) => {
     setFailedImages((current) => ({ ...current, [src]: true }))
   }
 
-  const renderImage = (film, className = "") => {
+  const renderImage = (film: FilmItem, className = "") => {
     if (failedImages[film.src]) {
       return <div className={`gallery-placeholder ${className}`}>IMAGE {film.number}</div>
     }

@@ -1,7 +1,15 @@
 import Link from "next/link"
 import Image from "next/image"
+import type { EventCardProps } from "@/types"
 
-export default function EventCard({ title, description, entryFee, image, highlighted = false, registrationPath }) {
+export default function EventCard({
+  title,
+  description,
+  entryFee,
+  image,
+  highlighted = false,
+  registrationPath,
+}: EventCardProps) {
   return (
     <div
       className={`group cursor-pointer transition ${highlighted ? "border-2 border-red-600" : "border border-gray-700"}`}
