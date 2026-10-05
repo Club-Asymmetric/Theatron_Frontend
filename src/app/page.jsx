@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import Navigation from "@/components/navigation"
-import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
 import Countdown from "@/components/countdown"
 import Gallery from "@/components/gallery"
@@ -35,8 +34,6 @@ export default function Home() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [activeSection])
 
-  const isIntroZooming = introState === "INTRO_ENTERING_SCREEN" || introState === "INTRO_REVEALING_HOME"
-
   return (
     <main className="theatron-site relative min-h-screen bg-black text-white selection:bg-red-800 selection:text-white">
       {/* Cinematic Intro with Tailwind CSS & TypeScript */}
@@ -52,12 +49,12 @@ export default function Home() {
 
       <Navigation activeSection={activeSection} onNavigate={goTo} />
 
-      {/* Main Page Container: Emerges seamlessly with Tailwind CSS transitions */}
+      {/* Main Page Container: Rendered underneath from start, dissolves in smoothly */}
       <div
-        className={`theatron-screen w-full transition-all duration-1000 ease-out ${
-          showIntro && isIntroZooming
-            ? "scale-[0.98] blur-[1px] opacity-95"
-            : "scale-100 blur-none opacity-100"
+        className={`theatron-screen w-full will-change-[opacity,transform] transition-all duration-[900ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)] ${
+          showIntro && introState === "INTRO_PLAYING"
+            ? "opacity-0 scale-[0.99] pointer-events-none"
+            : "opacity-100 scale-100 pointer-events-auto"
         }`}
       >
         {activeSection === "home" && (
@@ -100,8 +97,6 @@ export default function Home() {
               </div>
             </div>
 
-            <Sidebar />
-
             <div className="theatron-venue">
               <span>A THEATRE &amp; CINEMA EXPERIENCE</span>
               <span>CHENNAI INSTITUTE OF TECHNOLOGY</span>
@@ -115,10 +110,9 @@ export default function Home() {
           </section>
         )}
 
-        {/* Events Page from GitHub Repo */}
+        {/* Events Page */}
         {activeSection === "events" && (
           <div className="min-h-screen">
-            <Sidebar />
             <EventsSection />
             <Footer />
           </div>
@@ -132,10 +126,9 @@ export default function Home() {
           </section>
         )}
 
-        {/* Contact Page from GitHub Repo */}
+        {/* Contact Page */}
         {activeSection === "contact" && (
           <div className="min-h-screen">
-            <Sidebar />
             <ContactSection />
             <Footer />
           </div>
@@ -144,3 +137,4 @@ export default function Home() {
     </main>
   )
 }
+

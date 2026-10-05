@@ -1,8 +1,9 @@
 export type IntroState =
   | 'INTRO_PLAYING'
+  | 'INTRO_TRANSITIONING'
+  | 'INTRO_COMPLETE'
   | 'INTRO_ENTERING_SCREEN'
-  | 'INTRO_REVEALING_HOME'
-  | 'INTRO_COMPLETE';
+  | 'INTRO_REVEALING_HOME';
 
 export type SectionId = 'home' | 'events' | 'gallery' | 'contact';
 
