@@ -1,4 +1,4 @@
-import { Poppins } from "next/font/google"
+import { Poppins, Geist } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import Sidebar from "@/components/sidebar"
 import "./globals.css"
@@ -10,6 +10,12 @@ const poppins = Poppins({
   display: "swap",
 })
 
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+  display: "swap",
+})
+
 export const metadata = {
   title: "THEATRON 2026",
   description: "Cinema, theatre and performing arts at Chennai Institute of Technology.",
@@ -17,7 +23,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={poppins.variable}>
+    <html lang="en" className={`${poppins.variable} ${geist.variable}`}>
       <head>
         <link rel="preload" href="/theatron-intro-clean.mp4" as="video" type="video/mp4" />
       </head>
