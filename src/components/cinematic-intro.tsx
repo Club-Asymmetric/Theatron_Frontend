@@ -160,6 +160,7 @@ export default function CinematicIntro({
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = originalOverflow;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array ensures timers are NEVER cancelled by parent re-renders
 
   // Native timeupdate listener for immediate reaction
