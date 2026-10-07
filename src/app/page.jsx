@@ -137,7 +137,7 @@ export default function Home() {
 
         {/* Contact Page */}
         {activeSection === "contact" && (
-          <div className="min-h-screen">
+          <div className="min-h-screen bg-black">
             <ContactSection />
             <Footer />
           </div>
