@@ -1,218 +1,324 @@
 /* =========================================================
-   HEADER / NAVIGATION
+   HEADER / NAVIGATION - GRAND LUXURY & CINEMATIC ELEGANCE
    ========================================================= */
 
 .theatron-nav {
   position: fixed;
   inset: 0 0 auto;
-  z-index: 50;
+  z-index: 100;
+  width: 100%;
 
-  background: #000;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 8, 7, 0.95) 0%,
+    rgba(6, 5, 4, 0.88) 100%
+  );
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(214, 180, 122, 0.22);
+
+  backdrop-filter: blur(24px) saturate(170%);
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
+
+  box-shadow:
+    0 14px 40px -10px rgba(0, 0, 0, 0.88),
+    0 1px 0 0 rgba(214, 180, 122, 0.12),
+    0 0 26px -2px rgba(214, 180, 122, 0.05);
+
+  transition: all 0.35s ease;
+}
+
+/* Regal top ambient refraction hairline */
+.theatron-nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(214, 180, 122, 0.35) 25%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(214, 180, 122, 0.35) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
 }
 
 
 /* =========================================================
-   NAV INNER
+   NAV INNER - GRAND PROPORTIONS & SPACIOUS CLEARANCE
    ========================================================= */
 
 .theatron-nav-inner {
   position: relative;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  min-height: 88px;
-
-  padding: 0 28px;
-  gap: 24px;
+  width: 100%;
+  max-width: 1800px;
+  min-height: 96px;
+  margin: 0 auto;
+  padding: 0 4.5%;
 }
 
 
 /* =========================================================
-   THEATRON BRAND
+   THEATRON BRAND (LEFT) - PROMINENT CINEMATIC LOGO
    ========================================================= */
 
 .theatron-brand {
   display: flex;
   align-items: center;
-  flex: 0 0 auto;
-
-  height: 56px;
+  background: transparent;
+  border: 0;
+  padding: 6px 0;
+  cursor: pointer;
+  outline: none;
 }
-
 
 .theatron-brand-logo {
+  height: 52px;
   width: auto;
-  height: 56px;
-  max-width: 230px;
+  max-width: 260px;
+  object-fit: contain;
 
-  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 14px rgba(220, 38, 38, 0.4));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.35s ease;
 }
 
-
 .theatron-brand:hover .theatron-brand-logo {
-  transform: translateY(-1px);
+  transform: translateY(-2px) scale(1.03);
+  filter: drop-shadow(0 4px 22px rgba(220, 38, 38, 0.65))
+          drop-shadow(0 0 12px rgba(214, 180, 122, 0.25));
 }
 
 
 /* =========================================================
-   COLLABORATION LOGOS
+   COLLABORATION CAPSULE (CENTER) - PRESTIGE BADGE
    ========================================================= */
 
 .theatron-collab {
-  position: static;
-
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex: 1 1 auto;
-
-  gap: 14px;
+  pointer-events: auto;
 }
 
+.theatron-collab-pill {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 9px 26px;
 
-.theatron-collab > span {
-  color: #fff;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
 
-  font-family: "DM Sans", sans-serif;
+  border: 1px solid rgba(214, 180, 122, 0.22);
+  border-radius: 9999px;
 
-  font-size: 18px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 4px 22px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    inset 0 0 14px rgba(214, 180, 122, 0.04);
+
+  transition: all 0.35s ease;
 }
 
-.theatron-collab-mark {
-  width: auto;
-  object-fit: contain;
+.theatron-collab-pill:hover {
+  border-color: rgba(214, 180, 122, 0.45);
+  box-shadow:
+    0 6px 26px rgba(0, 0, 0, 0.65),
+    0 0 18px rgba(214, 180, 122, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .theatron-collab-immerse {
-  height: 36px;
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.theatron-collab-divider {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+
+  color: #d8b979;
+  opacity: 0.9;
+
+  text-shadow: 0 0 8px rgba(214, 180, 122, 0.45);
+  user-select: none;
 }
 
 .theatron-collab-resolution {
-  height: 46px;
-}
-
-
-.theatron-collab-logo {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-}
-
-
-.theatron-collab-logo img {
+  height: 38px;
+  width: auto;
   object-fit: contain;
-
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-
-.theatron-collab-logo:hover img {
+.theatron-collab-pill:hover .theatron-collab-immerse {
   transform: scale(1.04);
+  filter: drop-shadow(0 2px 10px rgba(239, 68, 68, 0.45));
 }
 
-
-.theatron-collab-logo.theatron-collab-immerse {
-  width: 180px;
-}
-
-
-.theatron-collab-logo.theatron-collab-resolution {
-  width: 160px;
+.theatron-collab-pill:hover .theatron-collab-resolution {
+  transform: scale(1.04);
+  filter: drop-shadow(0 2px 10px rgba(255, 255, 255, 0.4));
 }
 
 
 /* =========================================================
-   DESKTOP MENU
+   DESKTOP NAVIGATION MENU (RIGHT)
    ========================================================= */
 
 .theatron-desktop-menu {
   display: flex;
-
   align-items: center;
-  flex: 0 0 auto;
-
-  gap: 4px;
-
-  margin-left: 0;
+  gap: 36px;
+  margin-left: auto;
 }
-
-
-/* =========================================================
-   NAV LINKS
-   ========================================================= */
 
 .theatron-nav-link {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  color: #f5f5f5;
-
-  font-family: "DM Sans", sans-serif;
-
-  font-size: 13px;
-
-  font-weight: 700;
-
-  letter-spacing: 0.12em;
-
-  padding: 9px 14px;
-
-  border-radius: 999px;
-
+  padding: 12px 6px;
+  border: 0;
   background: transparent;
 
-  line-height: 1;
+  color: rgba(244, 234, 213, 0.76);
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 
-  transition:
-    color 0.25s ease,
-    background 0.25s ease;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
+.theatron-nav-link-text {
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
 
-/* =========================================================
-   METALLIC GOLD HOVER LINE
-   ========================================================= */
-
+/* Regal Metallic Gold Active/Hover Underline Indicator */
 .theatron-nav-link::after {
-  display: none;
-}
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
 
+  width: 0;
+  height: 2px;
+  border-radius: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #a98b5d 20%,
+    #f4ead5 50%,
+    #a98b5d 80%,
+    transparent 100%
+  );
+
+  opacity: 0;
+  box-shadow: 0 0 10px rgba(214, 180, 122, 0.6);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.35s ease,
+              box-shadow 0.35s ease;
+}
 
 .theatron-nav-link:hover {
-  color: #fff;
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
+.theatron-nav-link:hover .theatron-nav-link-text {
+  text-shadow: 0 0 14px rgba(214, 180, 122, 0.5);
+}
 
-.theatron-nav-link.is-active,
-.theatron-nav-link.is-active:hover {
-  color: #fff;
-  background: #e10600;
+.theatron-nav-link:hover::after {
+  width: 75%;
+  opacity: 0.85;
+}
+
+/* ACTIVE STATE */
+.theatron-nav-link.is-active {
+  color: #f7eedb;
+  font-weight: 600;
+}
+
+.theatron-nav-link.is-active .theatron-nav-link-text {
+  text-shadow:
+    0 0 14px rgba(214, 180, 122, 0.7),
+    0 0 28px rgba(214, 180, 122, 0.35);
+}
+
+.theatron-nav-link.is-active::after {
+  width: 100%;
+  opacity: 1;
+  box-shadow:
+    0 0 10px rgba(214, 180, 122, 0.9),
+    0 0 22px rgba(214, 180, 122, 0.45);
 }
 
 
 /* =========================================================
-   MOBILE MENU BUTTON
+   MOBILE MENU TOGGLE
    ========================================================= */
 
 .theatron-menu-button {
   display: none;
+  align-items: center;
+  justify-content: center;
 
-  border: 0;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(214, 180, 122, 0.3);
+  border-radius: 10px;
 
-  background: transparent;
-
+  background: rgba(255, 255, 255, 0.04);
   color: var(--cream);
 
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
   cursor: pointer;
+}
+
+.theatron-menu-button:hover {
+  background: rgba(214, 180, 122, 0.12);
+  border-color: rgba(214, 180, 122, 0.6);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(214, 180, 122, 0.28);
 }
 
 
 /* =========================================================
-   MOBILE MENU
+   MOBILE MENU DROPDOWN
    ========================================================= */
 
 .theatron-mobile-menu {
@@ -220,152 +326,128 @@
 }
 
 
-.theatron-mobile-link {
-  position: relative;
-
-  color: rgba(244, 234, 213, 0.72);
-
-  font-family: "DM Sans", sans-serif;
-
-  font-size: 11px;
-
-  font-weight: 700;
-
-  letter-spacing: 0.18em;
-
-  padding-bottom: 6px;
-
-  transition:
-    color 0.25s ease,
-    transform 0.25s ease;
-}
-
-
-.theatron-mobile-link::after {
-  content: "";
-
-  position: absolute;
-
-  left: 50%;
-  bottom: 0;
-
-  width: 0;
-  height: 1px;
-
-  background: linear-gradient(
-    90deg,
-    transparent,
-    #a98b5d,
-    #e0c184,
-    #a98b5d,
-    transparent
-  );
-
-  transform: translateX(-50%);
-
-  opacity: 0;
-
-  transition:
-    width 0.3s ease,
-    opacity 0.3s ease;
-}
-
-
-.theatron-mobile-link:hover {
-  color: var(--gold-light);
-
-  transform: translateY(-1px);
-}
-
-
-.theatron-mobile-link:hover::after {
-  width: 100%;
-
-  opacity: 1;
-}
-
-.theatron-mobile-link.is-active {
-  color: #fff;
-  background: #e10600;
-  border-radius: 999px;
-  padding: 8px 16px;
-}
-
-.theatron-mobile-link.is-active::after {
-  display: none;
-}
-
-
 /* =========================================================
-   TABLET
+   RESPONSIVE BREAKPOINTS
    ========================================================= */
 
-@media (max-width: 1100px) {
+@media (max-width: 1240px) {
+  .theatron-collab-pill {
+    padding: 8px 18px;
+    gap: 16px;
+  }
 
+  .theatron-collab-immerse {
+    height: 24px;
+  }
+
+  .theatron-collab-resolution {
+    height: 32px;
+  }
+
+  .theatron-desktop-menu {
+    gap: 26px;
+  }
+}
+
+@media (max-width: 1060px) {
   .theatron-collab {
     display: none;
   }
-
 }
 
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
 @media (max-width: 768px) {
-
   .theatron-nav-inner {
-    min-height: 88px;
-
+    min-height: 78px;
     padding: 0 22px;
   }
 
-
   .theatron-brand-logo {
-    width: auto;
-
-    height: 56px;
+    height: 44px;
+    max-width: 190px;
   }
-
 
   .theatron-desktop-menu {
     display: none;
   }
 
-
   .theatron-menu-button {
-    display: block;
+    display: flex;
   }
-
 
   .theatron-mobile-menu {
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
+    gap: 18px;
+    padding: 24px 20px 28px;
 
-    gap: 20px;
-
-    padding: 20px;
-
-    background: rgba(7, 6, 5, 0.97);
-
-    border-top: 1px solid var(--line);
+    background: rgba(8, 7, 6, 0.98);
+    border-top: 1px solid rgba(214, 180, 122, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.8);
   }
 
+  .theatron-mobile-link {
+    position: relative;
+    padding: 10px 0;
+    border: 0;
+    background: transparent;
+
+    color: rgba(244, 234, 213, 0.78);
+    font-family: var(--font-poppins), "Poppins", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+
+    transition: color 0.25s ease, transform 0.25s ease;
+  }
+
+  .theatron-mobile-link.is-active {
+    color: #f7eedb;
+    text-shadow: 0 0 14px rgba(214, 180, 122, 0.6);
+  }
+
+  .theatron-mobile-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    border-radius: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      #a98b5d,
+      #f4ead5,
+      #a98b5d,
+      transparent
+    );
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+  }
+
+  .theatron-mobile-link:hover,
+  .theatron-mobile-link.is-active {
+    color: #ffffff;
+  }
+
+  .theatron-mobile-link.is-active::after,
+  .theatron-mobile-link:hover::after {
+    width: 100%;
+    opacity: 1;
+  }
 }
 
-
-/* =========================================================
-   VERY SMALL MOBILE
-   ========================================================= */
-
 @media (max-width: 420px) {
-
   .theatron-nav-inner {
-    padding: 0 20px;
+    padding: 0 16px;
   }
 
+  .theatron-brand-logo {
+    height: 38px;
+    max-width: 150px;
+  }
 }

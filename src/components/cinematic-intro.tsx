@@ -236,6 +236,7 @@ export default function CinematicIntro({
           disableRemotePlayback
           onTimeUpdate={handleTimeUpdate}
           onEnded={handleEnded}
+          onError={handleEnded}
           className="w-full h-full object-cover object-center block border-0 outline-none"
         >
           <source src="/theatron-intro-clean.mp4" type="video/mp4" />

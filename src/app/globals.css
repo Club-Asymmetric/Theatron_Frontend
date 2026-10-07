@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,600&display=swap');
+
+@font-face {
+  font-family: 'Klop';
+  src: url('/klop.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 @import "tailwindcss";
 
@@ -162,15 +170,14 @@ body {
 
 .theatron-nav-link.is-active,
 .theatron-mobile-link.is-active {
-  color: #fff;
-  background: #e10600;
-  border-radius: 999px;
+  color: #f7eedb;
+  font-weight: 600;
 }
 
 .theatron-nav-link.is-active::after,
 .theatron-mobile-link.is-active::after {
-  width: 0;
-  opacity: 0;
+  width: 100%;
+  opacity: 1;
 }
 
 .home-screen,

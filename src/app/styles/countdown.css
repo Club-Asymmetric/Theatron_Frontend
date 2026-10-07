@@ -85,23 +85,24 @@
   display: block;
 
   font-family:
-    "Bebas Neue",
-    "Arial Narrow",
-    Impact,
+    var(--font-poppins),
+    "Poppins",
     sans-serif;
 
-  font-size: clamp(4.2rem, 5vw, 5.8rem);
+  font-size: clamp(3.2rem, 4.2vw, 4.8rem);
 
-  font-weight: 400;
+  font-weight: 700;
 
-  line-height: 0.82;
+  line-height: 0.95;
 
-  letter-spacing: 0.025em;
+  letter-spacing: 0.04em;
+
+  font-variant-numeric: tabular-nums;
 
   color: #eee2c9;
 
   text-shadow:
-    0 0 18px rgba(190, 156, 94, 0.08);
+    0 0 18px rgba(190, 156, 94, 0.12);
 
   transition:
     color 0.3s ease,
@@ -130,20 +131,21 @@
   margin-top: 12px;
 
   font-family:
-    "DM Sans",
+    var(--font-poppins),
+    "Poppins",
     sans-serif;
 
-  font-size: 8px;
+  font-size: 9.5px;
 
   font-weight: 600;
 
   line-height: 1;
 
-  letter-spacing: 0.27em;
+  letter-spacing: 0.28em;
 
   text-transform: uppercase;
 
-  color: rgba(238, 228, 207, 0.48);
+  color: rgba(238, 228, 207, 0.52);
 
   transition:
     color 0.3s ease,

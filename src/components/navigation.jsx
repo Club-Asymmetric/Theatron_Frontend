@@ -60,9 +60,23 @@ export default function Navigation({ activeSection = "home", onNavigate = null }
         </button>
 
         <div className="theatron-collab" aria-label="Immerse and Resolution">
-          <Image src="/Immerse_logo.png" alt="Immerse" width={230} height={72} className="theatron-collab-mark theatron-collab-immerse" />
-          <span>×</span>
-          <Image src="/Resolution_logo.png" alt="Resolution" width={170} height={64} className="theatron-collab-mark theatron-collab-resolution" />
+          <div className="theatron-collab-pill">
+            <Image
+              src="/Immerse_logo.png"
+              alt="Immerse"
+              width={220}
+              height={32}
+              className="theatron-collab-immerse"
+            />
+            <span className="theatron-collab-divider">✕</span>
+            <Image
+              src="/Resolution_logo.png"
+              alt="Resolution"
+              width={80}
+              height={42}
+              className="theatron-collab-resolution"
+            />
+          </div>
         </div>
 
         <div className="theatron-desktop-menu">
@@ -73,7 +87,7 @@ export default function Navigation({ activeSection = "home", onNavigate = null }
               className={`theatron-nav-link cursor-pointer ${currentSection === item.id ? "is-active" : ""}`}
               onClick={() => handleNavigate(item.id)}
             >
-              {item.name}
+              <span className="theatron-nav-link-text">{item.name}</span>
             </button>
           ))}
         </div>
@@ -85,7 +99,7 @@ export default function Navigation({ activeSection = "home", onNavigate = null }
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
         >
-          {menuOpen ? <X size={25} /> : <Menu size={25} />}
+          {menuOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
       </div>
 
@@ -98,7 +112,7 @@ export default function Navigation({ activeSection = "home", onNavigate = null }
               onClick={() => handleNavigate(item.id)}
               className={`theatron-mobile-link cursor-pointer ${currentSection === item.id ? "is-active" : ""}`}
             >
-              {item.name}
+              <span className="theatron-nav-link-text">{item.name}</span>
             </button>
           ))}
         </div>

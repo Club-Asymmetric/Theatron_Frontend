@@ -1,108 +1,305 @@
+/* =========================================================
+   FOOTER - HIGH-END CINEMATIC FESTIVAL FOOTER
+   ========================================================= */
+
 .theatron-footer {
   width: 100%;
-  background: #070605;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 48px 6% 40px;
+  position: relative;
+  background: linear-gradient(180deg, #0a0807 0%, #050403 100%);
+  border-top: 1px solid rgba(214, 180, 122, 0.20);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  padding: 60px 5% 42px;
+}
+
+.theatron-footer-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .theatron-footer-grid {
-  max-width: 1180px;
-  margin: 0 auto 28px;
   display: grid;
-  grid-template-columns: 1fr 1.4fr 1fr;
-  gap: 32px;
+  grid-template-columns: 1.2fr 1.6fr 1.2fr;
+  gap: 36px;
   align-items: center;
 }
+
+/* =========================================================
+   COLUMN 1: CREATED BY
+   ========================================================= */
 
 .theatron-footer-created {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
 }
 
-.theatron-footer-created p,
-.theatron-footer-created span {
-  margin: 0;
-  font-family: "DM Sans", sans-serif;
-  color: rgba(244, 234, 213, 0.55);
-  font-size: 11px;
-  font-weight: 500;
+.theatron-footer-kicker {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
+  color: rgba(244, 234, 213, 0.52);
 }
 
-.theatron-footer-created img {
-  width: 54px;
-  height: 54px;
-  margin: 0;
-  object-fit: contain;
-  object-position: left center;
+.theatron-footer-brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
+
+.theatron-footer-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 10px rgba(255, 255, 255, 0.22));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.theatron-footer-brand-lockup:hover .theatron-footer-logo {
+  transform: scale(1.06);
+  filter: drop-shadow(0 4px 16px rgba(255, 255, 255, 0.4));
+}
+
+.theatron-footer-asymmetric-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.theatron-footer-asymmetric-name {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #f7eedb;
+  text-transform: uppercase;
+}
+
+.theatron-footer-asymmetric-sub {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 10px;
+  color: rgba(244, 234, 213, 0.45);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   COLUMN 2: CENTER PRESENTERS
+   ========================================================= */
 
 .theatron-footer-center {
   text-align: center;
-}
-
-.theatron-footer-brand {
-  margin: 0 0 8px;
-  font-family: "DM Sans", sans-serif;
-  color: #e10600;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-}
-
-.theatron-footer-center p:last-child,
-.theatron-footer-right p {
-  margin: 0;
-  font-family: "DM Sans", sans-serif;
-  color: rgba(244, 234, 213, 0.62);
-  font-size: 12px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-}
-
-.theatron-footer-right {
-  text-align: right;
-}
-
-.theatron-footer-divider {
-  max-width: 1180px;
-  height: 1px;
-  margin: 0 auto 22px;
-  background: linear-gradient(90deg, transparent, #e10600 12%, #e10600 88%, transparent);
-}
-
-.theatron-footer-contact {
-  max-width: 1180px;
-  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  font-family: "DM Sans", sans-serif;
-  color: rgba(244, 234, 213, 0.78);
-  font-size: 13px;
-}
-
-.theatron-footer-contact div {
-  display: flex;
-  gap: 10px;
+  flex-direction: column;
   align-items: center;
 }
 
-.theatron-footer-contact span {
-  color: rgba(244, 234, 213, 0.42);
+.theatron-footer-presenters {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.theatron-footer-presenter-badge {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #e10600;
+  text-shadow: 0 0 16px rgba(225, 6, 0, 0.35);
+}
+
+.theatron-footer-presenter-cross {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: #d8b979;
+  text-shadow: 0 0 8px rgba(214, 180, 122, 0.4);
+}
+
+.theatron-footer-institution {
+  margin: 0;
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  color: rgba(244, 234, 213, 0.72);
+}
+
+.theatron-footer-tag {
+  margin: 4px 0 0;
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244, 234, 213, 0.45);
+}
+
+/* =========================================================
+   COLUMN 3: RIGHT COPYRIGHT & LEGAL
+   ========================================================= */
+
+.theatron-footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.theatron-footer-copyright {
+  margin: 0;
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
   letter-spacing: 0.16em;
+  color: #f7eedb;
+  text-transform: uppercase;
+}
+
+.theatron-footer-rights {
+  margin: 4px 0 0;
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(244, 234, 213, 0.45);
+}
+
+.theatron-footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.theatron-footer-legal-link {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
   font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244, 234, 213, 0.55);
+  transition: color 0.25s ease;
 }
 
-.theatron-footer-contact a {
-  transition: color 0.2s ease;
+.theatron-footer-legal-link:hover {
+  color: #d8b979;
 }
 
-.theatron-footer-contact a:hover {
-  color: #fff;
+.theatron-footer-legal-dot {
+  color: rgba(214, 180, 122, 0.4);
+  font-size: 12px;
+}
+
+/* =========================================================
+   REGAL METALLIC DIVIDER
+   ========================================================= */
+
+.theatron-footer-divider {
+  width: 100%;
+  height: 1px;
+  margin: 32px 0 24px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(214, 180, 122, 0.28) 25%,
+    rgba(225, 6, 0, 0.45) 50%,
+    rgba(214, 180, 122, 0.28) 75%,
+    transparent 100%
+  );
+}
+
+/* =========================================================
+   BOTTOM BAR: CONTACT & SOCIAL
+   ========================================================= */
+
+.theatron-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.theatron-footer-contacts {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.theatron-footer-contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: rgba(244, 234, 213, 0.78);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.theatron-footer-contact-item:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.theatron-footer-instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(225, 6, 0, 0.08);
+  border: 1px solid rgba(225, 6, 0, 0.25);
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(244, 234, 213, 0.85);
+  transition: all 0.3s ease;
+}
+
+.theatron-footer-instagram:hover {
+  background: rgba(225, 6, 0, 0.18);
+  border-color: rgba(225, 6, 0, 0.5);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(225, 6, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   RESPONSIVE FOOTER
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .theatron-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .theatron-footer-created,
+  .theatron-footer-right {
+    align-items: center;
+    text-align: center;
+  }
+
+  .theatron-footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .theatron-footer-contacts {
+    justify-content: center;
+    gap: 20px;
+  }
 }
