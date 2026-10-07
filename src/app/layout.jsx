@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import Sidebar from "@/components/sidebar"
 import "./globals.css"
 
 const geist = Geist({ subsets: ["latin"] })
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <link rel="preload" href="/theatron-intro-clean.mp4" as="video" type="video/mp4" />
       </head>
       <body className={`${geist.className} ${geistMono.variable} bg-black text-white antialiased`}>
+        <Sidebar />
         {children}
         <Analytics />
       </body>

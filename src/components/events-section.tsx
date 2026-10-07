@@ -142,10 +142,6 @@ export default function EventsSection() {
 
   return (
     <section className="relative z-10 pt-32 pb-20 px-4 sm:px-8 max-w-7xl mx-auto">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)] pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)] pointer-events-none" />
-
       {/* Header */}
       <div className="text-center mb-16 relative z-10">
         <p className="text-red-600 text-xs tracking-widest mb-4">CHOOSE YOUR CATEGORY</p>

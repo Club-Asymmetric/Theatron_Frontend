@@ -7,11 +7,9 @@
   inset: 0 0 auto;
   z-index: 50;
 
-  background: rgba(6, 6, 5, 0.82);
+  background: #000;
 
-  border-bottom: 1px solid rgba(214, 180, 122, 0.16);
-
-  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 
@@ -26,9 +24,10 @@
   align-items: center;
   justify-content: space-between;
 
-  min-height: 80px;
+  min-height: 88px;
 
-  padding: 0 5%;
+  padding: 0 28px;
+  gap: 24px;
 }
 
 
@@ -39,12 +38,17 @@
 .theatron-brand {
   display: flex;
   align-items: center;
+  flex: 0 0 auto;
 
-  height: 50px;
+  height: 56px;
 }
 
 
 .theatron-brand-logo {
+  width: auto;
+  height: 56px;
+  max-width: 230px;
+
   transition: transform 0.3s ease;
 }
 
@@ -59,25 +63,36 @@
    ========================================================= */
 
 .theatron-collab {
-  position: absolute;
-
-  left: 50%;
-
-  transform: translateX(-50%);
+  position: static;
 
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
 
-  gap: 18px;
+  gap: 14px;
 }
 
 
 .theatron-collab > span {
-  color: var(--gold);
+  color: #fff;
 
   font-family: "DM Sans", sans-serif;
 
-  font-size: 16px;
+  font-size: 18px;
+}
+
+.theatron-collab-mark {
+  width: auto;
+  object-fit: contain;
+}
+
+.theatron-collab-immerse {
+  height: 36px;
+}
+
+.theatron-collab-resolution {
+  height: 46px;
 }
 
 
@@ -101,13 +116,13 @@
 }
 
 
-.theatron-collab-immerse {
-  width: 120px;
+.theatron-collab-logo.theatron-collab-immerse {
+  width: 180px;
 }
 
 
-.theatron-collab-resolution {
-  width: 110px;
+.theatron-collab-logo.theatron-collab-resolution {
+  width: 160px;
 }
 
 
@@ -119,10 +134,11 @@
   display: flex;
 
   align-items: center;
+  flex: 0 0 auto;
 
-  gap: 30px;
+  gap: 4px;
 
-  margin-left: auto;
+  margin-left: 0;
 }
 
 
@@ -133,21 +149,27 @@
 .theatron-nav-link {
   position: relative;
 
-  color: rgba(244, 234, 213, 0.70);
+  color: #f5f5f5;
 
   font-family: "DM Sans", sans-serif;
 
-  font-size: 14px;
+  font-size: 13px;
 
   font-weight: 700;
 
-  letter-spacing: 0.19em;
+  letter-spacing: 0.12em;
 
-  padding-bottom: 8px;
+  padding: 9px 14px;
+
+  border-radius: 999px;
+
+  background: transparent;
+
+  line-height: 1;
 
   transition:
     color 0.25s ease,
-    transform 0.25s ease;
+    background 0.25s ease;
 }
 
 
@@ -156,46 +178,19 @@
    ========================================================= */
 
 .theatron-nav-link::after {
-  content: "";
-
-  position: absolute;
-
-  left: 50%;
-  bottom: 0;
-
-  width: 0;
-  height: 1px;
-
-  background: linear-gradient(
-    90deg,
-    transparent,
-    #a98b5d,
-    #e0c184,
-    #a98b5d,
-    transparent
-  );
-
-  transform: translateX(-50%);
-
-  opacity: 0;
-
-  transition:
-    width 0.3s ease,
-    opacity 0.3s ease;
+  display: none;
 }
 
 
 .theatron-nav-link:hover {
-  color: var(--gold-light);
-
-  transform: translateY(-1px);
+  color: #fff;
 }
 
 
-.theatron-nav-link:hover::after {
-  width: 100%;
-
-  opacity: 1;
+.theatron-nav-link.is-active,
+.theatron-nav-link.is-active:hover {
+  color: #fff;
+  background: #e10600;
 }
 
 
@@ -289,6 +284,17 @@
   opacity: 1;
 }
 
+.theatron-mobile-link.is-active {
+  color: #fff;
+  background: #e10600;
+  border-radius: 999px;
+  padding: 8px 16px;
+}
+
+.theatron-mobile-link.is-active::after {
+  display: none;
+}
+
 
 /* =========================================================
    TABLET
@@ -310,16 +316,16 @@
 @media (max-width: 768px) {
 
   .theatron-nav-inner {
-    min-height: 70px;
+    min-height: 88px;
 
     padding: 0 22px;
   }
 
 
   .theatron-brand-logo {
-    width: 125px;
+    width: auto;
 
-    height: 44px;
+    height: 56px;
   }
 
 

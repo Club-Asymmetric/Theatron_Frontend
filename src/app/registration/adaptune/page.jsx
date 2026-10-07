@@ -1,6 +1,5 @@
 "use client"
 import Navigation from "@/components/navigation"
-import Sidebar from "@/components/sidebar"
 import Footer from "@/components/footer"
 
 export default function GeneralPass() {
@@ -8,7 +7,6 @@ export default function GeneralPass() {
     <main className="bg-black text-white min-h-screen relative">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)]"></div>
       <Navigation />
-      <Sidebar />
 
       <section className="pt-32 pb-20 px-8 relative">
         <div className="max-w-2xl mx-auto text-center">

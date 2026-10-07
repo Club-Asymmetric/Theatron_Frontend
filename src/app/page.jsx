@@ -4,7 +4,8 @@ import { useEffect, useState } from "react"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import Countdown from "@/components/countdown"
-import Gallery from "@/components/gallery"
+import PhotoGallery from "@/components/photo-gallery"
+import HomeAbout from "@/components/home-about"
 import EventsSection from "@/components/events-section"
 import ContactSection from "@/components/contact-section"
 import CinematicIntro from "@/components/cinematic-intro"
@@ -58,6 +59,7 @@ export default function Home() {
         }`}
       >
         {activeSection === "home" && (
+          <>
           <section className="theatron-hero" id="home" aria-label="Theatron 2026">
             <div className="theatron-hero-image" />
             <div className="theatron-hero-vignette" />
@@ -108,11 +110,16 @@ export default function Home() {
               <span>06</span>
             </div>
           </section>
+          <HomeAbout onRegister={() => goTo("events")} />
+          <Footer />
+          </>
         )}
 
         {/* Events Page */}
         {activeSection === "events" && (
-          <div className="min-h-screen">
+          <div className="relative min-h-screen overflow-x-hidden bg-gradient-to-br from-black via-zinc-900 to-black">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)]" />
             <EventsSection />
             <Footer />
           </div>
@@ -120,10 +127,12 @@ export default function Home() {
 
         {/* Gallery */}
         {activeSection === "gallery" && (
-          <section className="gallery-screen" id="gallery">
-            <Gallery />
+          <div className="relative min-h-screen overflow-x-hidden bg-black">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,0,0.25),transparent_60%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05),transparent_70%)]" />
+            <PhotoGallery />
             <Footer />
-          </section>
+          </div>
         )}
 
         {/* Contact Page */}

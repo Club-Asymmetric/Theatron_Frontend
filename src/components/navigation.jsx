@@ -50,19 +50,19 @@ export default function Navigation({ activeSection = "home", onNavigate = null }
           aria-label="Go to Theatron home"
         >
           <Image
-            src="/Theatron_Logo.png"
-            alt="Theatron"
-            width={150}
-            height={50}
+            src="/theatron-double-x.png"
+            alt="Theatron Double X"
+            width={986}
+            height={263}
             priority
             className="theatron-brand-logo"
           />
         </button>
 
         <div className="theatron-collab" aria-label="Immerse and Resolution">
-          <Image src="/Immerse_logo.png" alt="Immerse" width={150} height={50} />
+          <Image src="/Immerse_logo.png" alt="Immerse" width={230} height={72} className="theatron-collab-mark theatron-collab-immerse" />
           <span>×</span>
-          <Image src="/Resolution_logo.png" alt="Resolution" width={100} height={40} />
+          <Image src="/Resolution_logo.png" alt="Resolution" width={170} height={64} className="theatron-collab-mark theatron-collab-resolution" />
         </div>
 
         <div className="theatron-desktop-menu">
