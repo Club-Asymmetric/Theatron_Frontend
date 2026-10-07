@@ -5,15 +5,6 @@ import EventCard from "@/components/event-card"
 
 const competitions = [
   {
-    id: 8,
-    title: "General Pass",
-    description:
-      "Exclusive entry pass for CIT students to access all on-campus events. Only valid for students with a @citchennai.net email address. Grab your pass and be part of the excitement!",
-    entryFee: "₹89",
-    image: "/general-pass.jpg",
-    registrationPath: "/registration/general-pass",
-  },
-  {
     id: 1,
     title: "Graphics Grid",
     description:
@@ -45,18 +36,9 @@ const competitions = [
     title: "CinePlus",
     description:
       "Craft short films that blend emotion, vision, and storytelling brilliance. From scripting to direction, bring your imagination to life on screen. Let your creativity shape narratives that touch hearts and inspire audiences.",
-    entryFee: "₹149",
+    entryFee: "₹99",
     image: "/cine-pulse.jpg",
     registrationPath: "/registration/cineplus",
-  },
-  {
-    id: 5,
-    title: "TrailCut",
-    description:
-      "Master the precision of cinematic editing. Create thrilling trailers that captivate viewers with energy and rhythm. Every second counts—craft motion, mood, and momentum that leaves audiences eager for more, celebrating true cinematic brilliance.",
-    entryFee: "₹150",
-    image: "/trailer-cut.jpg",
-    registrationPath: "/registration/trail-cut",
   },
   {
     id: 6,
@@ -76,24 +58,33 @@ const competitions = [
     image: "/quiz.jpg",
     registrationPath: "/registration/quizcorn",
   },
+  {
+    id: 9,
+    title: "Brainstorm",
+    description:
+      "Develop a unique logline into a structured screenplay and turn an idea into a compelling cinematic story.",
+    entryFee: "₹99",
+    image: "/scriptwriting-draft.png",
+    registrationPath: "/registration/brainstorm",
+  },
+  {
+    id: 10,
+    title: "Debate",
+    description:
+      "Teams of four tackle topics revealed on the spot, testing knowledge, spontaneity, and communication.",
+    entryFee: "₹99",
+    image: "/stage-play.jpg",
+    registrationPath: "/registration/debate",
+  },
 ]
 
 const workshops = [
-  {
-    id: 5,
-    title: "General Pass",
-    description:
-      "Exclusive entry pass for CIT students to access all on-campus events. Only valid for students with a @citchennai.net email address. Grab your pass and be part of the excitement!",
-    entryFee: "₹89",
-    image: "/general-pass.jpg",
-    registrationPath: "/registration/general-pass",
-  },
   {
     id: 1,
     title: "Script Writing",
     description:
       "Discover the fundamentals of cinematic storytelling. Learn to craft original scripts with compelling plots, powerful characters, and natural dialogue. Turn your creative thoughts into scripts ready for the big screen.",
-    entryFee: "₹150",
+    entryFee: "₹99",
     image: "/scriptwriting-draft.png",
     registrationPath: "/registration/script-writing",
   },
@@ -111,27 +102,27 @@ const workshops = [
     title: "Dance Workshop",
     description:
       "Move to the rhythm and express yourself through dance! Join our workshop to learn choreography, stage presence, and performance techniques from talented instructors. Perfect for beginners and enthusiasts alike.",
-    entryFee: "₹199",
+    entryFee: "₹99",
     image: "/danceworkshop.jpg",
     registrationPath: "/registration/dance-workshop",
   },
   {
-    id: 4,
-    title: "Blender Workshop",
+    id: 7,
+    title: "VFX and Editing",
     description:
-      "Unleash your creativity with Blender! Dive into 3D modeling, animation, and rendering using the industry’s favorite open-source tool. Learn to design, animate, and bring your ideas to life with professional techniques.",
+      "Transform creative ideas into captivating visual stories through the art of VFX and video editing.",
     entryFee: "₹99",
-    image: "/blender.jpg",
-    registrationPath: "/registration/Blender_",
+    image: "/cine-pulse.jpg",
+    registrationPath: "/registration/vfx-and-editing",
   },
   {
-    id: 6,
-    title: "Modeling Workshop",
+    id: 8,
+    title: "Storyboard",
     description:
-      "Unleash your creativity in our hands-on fashion workshop — learn, design, and bring your style ideas to life!",
-    entryFee: "₹199",
-    image: "/model.jpg",
-    registrationPath: "/registration/modeling-workshop",
+      "Visualize scripts through shot composition, camera angles, framing, and scene-by-scene planning.",
+    entryFee: "₹99",
+    image: "/scriptwriting-draft.png",
+    registrationPath: "/registration/storyboard",
   },
 ]
 
