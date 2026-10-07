@@ -6,7 +6,6 @@ import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 
 const FEE = 99
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://theatron-backend.onrender.com"
 
 const inputClass =
   "w-full rounded border border-gray-700 bg-gray-900 px-4 py-3 text-white outline-none transition focus:border-red-600"
@@ -227,7 +226,7 @@ export default function RegistrationForm({ event }) {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch(`${API_URL}/payment/get_order`, {
+      const response = await fetch("/api/payment/get_order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -257,7 +256,7 @@ export default function RegistrationForm({ event }) {
         theme: { color: "#e10600" },
         handler: async (payment) => {
           try {
-            const verificationResponse = await fetch(`${API_URL}/payment/verify`, {
+            const verificationResponse = await fetch("/api/payment/verify", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
