@@ -66,6 +66,10 @@ export default function Home() {
             <div className="theatron-hero-grain" />
 
             <div className="theatron-hero-content">
+              <div className="theatron-kicker">
+                <span className="theatron-kicker-dot" />
+                <span>A THEATRE &amp; CINEMA EXPERIENCE</span>
+              </div>
               <h1 className="theatron-title">THEATRON</h1>
               <p className="theatron-year">2026</p>
 
