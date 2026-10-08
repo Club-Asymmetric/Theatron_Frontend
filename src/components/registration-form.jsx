@@ -218,7 +218,8 @@ export default function RegistrationForm({ event }) {
       setError(validationError)
       return
     }
-    if (!process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || (!isRazorpayReady && !window.Razorpay)) {
+    const razorpayKey = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_live_RXQAxkawOc5Qfn"
+    if (!razorpayKey || (!isRazorpayReady && !window.Razorpay)) {
       setError("Payment checkout is still loading. Please try again in a moment.")
       return
     }
@@ -260,7 +261,7 @@ export default function RegistrationForm({ event }) {
       }
 
       const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        key: razorpayKey,
         amount: order.amount,
         currency: order.currency || "INR",
         name: "THEATRON 2026",
