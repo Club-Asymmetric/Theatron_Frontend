@@ -218,7 +218,7 @@ export default function RegistrationForm({ event }) {
       setError(validationError)
       return
     }
-    if (!process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || !isRazorpayReady || !window.Razorpay) {
+    if (!process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || (!isRazorpayReady && !window.Razorpay)) {
       setError("Payment checkout is still loading. Please try again in a moment.")
       return
     }
@@ -226,19 +226,33 @@ export default function RegistrationForm({ event }) {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch("/api/payment/get_order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          event,
-          amount: FEE,
-          currency: "INR",
-          receipt: `${event}_${Date.now()}`,
-        }),
-      })
+      const orderPayload = {
+        event,
+        amount: FEE,
+        currency: "INR",
+        receipt: `${event}_${Date.now()}`,
+      }
+
+      let response
+      try {
+        response = await fetch("/api/payment/get_order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(orderPayload),
+        })
+      } catch (localFetchErr) {
+        // Fallback to direct backend call if local Next.js proxy route is unavailable
+        const backendUrl = process.env.NEXT_PUBLIC_API_URL || "https://theatron-backend.onrender.com"
+        response = await fetch(`${backendUrl}/payment/get_order`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(orderPayload),
+        })
+      }
+
       if (!response.ok) {
         const body = await response.json().catch(() => ({}))
-        throw new Error(body.message || "Unable to create the payment order.")
+        throw new Error(body.error || body.message || "Unable to create the payment order.")
       }
       const order = await response.json()
       if (!order.id) {
@@ -256,17 +270,30 @@ export default function RegistrationForm({ event }) {
         theme: { color: "#e10600" },
         handler: async (payment) => {
           try {
-            const verificationResponse = await fetch("/api/payment/verify", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                event,
-                ...formData,
-                razorpay_payment_id: payment.razorpay_payment_id,
-                razorpay_order_id: payment.razorpay_order_id,
-                razorpay_signature: payment.razorpay_signature,
-              }),
-            })
+            const verifyPayload = {
+              event,
+              ...formData,
+              razorpay_payment_id: payment.razorpay_payment_id,
+              razorpay_order_id: payment.razorpay_order_id,
+              razorpay_signature: payment.razorpay_signature,
+            }
+
+            let verificationResponse
+            try {
+              verificationResponse = await fetch("/api/payment/verify", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(verifyPayload),
+              })
+            } catch (localVerifyErr) {
+              const backendUrl = process.env.NEXT_PUBLIC_API_URL || "https://theatron-backend.onrender.com"
+              verificationResponse = await fetch(`${backendUrl}/payment/verify`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(verifyPayload),
+              })
+            }
+
             const verificationBody = await verificationResponse.json().catch(() => ({}))
             if (verificationResponse.status === 401) {
               throw new Error("Payment verification failed. If money was deducted, please contact the organizers.")
@@ -275,10 +302,10 @@ export default function RegistrationForm({ event }) {
               throw new Error("This payment has already been registered.")
             }
             if (verificationResponse.status === 400) {
-              throw new Error(verificationBody.message || "Please check your registration details.")
+              throw new Error(verificationBody.error || verificationBody.message || "Please check your registration details.")
             }
             if (!verificationResponse.ok || !verificationBody.success) {
-              throw new Error("Payment verification failed. Please contact the organizers.")
+              throw new Error(verificationBody.error || verificationBody.message || "Payment verification failed. Please contact the organizers.")
             }
             setSuccess({
               registrationId: verificationBody.registrationId,
@@ -286,7 +313,12 @@ export default function RegistrationForm({ event }) {
               message: verificationBody.message,
             })
           } catch (verificationError) {
-            setError(verificationError.message || "Payment verification failed. Please contact the organizers.")
+            const msg = verificationError.message || ""
+            if (msg.includes("Failed to fetch")) {
+              setError("Payment verification could not reach the server. If money was deducted, please contact the organizers.")
+            } else {
+              setError(msg || "Payment verification failed. Please contact the organizers.")
+            }
           } finally {
             setIsSubmitting(false)
           }
@@ -298,9 +330,15 @@ export default function RegistrationForm({ event }) {
           },
         },
       }
-      new window.Razorpay(options).open()
+      const razorpayInstance = new window.Razorpay(options)
+      razorpayInstance.open()
     } catch (paymentError) {
-      setError(paymentError.message || "A network error prevented payment from starting.")
+      const msg = paymentError.message || ""
+      if (msg.includes("Failed to fetch")) {
+        setError("Unable to connect to the payment server. The backend server may be waking up (Render cold-start)—please wait a few seconds and try again.")
+      } else {
+        setError(msg || "A network error prevented payment from starting.")
+      }
       setIsSubmitting(false)
     }
   }
