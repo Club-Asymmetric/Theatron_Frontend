@@ -218,7 +218,7 @@ export default function RegistrationForm({ event }) {
       setError(validationError)
       return
     }
-    const razorpayKey = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_live_RXQAxkawOc5Qfn"
+    const razorpayKey = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID
     if (!razorpayKey || (!isRazorpayReady && !window.Razorpay)) {
       setError("Payment checkout is still loading. Please try again in a moment.")
       return
