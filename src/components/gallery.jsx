@@ -3,17 +3,10 @@
 import { useState } from "react"
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react"
 
-const films = Array.from({ length: 6 }, (_, index) => ({
-  src: `/img${index + 1}.jpg`,
+const films = Array.from({ length: 18 }, (_, index) => ({
+  src: index < 12 ? `/img${index + 1}.jpg` : `/img${index + 1}.jpeg`,
   number: String(index + 1).padStart(2, "0"),
-  title: [
-    "THEATRON 2025",
-    "THEATRON 2025",
-    "THEATRON 2025",
-    "THEATRON 2025",
-    "THEATRON 2025",
-    "THEATRON 2025",
-  ][index],
+  title: "THEATRON 2025",
 }))
 
 function FilmImage({ src, alt, className = "", onError }) {
@@ -76,7 +69,7 @@ export default function Gallery() {
         <div className="gallery-index">
           <strong>{current.number}</strong>
           <i />
-          <span>06</span>
+          <span>18</span>
         </div>
       </div>
 
