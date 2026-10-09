@@ -6,8 +6,6 @@ const images = [
   { id: 5, src: "/img5.jpg", alt: "Gallery moment 5" },
   { id: 6, src: "/img6.jpg", alt: "Gallery moment 6" },
   { id: 7, src: "/img7.jpg", alt: "Gallery moment 7" },
-  { id: 8, src: "/img8.jpg", alt: "Gallery moment 8" },
-  { id: 9, src: "/img9.jpg", alt: "Gallery moment 9" },
   { id: 10, src: "/img10.jpg", alt: "Gallery moment 10" },
   { id: 11, src: "/img11.jpg", alt: "Gallery moment 11" },
   { id: 12, src: "/img12.jpg", alt: "Gallery moment 12" },
