@@ -10,6 +10,7 @@ export default function Countdown() {
     days: 0,
     hours: 0,
     minutes: 0,
+    seconds: 0,
   })
 
   useEffect(() => {
@@ -23,14 +24,15 @@ export default function Countdown() {
           days: Math.floor(distance / (1000 * 60 * 60 * 24)),
           hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
           minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((distance % (1000 * 60)) / 1000),
         })
       } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0 })
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
       }
     }
 
     updateTimer()
-    const interval = setInterval(updateTimer, 60000)
+    const interval = setInterval(updateTimer, 1000)
 
     return () => clearInterval(interval)
   }, [])
@@ -41,6 +43,7 @@ export default function Countdown() {
     [isMounted ? pad(timeLeft.days) : "00", "DAYS"],
     [isMounted ? pad(timeLeft.hours) : "00", "HOURS"],
     [isMounted ? pad(timeLeft.minutes) : "00", "MINUTES"],
+    [isMounted ? pad(timeLeft.seconds) : "00", "SECONDS"],
   ]
 
   return (
