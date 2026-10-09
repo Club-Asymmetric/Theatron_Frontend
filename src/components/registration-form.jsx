@@ -5,8 +5,6 @@ import { useMemo, useState } from "react"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 
-const FEE = 99
-
 const inputClass =
   "w-full rounded border border-gray-700 bg-gray-900 px-4 py-3 text-white outline-none transition focus:border-red-600"
 
@@ -49,6 +47,7 @@ const eventDetails = {
     title: "Adaptune",
     category: "Dance competition",
     description: "Adapt your moves to randomly changing songs and showcase your spontaneity and versatility.",
+    extra: "adaptuneTeam",
     contacts: ["Deepika: +91 97890 62268"],
   },
   brainstorm: {
@@ -147,7 +146,7 @@ export default function RegistrationForm({ event }) {
     college: "",
     department: "",
     year: "",
-    teamSize: event === "debate" ? "2" : "2",
+    teamSize: event === "debate" ? "2" : event === "adaptune" ? "1" : "2",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState("")
@@ -157,8 +156,28 @@ export default function RegistrationForm({ event }) {
   const participantCount = useMemo(() => {
     if (details?.extra === "debateTeam") return Number(formData.teamSize)
     if (details?.extra === "stageTeam") return Number(formData.teamSize)
+    if (details?.extra === "adaptuneTeam") return Number(formData.teamSize)
     return 0
   }, [details, formData.teamSize])
+
+  const FEE = useMemo(() => {
+    switch (event) {
+      case "adaptune": return Number(formData.teamSize) === 2 ? 150 : 120;
+      case "brainstorm":
+      case "graphics-grid":
+      case "stills-of-soul":
+      case "quizcorn": return 89;
+      case "cineplus": return 149;
+      case "stage-play": return (Number(formData.teamSize) || 1) * 99;
+      case "debate":
+      case "photography": return 99;
+      case "vfx-and-editing":
+      case "script-writing": return 120;
+      case "dance": return 150;
+      case "storyboard": return 89;
+      default: return 99;
+    }
+  }, [event, formData.teamSize]);
 
   if (!details) {
     return null
@@ -198,6 +217,9 @@ export default function RegistrationForm({ event }) {
     }
     if (details.extra === "debateTeam" && ![2, 3, 4].includes(Number(formData.teamSize))) {
       return "Debate teams must have 2, 3, or 4 participants."
+    }
+    if (details.extra === "adaptuneTeam" && ![1, 2].includes(Number(formData.teamSize))) {
+      return "Adaptune must have 1 or 2 participants."
     }
     if (participantCount > 0) {
       for (let index = 1; index <= participantCount; index += 1) {
@@ -435,6 +457,17 @@ export default function RegistrationForm({ event }) {
                 <ParticipantFields count={participantCount} values={formData} onChange={updateField} />
               </>
             )}
+            {details.extra === "adaptuneTeam" && (
+              <>
+                <Field label="Participation Type">
+                  <select className={inputClass} value={formData.teamSize} onChange={(e) => updateField("teamSize", e.target.value)}>
+                    <option value="1">Solo (₹120)</option>
+                    <option value="2">Duo (₹150)</option>
+                  </select>
+                </Field>
+                <ParticipantFields count={participantCount} values={formData} onChange={updateField} />
+              </>
+            )}
 
             <div className="flex flex-col gap-4 border-t border-gray-800 pt-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
@@ -442,7 +475,7 @@ export default function RegistrationForm({ event }) {
                 <p className="text-2xl font-bold text-red-600">₹{FEE}</p>
               </div>
               <button className="bg-red-600 px-8 py-3 font-bold transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50" type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "PROCESSING..." : "REGISTER & PAY ₹99"}
+                {isSubmitting ? "PROCESSING..." : `REGISTER & PAY ₹${FEE}`}
               </button>
             </div>
           </form>

@@ -9,7 +9,7 @@ const competitions = [
     title: "Graphics Grid",
     description:
       "Unleash your creativity through digital art and design. Create visually stunning posters that speak louder than words, combining imagination, style, and originality. Transform ideas into visuals that inspire emotion and cinematic impact.",
-    entryFee: "₹99",
+    entryFee: "₹89 / head",
     image: "/graphics-design-poster.jpg",
     registrationPath: "/registration/graphics-grid",
   },
@@ -18,7 +18,7 @@ const competitions = [
     title: "Stage Play",
     description:
       "Bring stories to life under the spotlight. Perform powerful dramas or lighthearted comedies that express emotion, passion, and creativity. Let your performance reflect the art of storytelling that connects deeply with every audience.",
-    entryFee: "₹99",
+    entryFee: "₹99 / head",
     image: "/stage-play.jpg",
     registrationPath: "/registration/stage-play",
   },
@@ -27,7 +27,7 @@ const competitions = [
     title: "Stills of Soul",
     description:
       "Capture the essence of emotion through your lens. Freeze powerful moments that tell stories words cannot. Each photograph should mirror your creative vision, turning still images into timeless expressions of cinematic storytelling.",
-    entryFee: "₹99",
+    entryFee: "₹89 / head",
     image: "/still-of-soul.jpg",
     registrationPath: "/registration/stills-of-soul",
   },
@@ -36,7 +36,7 @@ const competitions = [
     title: "CinePlus",
     description:
       "Craft short films that blend emotion, vision, and storytelling brilliance. From scripting to direction, bring your imagination to life on screen. Let your creativity shape narratives that touch hearts and inspire audiences.",
-    entryFee: "₹99",
+    entryFee: "₹149 / head",
     image: "/cine-pulse.jpg",
     registrationPath: "/registration/cineplus",
   },
@@ -45,7 +45,7 @@ const competitions = [
     title: "AdapTune",
     description:
       "Let rhythm and expression define your performance. Dance to cinematic tunes that combine passion, choreography, and storytelling. Move beyond beats to create an experience that connects art, energy, and raw emotion seamlessly.",
-    entryFee: "₹99",
+    entryFee: "Solo ₹120 / Duo ₹150",
     image: "/adapttune.jpg",
     registrationPath: "/registration/adaptune",
   },
@@ -54,7 +54,7 @@ const competitions = [
     title: "Quizcorn",
     description:
       "Step into the world of film trivia. Test your knowledge of actors, directors, scripts, and iconic moments in cinema. Compete with fellow cinephiles and prove that your love for movies goes far beyond the screen.",
-    entryFee: "₹99",
+    entryFee: "₹89 / head",
     image: "/quiz.jpg",
     registrationPath: "/registration/quizcorn",
   },
@@ -63,7 +63,7 @@ const competitions = [
     title: "Brainstorm",
     description:
       "Develop a unique logline into a structured screenplay and turn an idea into a compelling cinematic story.",
-    entryFee: "₹99",
+    entryFee: "₹89 / head",
     image: "/scriptwriting-draft.png",
     registrationPath: "/registration/brainstorm",
   },
@@ -72,7 +72,7 @@ const competitions = [
     title: "Debate",
     description:
       "Teams of four tackle topics revealed on the spot, testing knowledge, spontaneity, and communication.",
-    entryFee: "₹99",
+    entryFee: "₹99 / team",
     image: "/stage-play.jpg",
     registrationPath: "/registration/debate",
   },
@@ -84,7 +84,7 @@ const workshops = [
     title: "Script Writing",
     description:
       "Discover the fundamentals of cinematic storytelling. Learn to craft original scripts with compelling plots, powerful characters, and natural dialogue. Turn your creative thoughts into scripts ready for the big screen.",
-    entryFee: "₹99",
+    entryFee: "₹120 / head",
     image: "/scriptwriting-draft.png",
     registrationPath: "/registration/script-writing",
   },
@@ -93,25 +93,25 @@ const workshops = [
     title: "Photography Workshop",
     description:
       "Dive deep into the art and science of photography. Explore lighting, framing, and visual storytelling guided by experts. Transform everyday scenes into captivating frames that tell stories without words.",
-    entryFee: "₹99",
+    entryFee: "₹99 / head",
     image: "/photography-workshop.png",
-    registrationPath: "/registration/photography-workshop",
+    registrationPath: "/registration/photography",
   },
   {
     id: 3,
     title: "Dance Workshop",
     description:
       "Move to the rhythm and express yourself through dance! Join our workshop to learn choreography, stage presence, and performance techniques from talented instructors. Perfect for beginners and enthusiasts alike.",
-    entryFee: "₹99",
+    entryFee: "₹150 / head",
     image: "/danceworkshop.jpg",
-    registrationPath: "/registration/dance-workshop",
+    registrationPath: "/registration/dance",
   },
   {
     id: 7,
     title: "VFX and Editing",
     description:
       "Transform creative ideas into captivating visual stories through the art of VFX and video editing.",
-    entryFee: "₹99",
+    entryFee: "₹120 / head",
     image: "/cine-pulse.jpg",
     registrationPath: "/registration/vfx-and-editing",
   },
@@ -120,7 +120,7 @@ const workshops = [
     title: "Storyboard",
     description:
       "Visualize scripts through shot composition, camera angles, framing, and scene-by-scene planning.",
-    entryFee: "₹99",
+    entryFee: "₹89 / head",
     image: "/scriptwriting-draft.png",
     registrationPath: "/registration/storyboard",
   },
