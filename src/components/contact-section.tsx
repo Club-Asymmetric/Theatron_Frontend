@@ -24,16 +24,16 @@ export default function ContactSection() {
 
   const contacts = [
     {
-      role: "Overall Student Coordinator",
-      name: "Santhosh Kumar",
-      phone: "+91 79048 49032",
-      tel: "+917904849032",
+      role: "Overall Coordinator",
+      name: "Harivarman",
+      phone: "+91 96773 21266",
+      tel: "+919677321266",
     },
     {
-      role: "Event & Registrations Lead",
-      name: "Venkatesh R",
-      phone: "+91 98849 12815",
-      tel: "+919884912815",
+      role: "Overall Coordinator",
+      name: "Hariharran",
+      phone: "+91 63790 41919",
+      tel: "+916379041919",
     },
   ]
 

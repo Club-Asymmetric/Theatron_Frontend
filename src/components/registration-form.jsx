@@ -57,7 +57,7 @@ const eventDetails = {
     contacts: ["Ahilan: +91 93617 86878"],
   },
   debate: {
-    title: "Debate",
+    title: "ThiraiVaadham",
     category: "Team debate competition",
     description: "Tackle topics revealed on the spot and demonstrate knowledge, spontaneity, and communication.",
     extra: "debateTeam",
@@ -70,7 +70,7 @@ const eventDetails = {
     contacts: ["Mahak: +91 80895 58314"],
   },
   "vfx-and-editing": {
-    title: "VFX and Editing",
+    title: "Beyond The Frame",
     category: "VFX and video editing workshop",
     description: "Transform creative ideas into captivating visual stories through VFX and editing.",
     contacts: ["Elankaviyan: +91 93454 27112"],
@@ -146,6 +146,7 @@ export default function RegistrationForm({ event }) {
     college: "",
     department: "",
     year: "",
+    teamName: "",
     teamSize: event === "debate" ? "2" : event === "adaptune" ? "1" : "2",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -212,11 +213,14 @@ export default function RegistrationForm({ event }) {
     if ((details.extra === "poster" || details.extra === "video") && !formData.submissionLink?.trim()) {
       return `${details.extra === "poster" ? "Poster" : "Video"} submission URL is required.`
     }
+    if ((details.extra === "stageTeam" || details.extra === "debateTeam") && !formData.teamName?.trim()) {
+      return "Team name is required."
+    }
     if (details.extra === "stageTeam" && (Number(formData.teamSize) < 2 || Number(formData.teamSize) > 10)) {
       return "Stage Play teams must have 2 to 10 participants."
     }
     if (details.extra === "debateTeam" && ![2, 3, 4].includes(Number(formData.teamSize))) {
-      return "Debate teams must have 2, 3, or 4 participants."
+      return "ThiraiVaadham teams must have 2, 3, or 4 participants."
     }
     if (details.extra === "adaptuneTeam" && ![1, 2].includes(Number(formData.teamSize))) {
       return "Adaptune must have 1 or 2 participants."
@@ -439,6 +443,9 @@ export default function RegistrationForm({ event }) {
             )}
             {details.extra === "stageTeam" && (
               <>
+                <Field label="Team Name">
+                  <input className={inputClass} type="text" placeholder="Enter your team name" value={formData.teamName} onChange={(e) => updateField("teamName", e.target.value)} required />
+                </Field>
                 <Field label="Number of participants in the team">
                   <select className={inputClass} value={formData.teamSize} onChange={(e) => updateField("teamSize", e.target.value)}>
                     {Array.from({ length: 9 }, (_, i) => <option key={i + 2} value={i + 2}>{i + 2} participants</option>)}
@@ -449,6 +456,9 @@ export default function RegistrationForm({ event }) {
             )}
             {details.extra === "debateTeam" && (
               <>
+                <Field label="Team Name">
+                  <input className={inputClass} type="text" placeholder="Enter your team name" value={formData.teamName} onChange={(e) => updateField("teamName", e.target.value)} required />
+                </Field>
                 <Field label="Team size">
                   <select className={inputClass} value={formData.teamSize} onChange={(e) => updateField("teamSize", e.target.value)}>
                     {[2, 3, 4].map((size) => <option key={size} value={size}>{size} participants</option>)}

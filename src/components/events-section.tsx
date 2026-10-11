@@ -69,7 +69,7 @@ const competitions = [
   },
   {
     id: 10,
-    title: "Debate",
+    title: "ThiraiVaadham",
     description:
       "Teams of four tackle topics revealed on the spot, testing knowledge, spontaneity, and communication.",
     entryFee: "₹99 / team",
@@ -108,7 +108,7 @@ const workshops = [
   },
   {
     id: 7,
-    title: "VFX and Editing",
+    title: "Beyond The Frame",
     description:
       "Transform creative ideas into captivating visual stories through the art of VFX and video editing.",
     entryFee: "₹120 / head",
