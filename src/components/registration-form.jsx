@@ -79,7 +79,7 @@ const eventDetails = {
     title: "Dance",
     category: "Dance workshop",
     description: "Explore movement, rhythm, expression, and the joy of bringing music to life.",
-    contacts: ["Overall queries: Harivarman +91 96773 21266"],
+    contacts: ["Dhruv : +91 79040 35550"],
   },
   "script-writing": {
     title: "Script Writing",
