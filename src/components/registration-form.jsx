@@ -150,7 +150,12 @@ export default function RegistrationForm({ event }) {
     department: "",
     year: "",
     teamName: "",
-    teamSize: event === "debate" ? "2" : event === "adaptune" ? "1" : "2",
+    teamSize:
+      event === "debate"
+        ? "2"
+        : event === "adaptune" || event === "stage-play"
+          ? "1"
+          : "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState("")
@@ -211,11 +216,11 @@ export default function RegistrationForm({ event }) {
     if (!/^[+()\d\s-]{7,}$/.test(formData.phone)) {
       return "Enter a valid phone number."
     }
-    if (details.extra === "drive" && !/^https:\/\/drive\.google\.com\//i.test(formData.submissionLink || "")) {
+    if (
+      (details.extra === "drive" || details.extra === "poster" || details.extra === "video") &&
+      !/^https:\/\/(drive\.google\.com|docs\.google\.com)\//i.test(formData.submissionLink || "")
+    ) {
       return "Enter a valid Google Drive submission URL."
-    }
-    if ((details.extra === "poster" || details.extra === "video") && !formData.submissionLink?.trim()) {
-      return `${details.extra === "poster" ? "Poster" : "Video"} submission URL is required.`
     }
     if ((details.extra === "stageTeam" || details.extra === "debateTeam") && !formData.teamName?.trim()) {
       return "Team name is required."
@@ -256,10 +261,13 @@ export default function RegistrationForm({ event }) {
 
     setIsSubmitting(true)
 
+    const isTeamSizeEvent = Boolean(details?.extra === "stageTeam" || details?.extra === "debateTeam" || details?.extra === "adaptuneTeam")
+    const isTeamNameEvent = Boolean(details?.extra === "stageTeam" || details?.extra === "debateTeam" || event === "quizcorn")
+
     try {
       const orderPayload = {
         event,
-        teamSize: formData.teamSize,
+        ...(isTeamSizeEvent ? { teamSize: formData.teamSize } : {}),
         amount: FEE,
         currency: "INR",
         receipt: `${event}_${Date.now()}`,
@@ -305,6 +313,8 @@ export default function RegistrationForm({ event }) {
             const verifyPayload = {
               event,
               ...formData,
+              teamName: isTeamNameEvent ? (formData.teamName || "").trim() : "",
+              teamSize: isTeamSizeEvent ? formData.teamSize : "",
               razorpay_payment_id: payment.razorpay_payment_id,
               razorpay_order_id: payment.razorpay_order_id,
               razorpay_signature: payment.razorpay_signature,
@@ -436,6 +446,21 @@ export default function RegistrationForm({ event }) {
               <Field label="Department"><input className={inputClass} value={formData.department} onChange={(e) => updateField("department", e.target.value)} required /></Field>
               <Field label="Year of study"><input className={inputClass} value={formData.year} onChange={(e) => updateField("year", e.target.value)} required /></Field>
             </div>
+
+            {event === "quizcorn" && (
+              <Field
+                label="Team Name (Optional)"
+                hint="Enter your team name to be grouped with your teammates (Max 3 members per team, each registers individually)."
+              >
+                <input
+                  className={inputClass}
+                  type="text"
+                  placeholder="Enter your team name"
+                  value={formData.teamName}
+                  onChange={(e) => updateField("teamName", e.target.value)}
+                />
+              </Field>
+            )}
 
             {details.extra === "drive" && (
               <Field label="Google Drive photo link" hint="Upload your photo to Google Drive and enable viewer access before submitting.">
