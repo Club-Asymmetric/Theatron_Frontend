@@ -48,7 +48,7 @@ export default function EventCard({
         </div>
 
         {rules ? (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-1">
             <button
               type="button"
               className="border border-red-600 px-4 py-3 text-sm font-bold text-red-500 transition hover:bg-red-600 hover:text-white"
