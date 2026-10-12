@@ -5,6 +5,7 @@ import { useMemo, useState } from "react"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import { eventRules } from "@/data/event-rules"
+import EventRulesList from "@/components/event-rules-list"
 
 const inputClass =
   "w-full rounded border border-gray-700 bg-gray-900 px-4 py-3 text-white outline-none transition focus:border-red-600"
@@ -428,17 +429,9 @@ export default function RegistrationForm({ event }) {
               aria-label={`${details.title} rules`}
             >
               <p className="mb-1 text-xs tracking-widest text-red-600">EVENT RULES</p>
-              <h2 className="mb-4 text-xl font-bold text-white">{eventRules[event].title}</h2>
-              <ol className="list-decimal space-y-2 pl-5 text-sm leading-relaxed text-gray-300">
-                {eventRules[event].rules.map((rule) => (
-                  <li key={rule}>{rule}</li>
-                ))}
-              </ol>
-              {eventRules[event].prizePool && (
-                <p className="mt-4 text-sm text-gray-400">
-                  <span className="font-bold text-red-600">Prize pool:</span> {eventRules[event].prizePool}
-                </p>
-              )}
+              <h2 className="mb-1 text-2xl font-bold text-white">{eventRules[event].title}</h2>
+              <p className="mb-5 text-xs text-gray-500">Please read these before you register.</p>
+              <EventRulesList rules={eventRules[event].rules} prizePool={eventRules[event].prizePool} />
             </section>
           )}
 

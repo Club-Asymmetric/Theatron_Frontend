@@ -1,10 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { createPortal } from "react-dom"
 import Link from "next/link"
 import Image from "next/image"
 import { X } from "lucide-react"
 import { eventRules } from "@/data/event-rules"
+import EventRulesList from "@/components/event-rules-list"
 
 export default function EventCard({
   title,
@@ -77,7 +79,7 @@ export default function EventCard({
         </div>
       </div>
 
-      {rules && showRules && (
+      {rules && showRules && createPortal(
         <div
           className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/80 p-4"
           role="dialog"
@@ -86,7 +88,7 @@ export default function EventCard({
           onClick={() => setShowRules(false)}
         >
           <div
-            className="relative max-h-[85vh] max-h-[85dvh] w-full max-w-lg cursor-default overflow-y-auto rounded-lg border-2 border-red-600 bg-gray-950 p-6 sm:p-8"
+            className="relative max-h-[85vh] max-h-[85dvh] w-full max-w-2xl cursor-default overflow-y-auto rounded-lg border-2 border-red-600 bg-gray-950 p-6 sm:p-8"
             onClick={(event) => event.stopPropagation()}
           >
             <button
@@ -102,17 +104,9 @@ export default function EventCard({
             <h2 className="mb-4 pr-8 text-2xl font-bold text-white">{rules.title}</h2>
             <div className="mb-4 h-px bg-red-600" />
 
-            <ol className="mb-5 list-decimal space-y-2 pl-5 text-sm leading-relaxed text-gray-300">
-              {rules.rules.map((rule) => (
-                <li key={rule}>{rule}</li>
-              ))}
-            </ol>
-
-            {rules.prizePool && (
-              <p className="mb-5 text-sm text-gray-400">
-                <span className="font-bold text-red-600">Prize pool:</span> {rules.prizePool}
-              </p>
-            )}
+            <div className="mb-6">
+              <EventRulesList rules={rules.rules} prizePool={rules.prizePool} />
+            </div>
 
             <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
               <button
@@ -129,7 +123,8 @@ export default function EventCard({
               </Link>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   )
