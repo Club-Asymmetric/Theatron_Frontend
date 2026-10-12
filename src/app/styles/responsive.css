@@ -179,7 +179,8 @@
 
   .theatron-hero-image {
 
-    background-position: 58% center;
+    /* performer sits ~72% across the photo; aim the crop at her on portrait screens */
+    background-position: 72% center;
 
   }
 
@@ -195,9 +196,9 @@
 
         90deg,
 
-        rgba(4, 4, 3, 0.93),
+        rgba(4, 4, 3, 0.90),
 
-        rgba(4, 4, 3, 0.60)
+        rgba(4, 4, 3, 0.35)
 
       ),
 
