@@ -71,7 +71,7 @@ const competitions = [
     id: 10,
     title: "ThiraiVaadham",
     description:
-      "Teams of two tackle topics revealed on the spot, testing knowledge, spontaneity, and communication.",
+      "Teams of two debate topics announced along with registration, testing knowledge, arguments, communication, and teamwork.",
     entryFee: "₹99 / team",
     image: "/img6.jpg",
     registrationPath: "/registration/debate",

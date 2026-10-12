@@ -4,6 +4,7 @@ import Script from "next/script"
 import { useMemo, useState } from "react"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
+import { eventRules } from "@/data/event-rules"
 
 const inputClass =
   "w-full rounded border border-gray-700 bg-gray-900 px-4 py-3 text-white outline-none transition focus:border-red-600"
@@ -12,54 +13,55 @@ const eventDetails = {
   quizcorn: {
     title: "Quiz Corn",
     category: "Cinema quiz competition",
-    description: "Explore films, actors, directors, music, and more in this engaging cinema quiz.",
+    description: "A three-round cinema quiz on Tamil and English movies: online MCQ preliminary, shortlist round and a rapid-fire final.",
+    note: "Maximum 3 members per team. Every participant must register individually.",
     contacts: ["Charan: +91 72008 19221"],
   },
   "stills-of-soul": {
     title: "Stills of Soul",
     category: "Online photography competition",
-    description: "Submit your best photograph online. The top 10 teams will be shortlisted for the college round.",
+    description: "Upload your best original shot before the deadline. The top 10 entries advance to the on-campus grand finale and feature in the Photo Exhibition.",
     extra: "drive",
-    contacts: ["Dhanuj: +91 98842 78279", "Jeevaghan: +91 82207 66200"],
+    contacts: ["Dhanuj: +91 98842 78279", "Jehva: +91 82207 66200"],
   },
   "graphics-grid": {
     title: "Graphics Grid",
     category: "Online poster design competition",
-    description: "Submit your best poster design online. The top 10 teams will be shortlisted for the college round.",
+    description: "Design an original poster on the theme Cinema (no AI tools). The top 10 posters are shortlisted for the final round.",
     extra: "poster",
-    contacts: ["Dhanuj: +91 98842 78279", "Jeevaghan: +91 82207 66200"],
+    contacts: ["Dhanuj: +91 98842 78279", "Jehva: +91 82207 66200"],
   },
   cineplus: {
     title: "Cineplus",
     category: "Online short film competition",
-    description: "Submit a short film online. The top 3 teams will be selected and awarded at CIT.",
+    description: "Submit a short film (maximum 3 minutes) built around a Thirukkural. The top 10 are shortlisted and invited to campus; the top 3 are selected.",
     extra: "video",
-    contacts: ["Dhanuj: +91 98842 78279", "Jeevaghan: +91 82207 66200"],
+    contacts: ["Dhanuj: +91 98842 78279", "Jehva: +91 82207 66200"],
   },
   "stage-play": {
     title: "Stage Play",
     category: "Theatrical competition",
-    description: "Bring stories to life through creative scripts, expressive dialogue, and dynamic stage performances.",
+    description: "Bring stories to life on stage. Teams of 1 to 10 perform within 15 minutes, curtain to curtain.",
     extra: "stageTeam",
-    contacts: ["Sai Charan: +91 7397 466 351"],
+    contacts: ["Saicharan: +91 7397 466 351"],
   },
   adaptune: {
     title: "Adaptune",
     category: "Dance competition",
-    description: "Adapt your moves to randomly changing songs and showcase your spontaneity and versatility.",
+    description: "Solo or duo: perform to a 2-minute mixed audio track with 2 to 4 impromptu music transitions.",
     extra: "adaptuneTeam",
     contacts: ["Deepika: +91 97890 62268"],
   },
   brainstorm: {
     title: "Brainstorm",
     category: "Screenplay competition",
-    description: "Develop a unique logline into a structured screenplay.",
+    description: "Pick one of the on-the-spot loglines and write a structured screenplay in 60 to 90 minutes.",
     contacts: ["Ahilan: +91 93617 86878"],
   },
   debate: {
     title: "ThiraiVaadham",
     category: "Team debate competition",
-    description: "Tackle topics revealed on the spot and demonstrate knowledge, spontaneity, and communication.",
+    description: "A debate for teams of exactly 2. Round 1 topics are announced along with registration.",
     extra: "debateTeam",
     contacts: ["Keerthana: +91 94456 86514"],
   },
@@ -410,12 +412,35 @@ export default function RegistrationForm({ event }) {
             <p className="mb-3 text-sm uppercase tracking-widest text-red-600">{details.category}</p>
             <h1 className="mb-4 text-4xl font-bold sm:text-6xl">{details.title}</h1>
             <p className="mx-auto max-w-2xl text-gray-400">{details.description}</p>
+            {details.note && (
+              <p className="mx-auto mt-4 max-w-2xl text-sm font-semibold text-red-500">{details.note}</p>
+            )}
             {details.contacts && (
               <p className="mx-auto mt-4 max-w-2xl text-xs text-gray-500">
                 Event contact: {details.contacts.join(" • ")}
               </p>
             )}
           </header>
+
+          {eventRules[event] && (
+            <section
+              className="mb-8 rounded-lg border border-red-600 bg-gray-950 p-5 sm:p-8"
+              aria-label={`${details.title} rules`}
+            >
+              <p className="mb-1 text-xs tracking-widest text-red-600">EVENT RULES</p>
+              <h2 className="mb-4 text-xl font-bold text-white">{eventRules[event].title}</h2>
+              <ol className="list-decimal space-y-2 pl-5 text-sm leading-relaxed text-gray-300">
+                {eventRules[event].rules.map((rule) => (
+                  <li key={rule}>{rule}</li>
+                ))}
+              </ol>
+              {eventRules[event].prizePool && (
+                <p className="mt-4 text-sm text-gray-400">
+                  <span className="font-bold text-red-600">Prize pool:</span> {eventRules[event].prizePool}
+                </p>
+              )}
+            </section>
+          )}
 
           <form className="space-y-6 rounded-lg border border-gray-700 bg-gray-950 p-5 sm:p-8" onSubmit={handlePayment}>
             {error && <div className="rounded border border-red-600 bg-red-950 p-4 text-red-200">{error}</div>}
@@ -436,8 +461,8 @@ export default function RegistrationForm({ event }) {
             )}
             {(details.extra === "poster" || details.extra === "video") && (
               <Field
-                label={details.extra === "poster" ? "Poster submission link" : "Three-minute video submission link"}
-                hint={details.extra === "poster" ? "Accepted formats: JPG, JPEG, PNG, or PDF." : "The video must be no longer than 3 minutes and accessible to the event team."}
+                label={details.extra === "poster" ? "Poster submission link (Google Drive)" : "Short film submission link (Google Drive)"}
+                hint={details.extra === "poster" ? "Upload to Google Drive with viewer access. Accepted formats: JPG, JPEG, PNG, or PDF." : "Upload to Google Drive with viewer access. The film must not exceed 3 minutes."}
               >
                 <input className={inputClass} type="url" value={formData.submissionLink || ""} onChange={(e) => updateField("submissionLink", e.target.value)} required />
               </Field>
