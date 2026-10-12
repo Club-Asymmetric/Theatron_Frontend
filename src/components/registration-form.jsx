@@ -216,8 +216,8 @@ export default function RegistrationForm({ event }) {
     if ((details.extra === "stageTeam" || details.extra === "debateTeam") && !formData.teamName?.trim()) {
       return "Team name is required."
     }
-    if (details.extra === "stageTeam" && (Number(formData.teamSize) < 2 || Number(formData.teamSize) > 10)) {
-      return "Stage Play teams must have 2 to 10 participants."
+    if (details.extra === "stageTeam" && (Number(formData.teamSize) < 1 || Number(formData.teamSize) > 10)) {
+      return "Stage Play teams must have 1 to 10 participants."
     }
     if (details.extra === "debateTeam" && Number(formData.teamSize) !== 2) {
       return "ThiraiVaadham teams must have exactly 2 participants."
@@ -449,7 +449,7 @@ export default function RegistrationForm({ event }) {
                 </Field>
                 <Field label="Number of participants in the team">
                   <select className={inputClass} value={formData.teamSize} onChange={(e) => updateField("teamSize", e.target.value)}>
-                    {Array.from({ length: 9 }, (_, i) => <option key={i + 2} value={i + 2}>{i + 2} participants</option>)}
+                    {Array.from({ length: 10 }, (_, i) => <option key={i + 1} value={i + 1}>{i + 1} participant{i === 0 ? "" : "s"}</option>)}
                   </select>
                 </Field>
                 <ParticipantFields count={participantCount} values={formData} onChange={updateField} />
