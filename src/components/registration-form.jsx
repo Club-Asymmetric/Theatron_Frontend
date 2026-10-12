@@ -262,7 +262,7 @@ export default function RegistrationForm({ event }) {
     setIsSubmitting(true)
 
     const isTeamSizeEvent = Boolean(details?.extra === "stageTeam" || details?.extra === "debateTeam" || details?.extra === "adaptuneTeam")
-    const isTeamNameEvent = Boolean(details?.extra === "stageTeam" || details?.extra === "debateTeam" || event === "quizcorn")
+    const isTeamNameEvent = Boolean(details?.extra === "stageTeam" || details?.extra === "debateTeam")
 
     try {
       const orderPayload = {
@@ -446,21 +446,6 @@ export default function RegistrationForm({ event }) {
               <Field label="Department"><input className={inputClass} value={formData.department} onChange={(e) => updateField("department", e.target.value)} required /></Field>
               <Field label="Year of study"><input className={inputClass} value={formData.year} onChange={(e) => updateField("year", e.target.value)} required /></Field>
             </div>
-
-            {event === "quizcorn" && (
-              <Field
-                label="Team Name (Optional)"
-                hint="Enter your team name to be grouped with your teammates (Max 3 members per team, each registers individually)."
-              >
-                <input
-                  className={inputClass}
-                  type="text"
-                  placeholder="Enter your team name"
-                  value={formData.teamName}
-                  onChange={(e) => updateField("teamName", e.target.value)}
-                />
-              </Field>
-            )}
 
             {details.extra === "drive" && (
               <Field label="Google Drive photo link" hint="Upload your photo to Google Drive and enable viewer access before submitting.">
