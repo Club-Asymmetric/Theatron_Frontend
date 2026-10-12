@@ -64,16 +64,16 @@ const competitions = [
     description:
       "Develop a unique logline into a structured screenplay and turn an idea into a compelling cinematic story.",
     entryFee: "₹89 / head",
-    image: "/scriptwriting-draft.png",
+    image: "/theatre-curtains-stage.jpg",
     registrationPath: "/registration/brainstorm",
   },
   {
     id: 10,
     title: "ThiraiVaadham",
     description:
-      "Teams of four tackle topics revealed on the spot, testing knowledge, spontaneity, and communication.",
+      "Teams of two tackle topics revealed on the spot, testing knowledge, spontaneity, and communication.",
     entryFee: "₹99 / team",
-    image: "/stage-play.jpg",
+    image: "/img6.jpg",
     registrationPath: "/registration/debate",
   },
 ]
@@ -112,7 +112,7 @@ const workshops = [
     description:
       "Transform creative ideas into captivating visual stories through the art of VFX and video editing.",
     entryFee: "₹120 / head",
-    image: "/cine-pulse.jpg",
+    image: "/blender.jpg",
     registrationPath: "/registration/vfx-and-editing",
   },
   {
@@ -121,7 +121,7 @@ const workshops = [
     description:
       "Visualize scripts through shot composition, camera angles, framing, and scene-by-scene planning.",
     entryFee: "₹89 / head",
-    image: "/scriptwriting-draft.png",
+    image: "/trailer-cut.jpg",
     registrationPath: "/registration/storyboard",
   },
 ]

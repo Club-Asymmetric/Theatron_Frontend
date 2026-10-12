@@ -15,6 +15,10 @@ const images = [
   { id: 16, src: "/img16.jpeg", alt: "Gallery moment 16" },
   { id: 17, src: "/img17.jpeg", alt: "Gallery moment 17" },
   { id: 18, src: "/img18.jpeg", alt: "Gallery moment 18" },
+  { id: 19, src: "/img19.jpg", alt: "Gallery moment 19" },
+  { id: 20, src: "/img20.jpg", alt: "Gallery moment 20" },
+  { id: 22, src: "/img22.jpg", alt: "Gallery moment 22" },
+  { id: 23, src: "/img23.jpg", alt: "Gallery moment 23" },
 ]
 
 export default function PhotoGallery() {

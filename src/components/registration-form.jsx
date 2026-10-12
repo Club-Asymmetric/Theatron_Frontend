@@ -219,8 +219,8 @@ export default function RegistrationForm({ event }) {
     if (details.extra === "stageTeam" && (Number(formData.teamSize) < 2 || Number(formData.teamSize) > 10)) {
       return "Stage Play teams must have 2 to 10 participants."
     }
-    if (details.extra === "debateTeam" && ![2, 3, 4].includes(Number(formData.teamSize))) {
-      return "ThiraiVaadham teams must have 2, 3, or 4 participants."
+    if (details.extra === "debateTeam" && Number(formData.teamSize) !== 2) {
+      return "ThiraiVaadham teams must have exactly 2 participants."
     }
     if (details.extra === "adaptuneTeam" && ![1, 2].includes(Number(formData.teamSize))) {
       return "Adaptune must have 1 or 2 participants."
@@ -255,6 +255,7 @@ export default function RegistrationForm({ event }) {
     try {
       const orderPayload = {
         event,
+        teamSize: formData.teamSize,
         amount: FEE,
         currency: "INR",
         receipt: `${event}_${Date.now()}`,
@@ -459,10 +460,8 @@ export default function RegistrationForm({ event }) {
                 <Field label="Team Name">
                   <input className={inputClass} type="text" placeholder="Enter your team name" value={formData.teamName} onChange={(e) => updateField("teamName", e.target.value)} required />
                 </Field>
-                <Field label="Team size">
-                  <select className={inputClass} value={formData.teamSize} onChange={(e) => updateField("teamSize", e.target.value)}>
-                    {[2, 3, 4].map((size) => <option key={size} value={size}>{size} participants</option>)}
-                  </select>
+                <Field label="Team size" hint="Each team must have exactly 2 members.">
+                  <input className={inputClass} value="2 participants" readOnly disabled />
                 </Field>
                 <ParticipantFields count={participantCount} values={formData} onChange={updateField} />
               </>

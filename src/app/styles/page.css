@@ -223,6 +223,8 @@
 
 
 .theatron-hero-content {
+  min-width: 0;
+  max-width: 100%;
   width: min(880px, 92vw);
   margin-left: clamp(20px, 3.8vw, 56px);
   padding-top: 65px;
