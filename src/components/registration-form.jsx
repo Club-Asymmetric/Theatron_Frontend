@@ -5,7 +5,6 @@ import { useMemo, useState } from "react"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import { eventRules } from "@/data/event-rules"
-import EventRulesList from "@/components/event-rules-list"
 import RulesModal from "@/components/rules-modal"
 
 const inputClass =
@@ -425,17 +424,6 @@ export default function RegistrationForm({ event }) {
             )}
           </header>
 
-          {eventRules[event] && (
-            <section
-              className="mb-8 rounded-lg border border-red-600 bg-gray-950 p-5 sm:p-8"
-              aria-label={`${details.title} rules`}
-            >
-              <p className="mb-1 text-xs tracking-widest text-red-600">EVENT RULES</p>
-              <h2 className="mb-1 text-2xl font-bold text-white">{eventRules[event].title}</h2>
-              <p className="mb-5 text-xs text-gray-500">Please read these before you register.</p>
-              <EventRulesList rules={eventRules[event].rules} prizePool={eventRules[event].prizePool} />
-            </section>
-          )}
 
           <form className="space-y-6 rounded-lg border border-gray-700 bg-gray-950 p-5 sm:p-8" onSubmit={handlePayment}>
             {error && <div className="rounded border border-red-600 bg-red-950 p-4 text-red-200">{error}</div>}
