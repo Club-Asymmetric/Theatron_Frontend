@@ -13,9 +13,22 @@ export async function POST(request) {
       headers: { "Content-Type": "application/json" },
     })
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message || "Failed to submit contact query" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    })
+    try {
+      const fallbackResponse = await fetch("https://theatron-backend.onrender.com/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      })
+      const fallbackData = await fallbackResponse.json().catch(() => ({}))
+      return new Response(JSON.stringify(fallbackData), {
+        status: fallbackResponse.status,
+        headers: { "Content-Type": "application/json" },
+      })
+    } catch (fallbackError) {
+      return new Response(JSON.stringify({ error: fallbackError.message || "Failed to submit contact query" }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      })
+    }
   }
 }
