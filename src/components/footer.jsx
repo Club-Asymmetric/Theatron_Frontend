@@ -61,9 +61,9 @@ export default function Footer() {
               <Mail className="h-4 w-4 text-red-500" />
               <span>immersecit@gmail.com</span>
             </a>
-            <a href="tel:+917904849032" className="theatron-footer-contact-item">
+            <a href="tel:+916379041919" className="theatron-footer-contact-item">
               <Phone className="h-4 w-4 text-[#d8b979]" />
-              <span>+91 7904849032</span>
+              <span>+91 63790 41919 (Hariharran)</span>
             </a>
           </div>
 
