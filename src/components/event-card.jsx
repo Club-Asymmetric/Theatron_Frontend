@@ -55,9 +55,18 @@ export default function EventCard({
             <p className="text-red-600 font-bold text-base md:text-lg">{entryFee}</p>
           </div>
           {rules ? (
-            <button type="button" className={buttonClass} onClick={() => setShowRules(true)}>
-              REGISTER →
-            </button>
+            <div className="flex w-full gap-2 sm:w-auto">
+              <button
+                type="button"
+                className="flex-1 border border-red-600 px-4 sm:px-5 py-2 text-red-500 font-bold text-xs sm:text-sm hover:bg-red-600 hover:text-white transition sm:flex-none"
+                onClick={() => setShowRules(true)}
+              >
+                RULES
+              </button>
+              <button type="button" className={`${buttonClass} flex-1 sm:flex-none`} onClick={() => setShowRules(true)}>
+                REGISTER →
+              </button>
+            </div>
           ) : (
             <Link href={href}>
               <button type="button" className={buttonClass}>
