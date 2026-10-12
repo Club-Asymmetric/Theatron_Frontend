@@ -48,27 +48,34 @@ export default function ContactSection() {
     setErrorMsg("")
     setIsSubmitting(true)
     try {
-      await fetch(
-        "https://script.google.com/macros/s/AKfycbxpjbdTT0V1w2ho_jVO0y4Tu08PIRi_cdr9rZW_QCq6hjgdnaw0w8TRSOsXdEkQFfM4/exec",
-        {
+      let response
+      try {
+        response = await fetch("/api/contact", {
           method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            Name: name,
-            Email: email,
-            Subject: subject,
-            Message: message,
-          }),
-        }
-      )
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, subject, message }),
+        })
+      } catch (localErr) {
+        const backendUrl = process.env.NEXT_PUBLIC_API_URL || "https://theatron-backend.onrender.com"
+        response = await fetch(`${backendUrl}/contact`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, subject, message }),
+        })
+      }
+
+      const body = await response.json().catch(() => ({}))
+      if (!response.ok) {
+        throw new Error(body.error || body.message || "Failed to send message.")
+      }
+
       setSuccessMsg("Message sent successfully! We will get back to you soon.")
       setName("")
       setEmail("")
       setSubject("")
       setMessage("")
     } catch (err) {
-      setErrorMsg("Something went wrong. Please try again later.")
+      setErrorMsg(err.message || "Something went wrong. Please try again later.")
       console.error(err)
     } finally {
       setIsSubmitting(false)
