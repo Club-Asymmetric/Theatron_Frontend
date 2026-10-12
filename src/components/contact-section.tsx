@@ -76,7 +76,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section className="relative z-10 overflow-hidden px-4 pb-20 pl-16 pt-28 sm:pl-20 sm:pt-32 lg:px-10 lg:pl-10">
+    <section className="relative z-10 overflow-hidden px-4 pb-20 pt-28 sm:px-8 sm:pt-32 lg:px-10">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(225,6,0,0.22),transparent_55%)]" />
 
       <div className="relative mx-auto max-w-6xl">

@@ -1090,7 +1090,7 @@ body {
 
   .gallery-section {
     padding:
-      95px
+      90px
       20px
       18px;
   }
@@ -1900,13 +1900,14 @@ body {
     min-height: auto;
 
     padding:
-      28px
+      90px
       20px
       30px;
   }
 
   .gallery-heading {
     margin-bottom: 18px;
+    padding-top: 0;
   }
 
   .gallery-heading h2 {
@@ -1944,7 +1945,7 @@ body {
 @media (max-width: 520px) {
   .gallery-section {
     padding:
-      22px
+      88px
       14px
       30px;
   }
@@ -2001,7 +2002,7 @@ body {
   position: relative;
   z-index: 50;
 
-  /* Push the complete title block below the navbar */
+  /* Push the complete title block below the navbar on desktop */
   padding-top: 65px;
   box-sizing: border-box;
 }
@@ -2025,6 +2026,14 @@ body {
   position: relative;
   z-index: 51;
 }
+
+/* On mobile, section padding already clears the navbar — no extra heading padding needed */
+@media (max-width: 768px) {
+  .gallery-heading {
+    padding-top: 0;
+  }
+}
+
 
 @keyframes sponsor-scroll {
   from {
