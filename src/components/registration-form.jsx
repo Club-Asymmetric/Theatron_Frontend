@@ -6,6 +6,7 @@ import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import { eventRules } from "@/data/event-rules"
 import EventRulesList from "@/components/event-rules-list"
+import RulesModal from "@/components/rules-modal"
 
 const inputClass =
   "w-full rounded border border-gray-700 bg-gray-900 px-4 py-3 text-white outline-none transition focus:border-red-600"
@@ -156,6 +157,7 @@ export default function RegistrationForm({ event }) {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState(null)
   const [isRazorpayReady, setIsRazorpayReady] = useState(false)
+  const [showRules, setShowRules] = useState(false)
 
   const participantCount = useMemo(() => {
     if (details?.extra === "debateTeam") return Number(formData.teamSize)
@@ -501,13 +503,27 @@ export default function RegistrationForm({ event }) {
                 <p className="text-sm text-gray-500">REGISTRATION FEE</p>
                 <p className="text-2xl font-bold text-red-600">₹{FEE}</p>
               </div>
-              <button className="bg-red-600 px-8 py-3 font-bold transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50" type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "PROCESSING..." : `REGISTER & PAY ₹${FEE}`}
-              </button>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                {eventRules[event] && (
+                  <button
+                    type="button"
+                    className="border border-red-600 px-6 py-3 font-bold text-red-500 transition hover:bg-red-600 hover:text-white"
+                    onClick={() => setShowRules(true)}
+                  >
+                    VIEW RULES
+                  </button>
+                )}
+                <button className="bg-red-600 px-8 py-3 font-bold transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50" type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? "PROCESSING..." : `REGISTER & PAY ₹${FEE}`}
+                </button>
+              </div>
             </div>
           </form>
         </div>
       </section>
+      {showRules && eventRules[event] && (
+        <RulesModal rules={eventRules[event]} onClose={() => setShowRules(false)} />
+      )}
       <Footer />
     </main>
   )
