@@ -1,4 +1,4 @@
-import { Poppins, Geist } from "next/font/google"
+import { Poppins, Geist, Cinzel } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import Sidebar from "@/components/sidebar"
 import "./globals.css"
@@ -16,6 +16,14 @@ const geist = Geist({
   display: "swap",
 })
 
+// Roman display capitals for headings, matching the Nocturne intro's baroque mask
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800", "900"],
+  variable: "--font-cinzel",
+  display: "swap",
+})
+
 export const metadata = {
   title: "THEATRON 2026",
   description: "Cinema, theatre and performing arts at Chennai Institute of Technology.",
@@ -23,11 +31,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${geist.variable}`}>
-      <head>
-        <link rel="preload" href="/theatron-intro-clean.mp4" as="video" type="video/mp4" />
-      </head>
-      <body className={`${poppins.className} bg-black text-white antialiased selection:bg-[#8F1111] selection:text-white`}>
+    <html lang="en" className={`${poppins.variable} ${geist.variable} ${cinzel.variable}`}>
+      <body className={`${poppins.className} bg-ink-950 text-white antialiased selection:bg-crimson-600 selection:text-white`}>
         <Sidebar />
         {children}
         <Analytics />

@@ -134,51 +134,46 @@ export default function EventsSection() {
   return (
     <section className="relative z-10 pt-32 pb-20 px-4 sm:px-8 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="text-center mb-16 relative z-10">
-        <p className="text-red-600 text-xs tracking-widest mb-4">CHOOSE YOUR CATEGORY</p>
-        <h1 className="text-5xl sm:text-6xl font-bold mb-4 text-white">EVENTS</h1>
+      <div className="nx-rise text-center mb-16 relative z-10">
+        <p className="nx-eyebrow mb-5">Choose Your Category</p>
+        <h1 className="nx-display nx-lacquer text-5xl sm:text-6xl font-bold mb-5">EVENTS</h1>
 
-        <div className="flex items-center justify-center gap-4 mb-8">
-          <div className="h-px w-12 bg-red-600" />
-          <div className="w-3 h-3 bg-red-600 rounded-full" />
-          <div className="h-px w-12 bg-red-600" />
+        <div className="nx-ornament mb-8" aria-hidden="true">
+          <i />
         </div>
 
-        <p className="text-gray-400 text-xs sm:text-sm tracking-wider mb-8 max-w-2xl mx-auto">
+        <p className="text-stone-400 text-xs sm:text-sm tracking-wider mb-8 max-w-2xl mx-auto">
           EXPLORE OUR CINEMATIC COMPETITIONS AND HANDS-ON CREATIVE WORKSHOPS
         </p>
 
         {/* Filter Buttons */}
-        <div className="flex justify-center gap-4 sm:gap-6">
-          <button
-            type="button"
-            onClick={() => setFilter("competition")}
-            className={`px-6 py-2 rounded-full border-2 text-sm sm:text-base font-semibold cursor-pointer ${
-              filter === "competition"
-                ? "bg-red-600 border-red-600 text-white shadow-[0_0_15px_rgba(220,38,38,0.5)]"
-                : "border-red-600 text-red-500 hover:bg-red-600 hover:text-white"
-            } transition-all duration-300`}
-          >
-            Competitions
-          </button>
-          <button
-            type="button"
-            onClick={() => setFilter("workshop")}
-            className={`px-6 py-2 rounded-full border-2 text-sm sm:text-base font-semibold cursor-pointer ${
-              filter === "workshop"
-                ? "bg-red-600 border-red-600 text-white shadow-[0_0_15px_rgba(220,38,38,0.5)]"
-                : "border-red-600 text-red-500 hover:bg-red-600 hover:text-white"
-            } transition-all duration-300`}
-          >
-            Workshops
-          </button>
+        <div className="flex justify-center gap-4 sm:gap-6" role="group" aria-label="Event category">
+          {(
+            [
+              ["competition", "Competitions"],
+              ["workshop", "Workshops"],
+            ] as const
+          ).map(([value, label]) => (
+            <button
+              key={value}
+              type="button"
+              onClick={() => setFilter(value)}
+              aria-pressed={filter === value}
+              className={`nx-btn rounded-full px-6 py-2 text-xs sm:text-sm ${
+                filter === value ? "nx-btn-primary" : "nx-btn-ghost"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Events Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 relative z-10">
-        {displayedEvents.map((event) => (
+      {/* Events Grid: keyed on the filter so switching replays the staggered entrance */}
+      <div key={filter} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 relative z-10">
+        {displayedEvents.map((event, index) => (
           <EventCard
+            index={index}
             key={event.id}
             title={event.title}
             description={event.description}

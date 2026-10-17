@@ -6,9 +6,10 @@ import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import { eventRules } from "@/data/event-rules"
 import RulesModal from "@/components/rules-modal"
+import StageBackdrop from "@/components/stage-backdrop"
 
 const inputClass =
-  "w-full rounded border border-gray-700 bg-gray-900 px-4 py-3 text-white outline-none transition focus:border-red-600"
+  "nx-input"
 
 const eventDetails = {
   quizcorn: {
@@ -101,17 +102,17 @@ const eventDetails = {
 function Field({ label, children, hint }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-sm font-bold text-gray-200">{label}</span>
+      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-crimson-200/90">{label}</span>
       {children}
-      {hint && <span className="mt-1 block text-xs text-gray-500">{hint}</span>}
+      {hint && <span className="mt-1 block text-xs text-stone-500">{hint}</span>}
     </label>
   )
 }
 
 function ParticipantFields({ count, values, onChange }) {
   return (
-    <div className="space-y-4 rounded border border-gray-800 bg-gray-950 p-4">
-      <h2 className="text-lg font-bold text-white">Participant details</h2>
+    <div className="space-y-4 rounded-lg border border-crimson-500/20 bg-ink-950/60 p-4">
+      <h2 className="nx-display text-lg font-bold text-crimson-200">Participant details</h2>
       {Array.from({ length: count }, (_, index) => {
         const number = index + 1
         return (
@@ -307,7 +308,7 @@ export default function RegistrationForm({ event }) {
         description: "THEATRON 2026 Event Registration",
         order_id: order.id,
         prefill: { name: formData.name, email: formData.email, contact: formData.phone },
-        theme: { color: "#e10600" },
+        theme: { color: "#d53422" },
         handler: async (payment) => {
           try {
             const verifyPayload = {
@@ -387,19 +388,20 @@ export default function RegistrationForm({ event }) {
 
   if (success) {
     return (
-      <main className="relative min-h-screen bg-black text-white">
+      <main className="relative min-h-screen bg-ink-950 text-white">
         <Navigation />
+        <StageBackdrop dust={0.35} />
         <section className="relative z-10 px-4 pb-20 pt-32 sm:px-8">
-          <div className="mx-auto max-w-2xl rounded-lg border border-green-700 bg-gray-950 p-8 text-center">
-            <h1 className="mb-4 text-4xl font-bold text-green-400">Payment successful</h1>
+          <div className="mx-auto max-w-2xl nx-panel nx-rise rounded-lg p-8 text-center">
+            <h1 className="nx-display nx-lacquer mb-4 text-4xl font-bold">Payment successful</h1>
             <p className="mb-2 text-xl text-white">Registration confirmed</p>
-            <p className="mb-6 text-gray-300">Registration ID: {success.registrationId}</p>
+            <p className="mb-6 text-stone-300">Registration ID: {success.registrationId}</p>
             {!success.emailSent && (
               <p className="mb-6 text-amber-300">
                 Your payment and registration were successful. We could not deliver the confirmation email, but your registration is saved.
               </p>
             )}
-            <a href="/events" className="inline-block bg-red-600 px-6 py-3 font-bold transition hover:bg-red-700">
+            <a href="/events" className="nx-btn nx-btn-primary px-6 py-3 text-sm">
               Back to Events
             </a>
           </div>
@@ -410,7 +412,7 @@ export default function RegistrationForm({ event }) {
   }
 
   return (
-    <main className="relative min-h-screen bg-black text-white">
+    <main className="relative min-h-screen bg-ink-950 text-white">
       <Script
         src="https://checkout.razorpay.com/v1/checkout.js"
         strategy="afterInteractive"
@@ -418,25 +420,26 @@ export default function RegistrationForm({ event }) {
         onError={() => setError("Payment checkout could not be loaded. Please refresh and try again.")}
       />
       <Navigation />
+      <StageBackdrop dust={0.35} />
       <section className="relative z-10 px-4 pb-20 pt-32 sm:px-8">
         <div className="mx-auto max-w-3xl">
-          <header className="mb-10 text-center">
-            <p className="mb-3 text-sm uppercase tracking-widest text-red-600">{details.category}</p>
-            <h1 className="mb-4 text-4xl font-bold sm:text-6xl">{details.title}</h1>
-            <p className="mx-auto max-w-2xl text-gray-400">{details.description}</p>
+          <header className="nx-rise mb-10 text-center">
+            <p className="nx-eyebrow mb-4">{details.category}</p>
+            <h1 className="nx-display nx-lacquer mb-4 text-4xl font-bold sm:text-6xl">{details.title}</h1>
+            <p className="mx-auto max-w-2xl text-stone-400">{details.description}</p>
             {details.note && (
-              <p className="mx-auto mt-4 max-w-2xl text-sm font-semibold text-red-500">{details.note}</p>
+              <p className="mx-auto mt-4 max-w-2xl text-sm font-semibold text-crimson-300">{details.note}</p>
             )}
             {details.contacts && (
-              <p className="mx-auto mt-4 max-w-2xl text-xs text-gray-500">
+              <p className="mx-auto mt-4 max-w-2xl text-xs text-stone-500">
                 Event contact: {details.contacts.join(" • ")}
               </p>
             )}
           </header>
 
 
-          <form className="space-y-6 rounded-lg border border-gray-700 bg-gray-950 p-5 sm:p-8" onSubmit={handlePayment}>
-            {error && <div className="rounded border border-red-600 bg-red-950 p-4 text-red-200">{error}</div>}
+          <form className="nx-panel nx-rise space-y-6 rounded-lg p-5 sm:p-8" style={{ "--i": 1 }} onSubmit={handlePayment}>
+            {error && <div className="rounded-lg border border-red-500/40 bg-red-950/50 p-4 text-red-200">{error}</div>}
 
             <div className="grid gap-5 sm:grid-cols-2">
               <Field label="Name"><input className={inputClass} value={formData.name} onChange={(e) => updateField("name", e.target.value)} required /></Field>
@@ -496,22 +499,22 @@ export default function RegistrationForm({ event }) {
               </>
             )}
 
-            <div className="flex flex-col gap-4 border-t border-gray-800 pt-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-4 border-t border-crimson-500/20 pt-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-sm text-gray-500">REGISTRATION FEE</p>
-                <p className="text-2xl font-bold text-red-600">₹{FEE}</p>
+                <p className="text-[11px] tracking-[0.2em] text-stone-500">REGISTRATION FEE</p>
+                <p className="nx-display text-2xl font-bold text-crimson-300">₹{FEE}</p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
                 {eventRules[event] && (
                   <button
                     type="button"
-                    className="border border-red-600 px-6 py-3 font-bold text-red-500 transition hover:bg-red-600 hover:text-white"
+                    className="nx-btn nx-btn-ghost px-6 py-3 text-sm"
                     onClick={() => setShowRules(true)}
                   >
                     VIEW RULES
                   </button>
                 )}
-                <button className="bg-red-600 px-8 py-3 font-bold transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50" type="submit" disabled={isSubmitting}>
+                <button className="nx-btn nx-btn-primary px-8 py-3 text-sm" type="submit" disabled={isSubmitting}>
                   {isSubmitting ? "PROCESSING..." : `REGISTER & PAY ₹${FEE}`}
                 </button>
               </div>

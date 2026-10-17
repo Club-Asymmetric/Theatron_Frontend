@@ -102,7 +102,7 @@
   color: #eee2c9;
 
   text-shadow:
-    0 0 18px rgba(190, 156, 94, 0.12);
+    0 0 18px rgba(213, 85, 71, 0.12);
 
   transition:
     color 0.3s ease,
@@ -112,12 +112,12 @@
 
 
 .countdown-unit:hover .countdown-value {
-  color: #c5a66f;
+  color: #da675a;
 
   transform: translateY(-2px);
 
   text-shadow:
-    0 0 22px rgba(190, 156, 94, 0.18);
+    0 0 22px rgba(213, 85, 71, 0.18);
 }
 
 
@@ -154,7 +154,7 @@
 
 
 .countdown-unit:hover .countdown-label {
-  color: #b99a66;
+  color: #cf5d50;
 
   letter-spacing: 0.31em;
 }

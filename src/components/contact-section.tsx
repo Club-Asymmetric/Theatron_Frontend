@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import StageBackdrop from "@/components/stage-backdrop"
 import {
   Mail,
   Phone,
@@ -84,22 +85,21 @@ export default function ContactSection() {
 
   return (
     <section className="relative z-10 overflow-hidden px-4 pb-20 pt-28 sm:px-8 sm:pt-32 lg:px-10">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(225,6,0,0.22),transparent_55%)]" />
+      <StageBackdrop />
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="mx-auto mb-12 max-w-3xl text-center md:mb-14">
-          <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
+        <div className="nx-rise mx-auto mb-12 max-w-3xl text-center md:mb-14">
+          <p className="nx-eyebrow mb-5">We&apos;re Listening</p>
+          <h1 className="nx-display mb-4 text-4xl font-bold text-ivory sm:text-5xl md:text-6xl">
             GET IN{" "}
-            <span className="text-[#e10600]">TOUCH</span>
+            <span className="nx-lacquer">TOUCH</span>
           </h1>
 
-          <div className="my-5 flex items-center justify-center gap-3">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#e10600] sm:w-24" />
-            <div className="h-1.5 w-1.5 rounded-full bg-[#e10600] shadow-[0_0_8px_rgba(225,6,0,0.7)]" />
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#e10600] sm:w-24" />
+          <div className="nx-ornament my-5" aria-hidden="true">
+            <i />
           </div>
 
-          <p className="mx-auto max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">
+          <p className="mx-auto max-w-2xl text-sm leading-relaxed text-stone-400 sm:text-base">
             Have questions regarding film submissions, passes, workshop schedules, or
             festival events? Reach out directly to our team.
           </p>
@@ -109,22 +109,22 @@ export default function ContactSection() {
           <div className="space-y-4 lg:col-span-5">
             <div className="mb-1">
               <h2 className="flex items-center gap-2.5 text-sm font-bold uppercase tracking-[0.18em] text-white sm:text-base">
-                <span className="h-4 w-1 rounded-full bg-[#e10600]" />
+                <span className="h-4 w-1 rounded-full bg-gradient-to-b from-crimson-200 to-crimson-600" />
                 Event Contacts
               </h2>
-              <p className="mt-1.5 text-xs text-zinc-500 sm:text-sm">
+              <p className="mt-1.5 text-xs text-stone-500 sm:text-sm">
                 Connect with the organizing team via email, phone, or visit our campus.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-black/70 p-4 backdrop-blur-sm sm:p-5">
+            <div className="nx-panel nx-rise rounded-2xl p-4 backdrop-blur-sm sm:p-5" style={{ "--i": 1 } as React.CSSProperties}>
               <div className="flex items-start gap-3.5">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#e10600] text-white">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-crimson-300/70 bg-gradient-to-b from-crimson-400 via-crimson-600 to-crimson-800 text-white">
                   <Phone className="h-5 w-5" />
                 </div>
                 <div className="min-w-0 flex-1 space-y-3">
                   <div>
-                    <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#e10600]">
+                    <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-crimson-300">
                       Student Coordinators
                     </p>
                     <h3 className="text-sm font-semibold text-white">Call Event Organizers</h3>
@@ -133,15 +133,15 @@ export default function ContactSection() {
                     {contacts.map((c) => (
                       <div
                         key={c.tel}
-                        className="flex flex-col gap-2 rounded-xl border border-white/10 bg-zinc-950/80 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between"
+                        className="flex flex-col gap-2 rounded-xl border border-crimson-500/15 bg-ink-950/70 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between"
                       >
                         <div>
-                          <p className="text-[11px] text-zinc-500">{c.role}</p>
+                          <p className="text-[11px] text-stone-500">{c.role}</p>
                           <p className="text-sm font-semibold text-white">{c.name}</p>
                         </div>
                         <a
                           href={`tel:${c.tel}`}
-                          className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#e10600] px-3 py-1.5 text-xs font-bold text-white transition hover:bg-[#ff1a1a]"
+                          className="nx-btn nx-btn-primary shrink-0 gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold tracking-[0.04em]"
                         >
                           <Phone className="h-3.5 w-3.5" />
                           {c.phone}
@@ -153,14 +153,14 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-black/70 p-4 backdrop-blur-sm sm:p-5">
+            <div className="nx-panel nx-rise rounded-2xl p-4 backdrop-blur-sm sm:p-5" style={{ "--i": 1 } as React.CSSProperties}>
               <div className="flex items-start gap-3.5">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#e10600] text-white">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-crimson-300/70 bg-gradient-to-b from-crimson-400 via-crimson-600 to-crimson-800 text-white">
                   <Mail className="h-5 w-5" />
                 </div>
                 <div className="min-w-0 flex-1 space-y-3">
                   <div>
-                    <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#e10600]">
+                    <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-crimson-300">
                       Official Emails
                     </p>
                     <h3 className="text-sm font-semibold text-white">General &amp; Entry Queries</h3>
@@ -169,12 +169,12 @@ export default function ContactSection() {
                     {emails.map((item) => (
                       <div
                         key={item.address}
-                        className="rounded-xl border border-white/10 bg-zinc-950/80 px-3 py-2.5"
+                        className="rounded-xl border border-crimson-500/15 bg-ink-950/70 px-3 py-2.5"
                       >
-                        <p className="text-[11px] text-zinc-500">{item.label}</p>
+                        <p className="text-[11px] text-stone-500">{item.label}</p>
                         <a
                           href={`mailto:${item.address}`}
-                          className="mt-0.5 inline-block break-all text-sm font-semibold text-zinc-200 transition hover:text-[#e10600]"
+                          className="mt-0.5 inline-block break-all text-sm font-semibold text-stone-200 transition hover:text-crimson-200"
                         >
                           {item.address}
                         </a>
@@ -187,15 +187,12 @@ export default function ContactSection() {
           </div>
 
           <div className="lg:col-span-7">
-            <div className="relative overflow-hidden rounded-2xl border border-[#8F742E]/40 bg-black/80 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.45)] sm:p-7 md:p-8">
+            <div className="nx-panel nx-rise relative overflow-hidden rounded-2xl p-5 sm:p-7 md:p-8" style={{ "--i": 2 } as React.CSSProperties}>
               <div className="mb-6">
-                <h2 className="mb-1.5 text-2xl font-extrabold uppercase tracking-wide text-white sm:text-3xl">
-                  Send A{" "}
-                  <span className="bg-gradient-to-r from-[#c45a12] via-[#e8a04a] to-[#f3d7a1] bg-clip-text text-transparent">
-                    Message
-                  </span>
+                <h2 className="nx-display mb-1.5 text-2xl font-bold uppercase text-ivory sm:text-3xl">
+                  Send A <span className="nx-lacquer">Message</span>
                 </h2>
-                <p className="text-sm text-zinc-500">
+                <p className="text-sm text-stone-500">
                   Fill out the form below and our festival team will respond as soon as possible.
                 </p>
               </div>
@@ -216,9 +213,9 @@ export default function ContactSection() {
 
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-zinc-400">
-                      <User className="h-3.5 w-3.5 text-[#e10600]" />
-                      Name <span className="text-[#e10600]">*</span>
+                    <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-stone-400">
+                      <User className="h-3.5 w-3.5 text-crimson-300" />
+                      Name <span className="text-crimson-300">*</span>
                     </label>
                     <input
                       type="text"
@@ -226,13 +223,13 @@ export default function ContactSection() {
                       onChange={(e) => setName(e.target.value)}
                       required
                       placeholder="Your Full Name"
-                      className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-[#C9A74E]/70"
+                      className="w-full nx-input text-sm"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-zinc-400">
-                      <Mail className="h-3.5 w-3.5 text-[#e10600]" />
-                      Email <span className="text-[#e10600]">*</span>
+                    <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-stone-400">
+                      <Mail className="h-3.5 w-3.5 text-crimson-300" />
+                      Email <span className="text-crimson-300">*</span>
                     </label>
                     <input
                       type="email"
@@ -240,15 +237,15 @@ export default function ContactSection() {
                       onChange={(e) => setEmail(e.target.value)}
                       required
                       placeholder="you@example.com"
-                      className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-[#C9A74E]/70"
+                      className="w-full nx-input text-sm"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-zinc-400">
-                    <Tag className="h-3.5 w-3.5 text-[#e10600]" />
-                    Subject <span className="text-[#e10600]">*</span>
+                  <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-stone-400">
+                    <Tag className="h-3.5 w-3.5 text-crimson-300" />
+                    Subject <span className="text-crimson-300">*</span>
                   </label>
                   <input
                     type="text"
@@ -256,14 +253,14 @@ export default function ContactSection() {
                     onChange={(e) => setSubject(e.target.value)}
                     required
                     placeholder="Inquiry Subject (e.g. Film Submission, Passes)"
-                    className="w-full rounded-xl border border-white/10 bg-zinc-900 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-[#C9A74E]/70"
+                    className="w-full nx-input text-sm"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-zinc-400">
-                    <MessageSquare className="h-3.5 w-3.5 text-[#e10600]" />
-                    Message <span className="text-[#e10600]">*</span>
+                  <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-stone-400">
+                    <MessageSquare className="h-3.5 w-3.5 text-crimson-300" />
+                    Message <span className="text-crimson-300">*</span>
                   </label>
                   <textarea
                     rows={5}
@@ -271,14 +268,14 @@ export default function ContactSection() {
                     onChange={(e) => setMessage(e.target.value)}
                     required
                     placeholder="Write your query or message here..."
-                    className="w-full resize-y rounded-xl border border-white/10 bg-zinc-900 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-[#C9A74E]/70"
+                    className="w-full resize-y nx-input text-sm"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#9b0c0c] via-[#c41212] to-[#e10600] py-3.5 text-sm font-extrabold uppercase tracking-[0.16em] text-white shadow-[0_8px_24px_rgba(225,6,0,0.28)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="nx-btn nx-btn-primary flex w-full gap-2 rounded-xl py-3.5 text-sm font-bold"
                 >
                   {isSubmitting ? (
                     <>

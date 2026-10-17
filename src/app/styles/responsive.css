@@ -259,21 +259,13 @@
 
 
   .theatron-title {
-
+    /* Cinzel capitals are wide: THEATRON is ~6.1em */
     font-size: clamp(
-
-      3.8rem,
-
-      16vw,
-
-      6.4rem
-
+      2.4rem,
+      13.6vw,
+      5.2rem
     );
-
-
-
-    line-height: 0.78;
-
+    line-height: 0.95;
   }
 
 
@@ -709,9 +701,7 @@
 
 
   .theatron-title {
-
-    font-size: clamp(2.4rem, 15.5vw, 4.1rem);
-
+    font-size: clamp(2.2rem, 13.4vw, 3.5rem);
   }
 
 

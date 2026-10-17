@@ -1,0 +1,206 @@
+/* Cinematic hero: video stage behind the existing .theatron-hero copy.
+   Layering inside the (isolated) hero: stage -3, vignette -2, particles -2 (later in DOM), grain -1, copy auto. */
+
+.hero {
+  /* matches the video's own edge colour so a scaled/translated stage never shows a seam */
+  background: #010101;
+}
+
+/* ---------- stage ---------- */
+
+/* Full 16:9 frame at cover size (set from JS); falls back to the hero box before measuring. */
+.stage {
+  position: absolute;
+  left: var(--stage-x, 0);
+  top: var(--stage-y, 0);
+  width: var(--stage-w, 100%);
+  height: var(--stage-h, 100%);
+  z-index: -3;
+  pointer-events: none;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.hero[data-phase='reveal'] .stage,
+.hero[data-phase='rest'] .stage,
+.hero[data-phase='static'] .stage {
+  transform: var(--rest-transform, none);
+}
+
+.hero[data-glide] .stage {
+  transition: transform 1.8s cubic-bezier(0.65, 0, 0.25, 1);
+}
+
+.float {
+  position: absolute;
+  inset: 0;
+}
+
+.hero[data-phase='rest'] .float {
+  animation: maskFloat 7s ease-in-out infinite;
+}
+
+@keyframes maskFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, calc(var(--float-amp, 6px) * -1), 0);
+  }
+}
+
+.poster,
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.poster {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.video {
+  display: block;
+  object-fit: cover;
+  object-position: 50% 50%;
+  border: 0;
+  outline: none;
+  background: transparent;
+}
+
+.intro {
+  transition: opacity 0.8s ease;
+}
+
+.intro[data-fading] {
+  opacity: 0;
+}
+
+.particles {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  animation: fadeIn 2.4s ease both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ---------- readability overlay ---------- */
+
+.vignette {
+  pointer-events: none;
+  transition: opacity 1.4s ease;
+}
+
+.hero[data-phase='pending'] .vignette,
+.hero[data-phase='intro'] .vignette {
+  opacity: 0;
+}
+
+.hero[data-layout='stacked'] .vignette {
+  background: linear-gradient(180deg, rgba(4, 4, 3, 0.55) 0%, rgba(4, 4, 3, 0.3) 50%, transparent 72%);
+}
+
+.hero[data-layout='behind'] .vignette {
+  background:
+    linear-gradient(180deg, rgba(4, 4, 3, 0.82) 0%, rgba(4, 4, 3, 0.6) 70%, rgba(4, 4, 3, 0.75) 100%);
+}
+
+/* ---------- existing hero copy: held back during the intro ---------- */
+
+.hero > :global(.theatron-hero-content),
+.hero > :global(.theatron-progress) {
+  transition:
+    opacity 1.1s ease 0.5s,
+    transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.5s;
+}
+
+.hero[data-phase='pending'] > :global(.theatron-hero-content),
+.hero[data-phase='intro'] > :global(.theatron-hero-content),
+.hero[data-phase='pending'] > :global(.theatron-progress),
+.hero[data-phase='intro'] > :global(.theatron-progress) {
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+}
+
+/* ---------- skip ---------- */
+
+.skip {
+  position: absolute;
+  right: clamp(20px, 3.8vw, 56px);
+  bottom: clamp(20px, 4vh, 40px);
+  z-index: 2;
+  padding: 10px 18px;
+  border: 1px solid rgba(191, 83, 71, 0.45);
+  background: rgba(4, 4, 3, 0.35);
+  backdrop-filter: blur(4px);
+  color: rgba(238, 228, 207, 0.72);
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    opacity 0.6s ease;
+}
+
+.skip:hover,
+.skip:focus-visible {
+  color: #f7eedb;
+  border-color: #bf5347;
+}
+
+.skip:focus-visible {
+  outline: 2px solid #bf5347;
+  outline-offset: 3px;
+}
+
+.skip[data-hidden] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 768px) {
+  /* room beneath the copy for the mask (global rule sets 780px) */
+  .hero.hero {
+    min-height: max(100svh, 880px);
+  }
+
+  /* bottom corners belong to the floating social button */
+  .skip {
+    right: 50%;
+    bottom: calc(100% - 100svh + 28px);
+    transform: translateX(50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero[data-glide] .stage,
+  .hero > :global(.theatron-hero-content),
+  .hero > :global(.theatron-progress) {
+    transition: none;
+  }
+
+  .hero[data-phase='rest'] .float,
+  .particles {
+    animation: none;
+  }
+}

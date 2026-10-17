@@ -25,36 +25,33 @@ export default function PhotoGallery() {
   return (
     <section className="relative z-10 px-4 pb-20 pt-32 sm:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-16 text-center">
-          <div className="mb-8 flex justify-center">
-            <div className="border-2 border-red-600 px-6 py-3">
-              <p className="text-xs tracking-widest text-red-600">MEMORIES CAPTURED</p>
-            </div>
+        <div className="nx-rise mb-16 text-center">
+          <p className="nx-eyebrow mb-5">Memories Captured</p>
+
+          <h1 className="nx-display nx-lacquer mb-5 text-5xl font-bold sm:text-6xl">GALLERY</h1>
+
+          <div className="nx-ornament mb-8" aria-hidden="true">
+            <i />
           </div>
 
-          <h1 className="mb-4 text-5xl font-bold sm:text-6xl">GALLERY</h1>
-
-          <div className="mb-8 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-red-600" />
-            <div className="h-3 w-3 rounded-full bg-red-600" />
-            <div className="h-px w-12 bg-red-600" />
-          </div>
-
-          <p className="text-xs tracking-wider text-gray-500 sm:text-sm">MOMENTS FROM PREVIOUS EDITIONS</p>
+          <p className="text-xs tracking-wider text-stone-500 sm:text-sm">MOMENTS FROM PREVIOUS EDITIONS</p>
         </div>
 
         <div className="columns-1 gap-6 space-y-6 sm:columns-2 md:columns-3">
-          {images.map((image) => (
+          {images.map((image, index) => (
             <div
               key={image.id}
-              className="group break-inside-avoid overflow-hidden rounded-xl border-2 border-red-600"
+              className="nx-frame nx-rise group break-inside-avoid"
+              style={{ "--i": Math.min(index, 8) }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
+              <div className="nx-frame-inner">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
             </div>
           ))}
         </div>

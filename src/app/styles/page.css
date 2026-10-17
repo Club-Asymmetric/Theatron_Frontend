@@ -239,7 +239,7 @@
   align-items: center;
   gap: 10px;
   margin: 0 0 16px;
-  color: #dc2626;
+  color: var(--accent-light);
   font-family: var(--font-poppins), "Poppins", sans-serif;
   font-size: clamp(0.72rem, 0.85vw, 0.85rem);
   font-weight: 600;
@@ -251,22 +251,22 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #dc2626;
-  box-shadow: 0 0 10px rgba(220, 38, 38, 0.9);
+  background: var(--accent-bright);
+  box-shadow: 0 0 10px rgba(242, 105, 90, 0.9);
 }
 
 /* =========================================================
-   MAIN TITLE - GOLDISH RED WITH FLOATING EFFECT & CRISP ALIGNMENT
+   MAIN TITLE - LACQUER CRIMSON WITH FLOATING EFFECT & CRISP ALIGNMENT
    ========================================================= */
 
 @keyframes theatronFloat {
   0%, 100% {
     transform: translateY(0px);
-    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 20px rgba(185, 28, 28, 0.55)) drop-shadow(0 0 10px rgba(234, 179, 8, 0.25));
+    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 18px rgba(213, 52, 34, 0.35));
   }
   50% {
     transform: translateY(-10px);
-    filter: drop-shadow(0 22px 36px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 32px rgba(220, 38, 38, 0.7)) drop-shadow(0 0 18px rgba(245, 185, 66, 0.45));
+    filter: drop-shadow(0 22px 36px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 28px rgba(242, 105, 90, 0.5));
   }
 }
 
@@ -275,25 +275,30 @@
   max-width: 860px;
   margin: 0;
   margin-left: -3px;
-  font-family: var(--font-geist), "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: clamp(4.2rem, 7.8vw, 7.8rem);
-  font-weight: 800;
-  line-height: 0.92;
-  letter-spacing: -0.02em;
+  font-family: var(--font-cinzel), "Cinzel", "Times New Roman", serif;
+  font-size: clamp(3.4rem, 6.4vw, 6.6rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: 0.04em;
+  /* lacquer crimson, matching the intro mask; the light sweeps slowly across it */
   background: linear-gradient(
-    135deg,
-    #ffe29a 0%,
-    #eab308 14%,
-    #ef4444 38%,
-    #b91c1c 65%,
-    #6b0b14 88%,
-    #3f0408 100%
+    110deg,
+    #7a180d 0%,
+    #cc3a26 20%,
+    #ff8a6e 36%,
+    #b52a1b 52%,
+    #e65442 68%,
+    #6e140b 86%,
+    #cc3a26 100%
   );
+  background-size: 220% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  animation: theatronFloat 4.8s ease-in-out infinite;
+  animation:
+    theatronFloat 4.8s ease-in-out infinite,
+    nxShimmer 9s ease-in-out infinite;
   will-change: transform, filter;
   transform-origin: left center;
 }
@@ -315,8 +320,8 @@
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.16em;
-  color: #d8b979;
-  text-shadow: 0 0 20px rgba(190, 156, 94, 0.25);
+  color: #ed7264;
+  text-shadow: 0 0 20px rgba(213, 85, 71, 0.25);
 }
 
 /* =========================================================
@@ -334,7 +339,7 @@
   width: 62px;
   height: 1px;
   flex-shrink: 0;
-  background: #a98b5d;
+  background: #bf5347;
   opacity: 0.85;
 }
 
@@ -352,7 +357,7 @@
 }
 
 .theatron-tagline p:hover {
-  color: #c5aa79;
+  color: #d87166;
   transform: translateX(3px);
 }
 
@@ -389,7 +394,7 @@
 
 .theatron-description:hover {
 
-  color: #c8aa76;
+  color: #dc6e62;
 
 
 
@@ -521,11 +526,11 @@
 
 
 
-  background: rgba(169, 139, 93, 0.045);
+  background: rgba(191, 83, 71, 0.045);
 
 
 
-  border: 1px solid rgba(198, 164, 103, 0.72);
+  border: 1px solid rgba(220, 95, 81, 0.72);
 
 
 
@@ -563,7 +568,7 @@
 
       transparent 20%,
 
-      rgba(220, 190, 130, 0.10) 50%,
+      rgba(239, 124, 111, 0.10) 50%,
 
       transparent 80%
 
@@ -621,11 +626,11 @@
 
 
 
-  background: #c6a568;
+  background: #dc6052;
 
 
 
-  border-color: #d8b979;
+  border-color: #ed7264;
 
 
 
@@ -637,7 +642,7 @@
 
     0 8px 24px rgba(0, 0, 0, 0.28),
 
-    0 0 18px rgba(198, 165, 104, 0.10);
+    0 0 18px rgba(220, 96, 82, 0.10);
 
 }
 
@@ -709,7 +714,7 @@
 
 
 
-  border: 1px solid rgba(198, 164, 103, 0.38);
+  border: 1px solid rgba(220, 95, 81, 0.38);
 
 
 
@@ -721,7 +726,7 @@
 
 
 
-/* bottom gold line */
+/* bottom accent line */
 
 
 
@@ -751,7 +756,7 @@
 
 
 
-  background: #c6a568;
+  background: #dc6052;
 
 
 
@@ -773,11 +778,11 @@
 
 
 
-  background: rgba(169, 139, 93, 0.07);
+  background: rgba(191, 83, 71, 0.07);
 
 
 
-  border-color: rgba(198, 164, 103, 0.72);
+  border-color: rgba(220, 95, 81, 0.72);
 
 
 
@@ -819,7 +824,7 @@
 
 
 
-  color: #c6a568;
+  color: #dc6052;
 
 
 
@@ -843,7 +848,7 @@
 
 
 
-  color: #e0c184;
+  color: #f37e71;
 
 
 
@@ -851,7 +856,7 @@
 
     drop-shadow(
 
-      0 0 5px rgba(198, 165, 104, 0.35)
+      0 0 5px rgba(220, 96, 82, 0.35)
 
     );
 
@@ -957,7 +962,7 @@
 
 
 
-  color: #b99a66;
+  color: #cf5d50;
 
 
 
@@ -975,7 +980,7 @@
 
 .theatron-date-note:hover svg {
 
-  color: #d1b477;
+  color: #e57063;
 
 
 
@@ -993,7 +998,7 @@
 
 
 
-  color: #a98b5d;
+  color: #bf5347;
 
 
 
@@ -1065,7 +1070,7 @@
 
 .theatron-scroll-cue svg {
 
-  color: #a98b5d;
+  color: #bf5347;
 
 }
 
@@ -1195,7 +1200,7 @@
 
     linear-gradient(
 
-      #a98b5d,
+      #bf5347,
 
       transparent
 

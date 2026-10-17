@@ -58,11 +58,11 @@ export default function Footer() {
         <div className="theatron-footer-bottom">
           <div className="theatron-footer-contacts">
             <a href="mailto:immersecit@gmail.com" className="theatron-footer-contact-item">
-              <Mail className="h-4 w-4 text-red-500" />
+              <Mail className="h-4 w-4 text-crimson-300" />
               <span>immersecit@gmail.com</span>
             </a>
             <a href="tel:+916379041919" className="theatron-footer-contact-item">
-              <Phone className="h-4 w-4 text-[#d8b979]" />
+              <Phone className="h-4 w-4 text-[#ed7264]" />
               <span>+91 63790 41919 (Hariharran)</span>
             </a>
           </div>
@@ -74,7 +74,7 @@ export default function Footer() {
             className="theatron-footer-instagram"
             aria-label="Follow Immerse CIT on Instagram"
           >
-            <Instagram className="h-4 w-4 text-red-500" />
+            <Instagram className="h-4 w-4 text-crimson-300" />
             <span>@immerse_cit</span>
           </a>
         </div>
