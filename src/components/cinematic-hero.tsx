@@ -19,10 +19,12 @@ const REVEAL_LEAD_S = 1.6; // start gliding + revealing copy this long before th
 const STALL_MS = 3500; // give up on the intro if playback makes no progress for this long
 const MAX_INTRO_MS = 16000;
 const NAV_CLEARANCE = 100;
+const MOBILE_NAV = 72;
+const PHONE_MAX_W = 768;
 const SESSION_KEY = 'theatron:intro-played';
 
 type Phase = 'pending' | 'intro' | 'reveal' | 'rest' | 'static';
-type Layout = 'side' | 'stacked' | 'behind';
+type Layout = 'side' | 'poster' | 'stacked' | 'behind';
 
 // Survives remounts (switching sections unmounts the hero) without touching the server.
 let introPlayedThisLoad = false;
@@ -77,6 +79,7 @@ function computeRest(hero: HTMLElement, content: HTMLElement | null) {
   let s: number;
   let cx: number;
   let cy: number;
+  let poster: Record<string, string> | null = null;
 
   if (w > 900 && w / h >= 1.15) {
     // Copy on the left, mask takes the stage on the right (where the old hero subject stood).
@@ -84,6 +87,30 @@ function computeRest(hero: HTMLElement, content: HTMLElement | null) {
     s = Math.min(1, (h - NAV_CLEARANCE - 24) / mh);
     cx = Math.min(w * 0.72, w * 0.95 - (mw * s) / 2);
     cy = Math.min(Math.max(fy + my, NAV_CLEARANCE + (mh * s) / 2), h - (mh * s) / 2 - 16);
+  } else if (w <= PHONE_MAX_W) {
+    // Phones: a poster. A large mask crowns the screen under the nav, and the
+    // title, year and tagline sit over its lower half, ending at the chin.
+    layout = 'poster';
+    const vh = window.innerHeight || h;
+    const target = Math.min(Math.max(vh * 0.64, 300), (w * 0.94) / maskAspect);
+    const top = MOBILE_NAV + 12;
+    const maskBottom = top + target;
+    s = target / mh;
+    cx = w / 2;
+    cy = top + target / 2;
+
+    // Height of title -> tagline (layout offsets, unaffected by the reveal transform).
+    const title = content?.querySelector<HTMLElement>('.theatron-title');
+    const tagline = content?.querySelector<HTMLElement>('.theatron-tagline');
+    const block = title && tagline ? tagline.offsetTop + tagline.offsetHeight - title.offsetTop : 170;
+    const titleTop = Math.max(top + target * 0.45, maskBottom - block - target * 0.02);
+    const contentTop = content ? content.offsetTop : 0;
+    poster = {
+      '--poster-copy-top': `${Math.round(titleTop - contentTop)}px`,
+      '--poster-fade-a': `${Math.round(titleTop - target * 0.16)}px`,
+      '--poster-fade-b': `${Math.round(titleTop + block * 0.35)}px`,
+      '--poster-fade-c': `${Math.round(maskBottom + 24)}px`,
+    };
   } else {
     // Portrait / narrow: mask sits in the free space beneath the copy.
     const contentBottom = content ? content.offsetTop + content.offsetHeight : h * 0.6;
@@ -104,6 +131,7 @@ function computeRest(hero: HTMLElement, content: HTMLElement | null) {
 
   return {
     layout,
+    poster,
     frame: { x: `${fx.toFixed(2)}px`, y: `${fy.toFixed(2)}px`, w: `${fw.toFixed(2)}px`, h: `${fh.toFixed(2)}px` },
     transform: `translate3d(${(cx - fx - s * mx).toFixed(2)}px, ${(cy - fy - s * my).toFixed(2)}px, 0) scale(${s.toFixed(4)})`,
     floatAmp: `${(6 / s).toFixed(2)}px`,
@@ -171,6 +199,7 @@ export default function CinematicHero({ children, id = 'home', ariaLabel }: Cine
       hero.style.setProperty('--stage-h', rest.frame.h);
       hero.style.setProperty('--rest-transform', rest.transform);
       hero.style.setProperty('--float-amp', rest.floatAmp);
+      for (const [name, value] of Object.entries(rest.poster ?? {})) hero.style.setProperty(name, value);
       setLayout(rest.layout);
       setFocus((prev) =>
         prev && Math.abs(prev.cx - rest.focus.cx) < 1 && Math.abs(prev.cy - rest.focus.cy) < 1 && Math.abs(prev.h - rest.focus.h) < 1

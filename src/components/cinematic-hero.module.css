@@ -113,6 +113,43 @@
   background: linear-gradient(180deg, rgba(4, 4, 3, 0.55) 0%, rgba(4, 4, 3, 0.3) 50%, transparent 72%);
 }
 
+/* phone poster: the upper face stays clear; under the title block the mask
+   dims just enough for the copy to read while its filigree still glows through */
+.hero[data-layout='poster'] .vignette {
+  background: linear-gradient(
+    180deg,
+    transparent 0,
+    transparent var(--poster-fade-a, 40%),
+    rgba(4, 4, 3, 0.5) var(--poster-fade-b, 55%),
+    rgba(4, 4, 3, 0.86) var(--poster-fade-c, 75%),
+    rgba(4, 4, 3, 0.94) 100%
+  );
+}
+
+.hero[data-layout='poster'] > :global(.theatron-hero-content) {
+  padding-top: var(--poster-copy-top, 132px);
+}
+
+/* over a crimson mask a crimson title disappears: go ivory, keep a crimson glint in the sweep */
+.hero[data-layout='poster'] :global(.theatron-title) {
+  background-image: linear-gradient(
+    110deg,
+    #e6d3c8 0%,
+    #fff6f1 26%,
+    #f3a493 42%,
+    #fff6f1 58%,
+    #ead8ce 80%,
+    #fff6f1 100%
+  );
+}
+
+.hero[data-layout='poster'] :global(.theatron-year),
+.hero[data-layout='poster'] :global(.theatron-tagline p) {
+  text-shadow:
+    0 2px 18px rgba(0, 0, 0, 0.95),
+    0 0 3px rgba(0, 0, 0, 0.9);
+}
+
 .hero[data-layout='behind'] .vignette {
   background:
     linear-gradient(180deg, rgba(4, 4, 3, 0.82) 0%, rgba(4, 4, 3, 0.6) 70%, rgba(4, 4, 3, 0.75) 100%);
@@ -179,9 +216,9 @@
 /* ---------- responsive ---------- */
 
 @media (max-width: 768px) {
-  /* room beneath the copy for the mask (global rule sets 780px) */
+  /* fill the screen; the poster's copy offset sets the rest (global rule sets 780px) */
   .hero.hero {
-    min-height: max(100svh, 880px);
+    min-height: 100svh;
   }
 
   /* bottom corners belong to the floating social button */
