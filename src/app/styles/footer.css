@@ -231,7 +231,28 @@
   width: 10px;
 }
 
-/* get in touch */
+/* get in touch: one block per presenting club */
+.theatron-footer-club {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.theatron-footer-club + .theatron-footer-club {
+  padding-top: 16px;
+  border-top: 1px solid rgba(204, 58, 38, 0.14);
+}
+
+.theatron-footer-club-name {
+  margin: 0;
+  font-family: var(--font-cinzel), "Cinzel", serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f7eedb;
+}
+
 .theatron-footer-contact-item {
   display: inline-flex;
   align-items: center;
@@ -388,6 +409,11 @@
 
   .theatron-footer-link::before {
     display: none;
+  }
+
+  .theatron-footer-club {
+    align-items: center;
+    width: 100%;
   }
 
   .theatron-footer-contacts {

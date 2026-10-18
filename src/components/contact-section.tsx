@@ -12,6 +12,7 @@ import {
   AlertCircle,
   Tag,
   Loader2,
+  Instagram,
 } from "lucide-react"
 
 export default function ContactSection() {
@@ -36,11 +37,23 @@ export default function ContactSection() {
       phone: "+91 63790 41919",
       tel: "+916379041919",
     },
+    {
+      role: "Team Resolution",
+      name: "Dharsan",
+      phone: "+91 80725 07323",
+      tel: "+918072507323",
+    },
   ]
 
   const emails = [
     { label: "General & Entry Queries", address: "immersecit@gmail.com" },
     { label: "Official Support & Helpdesk", address: "theatroncit@gmail.com" },
+    { label: "Team Resolution", address: "resolution@citchennai.net" },
+  ]
+
+  const socials = [
+    { club: "Immerse", handle: "immerse_cit" },
+    { club: "Team Resolution", handle: "team_resolution.cit" },
   ]
 
   const handleSubmit = async (e) => {
@@ -177,6 +190,40 @@ export default function ContactSection() {
                           className="mt-0.5 inline-block break-all text-sm font-semibold text-stone-200 transition hover:text-crimson-200"
                         >
                           {item.address}
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="nx-panel nx-rise rounded-2xl p-4 backdrop-blur-sm sm:p-5" style={{ "--i": 1 } as React.CSSProperties}>
+              <div className="flex items-start gap-3.5">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-crimson-300/70 bg-gradient-to-b from-crimson-400 via-crimson-600 to-crimson-800 text-white">
+                  <Instagram className="h-5 w-5" />
+                </div>
+                <div className="min-w-0 flex-1 space-y-3">
+                  <div>
+                    <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-crimson-300">
+                      Follow Us
+                    </p>
+                    <h3 className="text-sm font-semibold text-white">Instagram</h3>
+                  </div>
+                  <div className="space-y-2">
+                    {socials.map((item) => (
+                      <div
+                        key={item.handle}
+                        className="rounded-xl border border-crimson-500/15 bg-ink-950/70 px-3 py-2.5"
+                      >
+                        <p className="text-[11px] text-stone-500">{item.club}</p>
+                        <a
+                          href={`https://www.instagram.com/${item.handle}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-0.5 inline-block break-all text-sm font-semibold text-stone-200 transition hover:text-crimson-200"
+                        >
+                          @{item.handle}
                         </a>
                       </div>
                     ))}

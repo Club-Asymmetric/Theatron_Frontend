@@ -1,6 +1,26 @@
 import Link from "next/link"
 import { Mail, Phone, Instagram } from "lucide-react"
 
+// The two presenting clubs, each with its own point of contact.
+const clubs = [
+  {
+    name: "Immerse",
+    email: "immersecit@gmail.com",
+    phone: "+91 63790 41919",
+    tel: "+916379041919",
+    person: "Hariharran",
+    instagram: "immerse_cit",
+  },
+  {
+    name: "Resolution",
+    email: "resolution@citchennai.net",
+    phone: "+91 80725 07323",
+    tel: "+918072507323",
+    person: "Dharsan",
+    instagram: "team_resolution.cit",
+  },
+]
+
 const explore = [
   { label: "Home", href: "/" },
   { label: "Events", href: "/events" },
@@ -68,32 +88,39 @@ export default function Footer() {
           {/* Get in touch */}
           <div className="theatron-footer-col">
             <h2 className="theatron-footer-heading">Get In Touch</h2>
-            <ul className="theatron-footer-contacts">
-              <li>
-                <a href="mailto:immersecit@gmail.com" className="theatron-footer-contact-item">
-                  <Mail className="h-4 w-4 shrink-0 text-crimson-300" />
-                  <span>immersecit@gmail.com</span>
-                </a>
-              </li>
-              <li>
-                <a href="tel:+916379041919" className="theatron-footer-contact-item">
-                  <Phone className="h-4 w-4 shrink-0 text-crimson-300" />
-                  <span>+91 63790 41919 (Hariharran)</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.instagram.com/immerse_cit"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="theatron-footer-instagram"
-                  aria-label="Follow Immerse CIT on Instagram"
-                >
-                  <Instagram className="h-4 w-4 text-crimson-300" />
-                  <span>@immerse_cit</span>
-                </a>
-              </li>
-            </ul>
+            {clubs.map((club) => (
+              <div key={club.name} className="theatron-footer-club">
+                <h3 className="theatron-footer-club-name">{club.name}</h3>
+                <ul className="theatron-footer-contacts">
+                  <li>
+                    <a href={`mailto:${club.email}`} className="theatron-footer-contact-item">
+                      <Mail className="h-4 w-4 shrink-0 text-crimson-300" />
+                      <span>{club.email}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href={`tel:${club.tel}`} className="theatron-footer-contact-item">
+                      <Phone className="h-4 w-4 shrink-0 text-crimson-300" />
+                      <span>
+                        {club.phone} ({club.person})
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={`https://www.instagram.com/${club.instagram}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="theatron-footer-instagram"
+                      aria-label={`Follow ${club.name} on Instagram`}
+                    >
+                      <Instagram className="h-4 w-4 text-crimson-300" />
+                      <span>@{club.instagram}</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 
