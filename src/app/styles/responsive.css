@@ -628,54 +628,6 @@
 
 
 
-  /* -------------------------------------------------------
-
-     FOOTER
-
-     ------------------------------------------------------- */
-
-
-
-  .theatron-footer-grid {
-
-    grid-template-columns: 1fr;
-
-
-
-    text-align: center;
-
-  }
-
-
-
-
-
-  .theatron-footer-created,
-
-  .theatron-footer-right {
-
-    align-items: center;
-
-
-
-    text-align: center;
-
-  }
-
-
-
-
-
-  .theatron-footer-contact {
-
-    flex-direction: column;
-
-
-
-    align-items: center;
-
-  }
-
 }
 
 /* =========================================================
