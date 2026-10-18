@@ -396,6 +396,19 @@ export default function RegistrationForm({ event }) {
             <h1 className="nx-display nx-lacquer mb-4 text-4xl font-bold">Payment successful</h1>
             <p className="mb-2 text-xl text-white">Registration confirmed</p>
             <p className="mb-6 text-stone-300">Registration ID: {success.registrationId}</p>
+            {success.emailSent && (
+              <div className="mx-auto mb-6 max-w-md rounded-lg border border-crimson-500/30 bg-crimson-950/40 px-5 py-4 text-sm leading-relaxed text-stone-200">
+                <p>
+                  A confirmation email has been sent to{" "}
+                  <span className="break-all font-semibold text-ivory">{formData.email}</span>.
+                </p>
+                <p className="mt-2 text-stone-400">
+                  Can&apos;t find it? Please check your <span className="font-semibold text-crimson-200">Spam</span> or{" "}
+                  <span className="font-semibold text-crimson-200">Promotions</span> folder, and mark it as &ldquo;Not spam&rdquo; so
+                  future updates reach your inbox.
+                </p>
+              </div>
+            )}
             {!success.emailSent && (
               <p className="mb-6 text-amber-300">
                 Your payment and registration were successful. We could not deliver the confirmation email, but your registration is saved.
