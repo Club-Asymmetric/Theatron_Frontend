@@ -87,7 +87,8 @@
 
   .theatron-menu-button {
 
-    display: block;
+    /* flex keeps the icon centred (block left it offset) */
+    display: flex;
 
   }
 

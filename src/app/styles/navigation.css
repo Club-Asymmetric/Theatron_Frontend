@@ -297,6 +297,7 @@
   justify-content: center;
 
   width: 46px;
+  padding: 0;
   height: 46px;
   border: 1px solid rgba(234, 115, 102, 0.3);
   border-radius: 10px;
